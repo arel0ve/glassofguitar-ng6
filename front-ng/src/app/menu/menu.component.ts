@@ -19,7 +19,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     this.showSearch = false;
-    this.logClass = this.isLogin ? 'log-in' : 'log-out';
+    this.logClass = this.isLogin ? 'log-out' : 'log-in';
   }
 
   onShowSearch() {

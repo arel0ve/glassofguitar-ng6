@@ -4,9 +4,9 @@
     <img src="{{ '../../assets/icons/home-' + (isLogin ? 'not' : 'in') + '.png' }}" alt="h" class="main-menu-ico">
   </a>
 
-  <div class="login" [ngClass]="logClass">
+  <a class="login" [ngClass]="logClass" routerLink="/todo/login">
     <img src="../../assets/icons/main-logo.png" alt="l" class="main-menu-ico">
-  </div>
+  </a>
 
   <div class="search" [class.search-animation]="showSearch">
     <input type="search" #searchField class="search-field" tabindex="1"

@@ -7,6 +7,7 @@ const User = require('../models/user').User;
 
 /* POST registration. */
 router.post('/', (req, res, next) => {
+  console.log(req.body);
 
   User.findOne({ login: req.body.login }, function (err, user) {
     if (err) return next(err);

@@ -1,0 +1,93 @@
+<div class="opacity-wrapper">
+  <div class="wrapper">
+    <div class="hat">
+      <div class="authorization">
+        <span>Authorization</span>
+      </div>
+      <div class="close-btn" (click)="close()"></div>
+    </div>
+    <div class="info-block">
+      <form>
+        <fieldset id="autho-field">
+          <legend>SIGN IN</legend>
+          <div>
+            <label for="login">
+              <span>Login:</span>
+              <input type="text" id="login" (ngModel)="login" required>
+            </label>
+          </div>
+          <div>
+            <label for="password">
+              <span>Password:</span>
+              <input type="password" id="password" (ngModel)="password" required autocomplete="current-password"
+                     pattern="[0-9a-z]{6,}|[0-9A-Z]{6,}|[0-9a-zA-Z]{6,}" placeholder="min 6 chars, letters and numbers">
+            </label>
+          </div>
+          <div *ngIf="mode === 'reg'">
+            <label for="password-repeat">
+              <span>Repeat password:</span>
+              <input type="password" id="password-repeat" (ngModel)="passwordRepeat" required autocomplete="new-password"
+                     pattern="[0-9a-z]{6,}|[0-9A-Z]{6,}|[0-9a-zA-Z]{6,}" placeholder="min 6 chars, letters and numbers">
+            </label>
+          </div>
+          <div *ngIf="mode === 'reg'">
+            <label for="email">
+              <span>Email:</span>
+              <input type="email" id="email" (ngModel)="email" required>
+            </label>
+          </div>
+          <div *ngIf="mode === 'reg'">
+            <label for="tag">
+              <span>Band:</span>
+              <input type="text" id="tag" (ngModel)="tag" pattern="{0,64}">
+            </label>
+          </div>
+          <div *ngIf="mode === 'reg'">
+            <label for="name">
+              <span>Full name:</span>
+              <input type="text" id="name" (ngModel)="name" required pattern="{1,64}">
+            </label>
+          </div>
+          <div *ngIf="mode === 'reg'">
+            <label for="birthday">
+              <span>Birthday:</span>
+              <input type="date" id="birthday" (ngModel)="birthday" min="1901-01-01" max="2018-01-01">
+            </label>
+          </div>
+          <div *ngIf="mode === 'reg'">
+            <label for="place">
+              <span>Place of birthday:</span>
+              <input type="text" id="place" (ngModel)="place" pattern="{0,64}">
+            </label>
+          </div>
+          <div *ngIf="mode === 'reg'">
+            <label for="country">
+              <span>Country living:</span>
+              <input type="text" id="country" (ngModel)="country" pattern="{0,64}">
+            </label>
+          </div>
+          <div *ngIf="mode === 'reg'">
+            <label for="hat-color">
+              <span>Hat color:</span>
+              <input type="color" id="hat-color" (ngModel)="hatColor" value="#51907F">
+            </label>
+          </div>
+          <div id="div-message" style="margin-top: 1em">{{ message }}</div>
+          <div id="verify-block" *ngIf="mode === 'verify'">
+            <label for="verify">
+              <span>Verifying code:</span>
+              <input type="text" id="verify" (ngModel)="verify" required>
+            </label>
+          </div>
+          <div class="btn-div">
+            <button type="button" id="showReg" class="new" *ngIf="mode !== 'reg'" (click)="showReg($event)">New Account</button>
+            <button type="submit" id="authoBtn" class="active-btn" *ngIf="mode === 'login'" (click)="doLogin($event)">Sign In</button>
+            <button type="submit" id="regBtn" class="active-btn" *ngIf="mode === 'reg'" (click)="doReg($event)">Sign Up</button>
+            <button type="submit" id="verifyBtn" class="active-btn" *ngIf="mode === 'verify'" (click)="doVerify($event)">Verify</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+

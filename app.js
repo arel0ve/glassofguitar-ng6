@@ -31,7 +31,11 @@ const MongoStore = require('connect-mongo')(session);
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:4200',
+  credentials: true
+}
+app.use(cors(corsOptions));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -68,7 +72,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/api/user/', usersRouter);
 
-app.use('/r', regRouter);
+app.use('/api/registration', regRouter);
 app.use('/v', verRouter);
 app.use('/a', authoRouter);
 app.use('/o', logoutRouter);

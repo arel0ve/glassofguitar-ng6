@@ -5,7 +5,7 @@
 
        (mouseenter)="enterSong()" (mouseleave)="leaveSong()">
 
-    <a href="/{{ (song.author !== '' ? song.author + '/' : '') + song.id }}">
+    <a routerLink="/user/{{ (song.author !== '' ? song.author + '/' : '') + song.id }}">
       <b>{{ song.artist }}</b> - {{ song.title }}
     </a>
 
@@ -14,7 +14,7 @@
   <div class="back"
        [ngStyle]="{'transform': 'rotateX(' + (180 + angle) + 'deg)', 'filter': 'brightness(' + brightness + ')'}">
 
-    <a href="/{{ (song.author !== '' ? song.author + '/' : '') + song.id }}">
+    <a routerLink="/user/{{ (song.author !== '' ? song.author + '/' : '') + song.id }}">
       <b>{{ song.artist }}</b> - {{ song.title }}
     </a>
 

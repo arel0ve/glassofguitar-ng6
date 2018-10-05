@@ -18,6 +18,7 @@ import { NotesComponent } from './notes/notes.component';
 import { ChangedNotesDirective } from './notes/changed.notes.directive';
 import { HoversvgDirective } from './notes/hoversvg.directive';
 import { WorkspaceComponent } from './workspace/workspace.component';
+import { LoginComponent } from './login/login.component';
 
 
 const appRoutes: Routes = [
@@ -26,12 +27,17 @@ const appRoutes: Routes = [
     component: WorkspaceComponent
   },
   {
-    path: ':user',
-    redirectTo: ':user/0'
+    path: 'user/:user',
+    redirectTo: ':user/0',
+    pathMatch: 'full'
   },
   {
-    path: ':user/:song',
+    path: 'user/:user/:song',
     component: WorkspaceComponent
+  },
+  {
+    path: 'todo/:mode',
+    component: LoginComponent
   }
 ];
 
@@ -51,7 +57,8 @@ const appRoutes: Routes = [
     NotesComponent,
     ChangedNotesDirective,
     HoversvgDirective,
-    WorkspaceComponent
+    WorkspaceComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
