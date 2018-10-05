@@ -1,0 +1,23 @@
+<div class="track">
+  <div class="front"
+       [ngClass]="{'track-animation': isSelected}"
+       [ngStyle]="{'transform': 'rotateX(' + angle + 'deg)', 'filter': 'brightness(' + brightness + ')'}"
+
+       (mouseenter)="enterSong()" (mouseleave)="leaveSong()">
+
+    <a href="/{{ (song.author !== '' ? song.author + '/' : '') + song.id }}">
+      <b>{{ song.artist }}</b> - {{ song.title }}
+    </a>
+
+  </div>
+
+  <div class="back"
+       [ngStyle]="{'transform': 'rotateX(' + (180 + angle) + 'deg)', 'filter': 'brightness(' + brightness + ')'}">
+
+    <a href="/{{ (song.author !== '' ? song.author + '/' : '') + song.id }}">
+      <b>{{ song.artist }}</b> - {{ song.title }}
+    </a>
+
+  </div>
+</div>
+

@@ -1,6 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const logger = require('morgan');
@@ -29,6 +30,8 @@ mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true});
 const MongoStore = require('connect-mongo')(session);
 
 const app = express();
+
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -63,7 +66,7 @@ app.use(busboy());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/', usersRouter);
+app.use('/api/user/', usersRouter);
 
 app.use('/r', regRouter);
 app.use('/v', verRouter);

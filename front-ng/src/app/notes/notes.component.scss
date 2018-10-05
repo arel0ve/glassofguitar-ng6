@@ -1,0 +1,249 @@
+.wrapper {
+  position: absolute;
+  top: calc(3.3em + 33vmin);
+  left: 21%;
+  margin: 10px 5px 0;
+  background: linear-gradient(rgba(7, 9, 7, .5) 67%, rgba(7, 9, 7, .5), rgba(7, 9, 7, .0));
+  height: calc(100% - 33vmin - 3.3em - 18px);
+  max-height: calc(100% - 33vmin - 18px);
+  width: calc(78% - 10px);
+  box-shadow: 1px -3px 2px 1px rgba(2, 3, 2, .7);
+  font-family: "Erika Monospace", monospace;
+  font-size: 1.2em;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.wrapper::-webkit-scrollbar-track-piece {
+  background-color: rgba(0, 0, 0, .0);
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .5);
+  border-radius: 50% / 4px;
+}
+
+.wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, .7);
+}
+
+.hat {
+  font-weight: 100;
+  display: flex;
+  justify-content: space-between;
+}
+
+.play-menu {
+  display: inline-block;
+  margin-top: 5px;
+  color: rgb(107, 121, 127);
+  user-select: none;
+}
+
+.play-menu i {
+  cursor: pointer;
+  transform: rotate(0);
+  padding: 0 5px;
+  text-shadow: 0 0 3px rgba(77, 177, 254, .7);
+}
+
+@keyframes btn-rotate {
+  0% {
+    transform: rotate(0);
+    color: rgb(107, 121, 127);
+  }
+
+  50% {
+    transform: rotate(-420deg);
+    color: rgb(214, 242, 254);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+    color: rgb(161, 181, 201);
+  }
+}
+
+.play-menu i:hover {
+  animation: btn-rotate 1.2s forwards;
+}
+
+.play-menu i:active {
+  color: rgb(54, 61, 63);
+}
+
+.song-title {
+  display: inline-block;
+  margin-left: 12px;
+  padding: 5px 2px 6px;
+  color: rgb(107, 121, 127);
+  text-align: center;
+  border-bottom: 0 dotted rgba(127, 144, 154, .7);
+  transition: border-bottom .3s, padding-bottom .3s;
+}
+
+.song-title:hover {
+  border-bottom: thick dotted rgba(127, 144, 154, .7);
+  padding-bottom: 1px;
+  transition: border-bottom .6s, padding-bottom .6s;
+}
+
+.song-title b {
+  color: rgb(177, 207, 227);
+  font-weight: 200;
+}
+
+.song-title strong {
+  color: rgb(127, 142, 154);
+  font-weight: 200;
+}
+
+.action-menu {
+  width: 68px;
+}
+
+.hat-btn {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  margin: 0 2px;
+}
+
+#helpSpan {
+  font-size: 25px;
+  stroke-opacity: .3;
+  fill-opacity: .5;
+  user-select: none;
+}
+
+#fullScr {
+  stroke-opacity: .3;
+}
+
+.bar {
+  font-size: 2em;
+  color: rgba(144, 154, 163, .7);
+  vertical-align: top;
+  display: inline-block;
+}
+
+.bar div {
+  text-align: center;
+}
+
+.speed {
+  font-size: 0.5em;
+  margin-bottom: .8em;
+}
+
+.speed::before {
+  content: "♩=";
+}
+
+.info-notes {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 5px;
+}
+
+.plus-btn {
+  color: rgba(107, 207, 127, .9);
+  padding: 2px;
+  cursor: pointer;
+}
+
+.plus-btn::before {
+  content: "+";
+}
+
+.plus-btn:hover {
+  color: rgb(107, 255, 127);
+}
+
+.plus-btn:active {
+  color: rgb(54, 127, 63);
+}
+
+.column {
+  color: rgb(127, 142, 154);
+  line-height: 1em;
+  display: inline-block;
+  margin-bottom: .5em;
+  padding: 0 2px;
+}
+
+.column i {
+  text-align: left;
+  font-size: 1em;
+  margin-left: -2px;
+  cursor: pointer;
+  color: rgba(127, 142, 207, .05);
+  user-select: none;
+}
+
+.column i:hover {
+  color: rgba(127, 142, 207, .5);
+}
+
+.column i.selected{
+  color: rgba(127, 142, 207, 1);
+}
+
+input[type='text'] {
+  text-align: center;
+  padding: 0;
+  margin: -.15em;
+  display: block;
+  border: none;
+  background: none;
+  font-family: "Erika Monospace", monospace;
+  color: rgba(144, 154, 163, .7);
+}
+
+.note {
+  width: 1.1em;
+  font-size: 1em;
+  transform: scale3d(1, 1, 1);
+  transition: transform .3s;
+  caret-color: rgb(181, 27, 42);
+}
+
+[contenteditable='true'] {
+  caret-color: rgb(181, 27, 42);
+}
+
+.note-focus {
+  transform: scale3d(1.4, 1.4, 1.4);
+  z-index: 10;
+  transition: transform .6s;
+}
+
+.last-column {
+  margin-right: 5px;
+  border-right: solid 2px rgba(144, 154, 163, .7);
+}
+
+.successful-saving::before {
+  display: block;
+  content: "🖫";
+  color: rgb(107, 255, 127);
+  opacity: .3;
+  animation: 1.8s 1 hide-opacity;
+  -webkit-animation: 1.8s 1 hide-opacity;
+}
+
+.unsuccessful-saving::before {
+  display: block;
+  content: "🖫";
+  color: rgb(255, 107, 127);
+  opacity: .3;
+  animation: 1.8s 1 hide-opacity;
+  -webkit-animation: 1.8s 1 hide-opacity;
+}

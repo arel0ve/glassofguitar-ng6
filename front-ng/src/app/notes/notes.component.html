@@ -1,0 +1,56 @@
+<div #notesBlock class="wrapper">
+
+  <div class="hat">
+
+    <div class="play-menu">
+      <i class="large material-icons">add_circle</i>
+      <i #playBtn class="large material-icons" (click)="play()">play_circle_filled</i>
+      <i class="large material-icons" (click)="stop()">replay</i>
+    </div>
+
+    <div class="song-title">
+      <b>{{ song.artist }}</b>&nbsp;‒&nbsp;<b>{{ song.title }}</b>&nbsp;by&nbsp;<strong>{{ song.name }}</strong>
+      {{ song.tag !== '' ? '(' + song.tag + ')': '' }}
+    </div>
+
+    <div class="action-menu">
+      <div class="hat-btn" appHoversvg>
+        <svg version="1.1" width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+          <text id="helpTxt" x="10" y="25">
+            <tspan id="helpSpan">
+              ?
+            </tspan>
+          </text>
+        </svg>
+      </div>
+
+      <div class="hat-btn" appHoversvg>
+        <svg version="1.1" width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+          <path #fullScr d="m 10 5 h 15 v 15 m -5 5 h -15  v -15" stroke-linecap="round"
+                stroke-linejoin="round" stroke-opacity=".3" fill="rgba(0, 0, 0, .5)"></path>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bar">
+    <div class="speed" contenteditable="true" appChangedNotes="speed" (blur)="changeSpeed($event)">{{ speed }}</div>
+    <div class="numerator" contenteditable="true" appChangedNotes="numerator" (blur)="changeSize($event, true)">
+      {{ numerator }}
+    </div>
+    <div class="denominator" contenteditable="true" appChangedNotes="denominator" (blur)="changeSize($event, false)">
+      {{ denominator }}
+    </div>
+  </div>
+  <div *ngFor="let column of notes; index as i" class="column" [class.last-column]="i % barLength === barLength - 1">
+    <i class="large material-icons" [class.selected]="selectedColumn === i" (click)="selectionClick(i)">place</i>
+    <input type="text" *ngFor="let note of column.split(''); index as j" class="note" appChangedNotes="note"
+           [value]="note !== '-' ? guitar.class.getNumByLetter(note) : '-'" placeholder="-"
+           (blur)="changeNote($event, i, j)">
+  </div>
+  <div class="info-notes">
+    <div class="plus-btn" (click)="plusColumns()"></div>
+    <div></div>
+  </div>
+</div>

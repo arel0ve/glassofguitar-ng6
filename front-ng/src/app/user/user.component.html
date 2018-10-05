@@ -1,0 +1,27 @@
+<div class="wrapper">
+
+  <a href="/{{ user.login }}" class="user-name">
+    <div>
+      <b>{{ user.tag }}</b>
+    </div>
+    <div>{{ user.name }}</div>
+  </a>
+
+  <div class="user-photo">
+    <img src="../../assets/photos/{{ !user.photo || user.photo === '' ? 'no-photo.png' : user.photo }}" alt="p" class="main-menu-ico">
+  </div>
+
+  <div class="wrapper-3d">
+    <div #userInfo class="user-info" (mouseenter)="enterInfo()" (mouseleave)="leaveInfo()">
+      <p><b>Birthday</b>: {{ user.birthday }}</p>
+      <p><b>Place of birth</b>: {{ user.place }}</p>
+      <p><b>Country living</b>: {{ user.country }}</p>
+      <p><b>Biography</b>:<br>{{ user.biography }}</p>
+    </div>
+  </div>
+
+  <div #songs class="user-track-list">
+    <app-song *ngFor="let song of user.songs" [song]="song"></app-song>
+  </div>
+
+</div>

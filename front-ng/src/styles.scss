@@ -1,0 +1,26 @@
+$main-bg: #362A31;
+
+body {
+  background: $main-bg;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+@font-face {
+  font-family: "Guild Regular";
+  src: url("assets/fonts/guild-main-menu.ttf");
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Ubuntu Regular";
+  src: url("assets/fonts/ubuntu-regular.ttf");
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Erika Monospace";
+  src: url("assets/fonts/erika-ormig-monospace.ttf");
+  font-display: fallback;
+}
