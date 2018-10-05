@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/global.css')
+    link(rel='stylesheet', href='/stylesheets/menu.css')
+    link(rel='stylesheet', href='/stylesheets/user.css')
+    link(rel='stylesheet', href='/stylesheets/guitar.css')
+    link(rel='stylesheet', href='/stylesheets/notes.css')
+    link(rel='icon', href='/icons/favicon.ico')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    script(type='text/javascript', src='/javascripts/animation.js')
+    script(type='text/javascript', src='/javascripts/sound.js')
+    script(type='text/javascript', async=true, defer=true, src='/javascripts/detail-info.js')
+    script(type='text/javascript', async=true, defer=true, src='/javascripts/show-detail.js')
+    script(type='text/javascript', async=true, src='/javascripts/service-scripts/reg-btn.js')
+    script(type='text/javascript', async=true, src='/javascripts/service-scripts/autho-btn.js')
+    script(type='text/javascript', async=true, src='/javascripts/service-scripts/logout-btn.js')
+    script(type='text/javascript', async=true, src='/javascripts/service-scripts/create-song.js')
+
+  body
+    block content

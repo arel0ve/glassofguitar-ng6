@@ -1,0 +1,181 @@
+.wrapper-user {
+  position: absolute;
+  padding-left: 7px;
+  top: 3.3em;
+  width: calc(20% + 6px);
+  height: calc(100vh - 3.3em);
+  max-height: calc(100vh - 3.3em);
+  display: inline-block;
+  color: rgb(177, 207, 227);
+  font-family: "Ubuntu Regular", sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.wrapper-user::-webkit-scrollbar {
+  width: 6px;
+}
+
+.wrapper-user::-webkit-scrollbar-track-piece {
+  background-color: rgba(0, 0, 0, .0);
+}
+
+.wrapper-user::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .5);
+  border-radius: 50% / 4px;
+}
+
+.wrapper-user::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, .7);
+}
+
+.wrapper-user > div {
+  width: calc(100% - 7px);
+}
+
+.wrapper-user b {
+  color: rgb(127, 144, 154);
+}
+
+.user-name {
+  text-decoration: none;
+  display: block;
+  color: rgb(177, 207, 227);
+  width: 100%;
+  text-align: center;
+  font-size: 1.2em;
+  border-bottom: 0 dotted rgba(127, 144, 154, .7);
+  padding-bottom: 8px;
+  transition: border-bottom .3s, padding-bottom .3s;
+}
+
+.user-name:hover {
+  border-bottom: thick dotted rgba(127, 144, 154, .7);
+  padding-bottom: 3px;
+  transition: border-bottom .6s, padding-bottom .6s;
+}
+
+.user-photo {
+  position: relative;
+  padding-bottom: calc(100% - 7px);
+  overflow: hidden;
+}
+
+.user-photo > img {
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  opacity: .85;
+  border-radius: 50%;
+  padding: 0;
+  transform: scale(1);
+  transition: border-radius .6s, transform .6s .4s, opacity .5s .1s;
+}
+
+.user-photo > img:hover {
+  opacity: 1;
+  border-radius: 25% 25%;
+  transform: scale(1.15);
+  transition: border-radius 1.2s, transform 1.2s .8s, opacity 1s .2s;
+}
+
+.wrapper-3d {
+  perspective: 500px;
+}
+
+.user-info {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  background: rgb(49, 54, 49);
+  box-shadow: 1px 7px 7px 2px rgba(127, 254, 142, .5);
+  transform: rotateX(55deg) scale(.85);
+  transform-style: preserve-3d;
+  top: -30px;
+  transition: transform .6s, top .6s, background .6s, box-shadow .6s;
+  overflow-wrap: break-word;
+}
+
+.user-info:hover {
+  background: rgb(27, 35, 27);
+  box-shadow: 1px 2px 2px 1px rgba(127, 254, 142, .7);
+  transform: rotateX(0deg) scale(1);
+  top: 0;
+  transition: transform 1.2s, top 1.2s, background 1.2s, box-shadow 1.2s;
+}
+
+.user-info > div {
+  width: calc(100% - 10px);
+  height: 100%;
+  padding: 5px;
+  text-align: justify;
+}
+
+.user-track-list {
+  position: relative;
+  top: -60px;
+  transition: top .6s;
+}
+
+.user-track-list-down {
+  top: 0;
+  transition: top 1.2s;
+}
+
+.track {
+  perspective: 500px;
+}
+
+.front, .back {
+  margin-left: 5px;
+  margin-top: 2px;
+  border-top-left-radius: 10px 50%;
+  border-bottom-left-radius: 10px 50%;
+  backface-visibility: hidden;
+  padding-left: 10px;
+  width: calc(100% - 20px);
+  transition: padding-left .3s, width .3s, background-color .3s;
+}
+
+.front {
+  box-shadow: 1px 1px 2px 0 rgba(127, 254, 142, .7);
+  background-color: rgb(27, 35, 27);
+}
+
+.back {
+  position: absolute;
+  top: 0;
+  box-shadow: 1px -1px 2px 0 rgba(127, 254, 142, .7);
+  background: radial-gradient(at left, rgb(127, 254, 127) 10%, rgba(95, 254, 127, .75) 50%, rgba(95, 191, 127, .5));
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  overflow-wrap: break-word;
+}
+
+.front a {
+  color: rgb(177, 207, 227);
+}
+
+.front b {
+  color: rgb(127, 144, 154);
+}
+
+.back a {
+  color: rgba(177, 207, 227, 0);
+}
+
+.back b {
+  color: rgba(127, 144, 154, 0);
+}
+
+.track-animation {
+  cursor: pointer;
+  padding-left: 15px;
+  width: calc(100% - 20px);
+  background-color: rgb(27, 81, 72);
+  transition: padding-left .6s, width .6s, background-color .6s;
+}

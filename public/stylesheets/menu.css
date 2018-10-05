@@ -1,0 +1,121 @@
+.wrapper-menu {
+  position: fixed;
+  box-shadow: 0 1px 2px black;
+  opacity: .75;
+  height: 1.1em;
+  width: 100%;
+  font-size: 3em;
+  display: flex;
+  justify-content: space-between;
+  transition: opacity .3s;
+  font-family: "Guild Regular", sans-serif;
+}
+
+.wrapper-menu:hover {
+  opacity: 1;
+  transition: opacity .6s;
+}
+
+.main-menu-ico {
+  vertical-align: top;
+  cursor: pointer;
+  height: 100%;
+}
+
+.home {
+  margin-left: 10px;
+}
+
+.home::after {
+  content: "home";
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  padding-top: 5px;
+  display: inline-block;
+}
+
+.log-in::before {
+  content: "log";
+  cursor: pointer;
+}
+
+.log-in::after {
+  content: "in";
+  cursor: pointer;
+}
+
+.log-out::before {
+  content: "log";
+  cursor: pointer;
+}
+
+.log-out::after {
+  content: "out";
+  cursor: pointer;
+}
+
+.search {
+  width: 1.1em;
+  margin-right: .5em;
+  text-align: right;
+  transition: width .6s;
+}
+
+.search-animation {
+  width: 7.1em;
+  transition: width 1.2s;
+}
+
+.search-field {
+  display: inline-block;
+  vertical-align: top;
+  font-size: .75em;
+  font-family: "Guild Regular", sans-serif;
+  width: 0;
+  border-width: 2px 0;
+  padding: 1px 0;
+  transition: width .6s, border .3s .3s, padding .6s;
+}
+
+.search-field-animation {
+  width: 8em;
+  border-width: 2px 2px;
+  padding: 1px 1px;
+  transition: width 1.2s, border .6s .6s, padding 1.2s;
+}
+
+.search-field:focus {
+  border: inset;
+}
+
+.search-result {
+  position: fixed;
+  width: 15em;
+  font-family: "Ubuntu Regular";
+  font-size: 1.2em;
+}
+
+.search-result a {
+  display: block;
+  text-decoration: none;
+  color: rgb(177, 207, 227);
+  background: rgba(21, 27, 21, .7);
+  margin: 2px 0;
+}
+
+.search-result a:hover {
+  background: rgba(7, 9, 7, .95);
+  margin: 2px 0;
+  box-shadow: 1px 2px 3px 1px rgba(0, 2, 0, .7);
+  border-top-right-radius: 10px 50%;
+  border-bottom-right-radius: 10px 50%;
+}
+
+.search-result b {
+  color: rgb(127, 144, 154);
+}
+
+.search-result div {
+  background: rgba(12, 14, 12, .9);
+  color: rgb(227, 77, 81);
+}

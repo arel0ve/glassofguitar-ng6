@@ -1,0 +1,75 @@
+<fieldset id="autho-field">
+  <legend>SIGN IN</legend>
+  <div>
+    <label for="login">
+      <span>Login:</span>
+      <input type="text" id="login" required>
+    </label>
+  </div>
+  <div>
+    <label for="password">
+      <span>Password:</span>
+      <input type="password" id="password" required autocomplete="current-password">
+    </label>
+  </div>
+  <div style="display: none">
+    <label for="password-repeat">
+      <span>Repeat password:</span>
+      <input type="password" id="password-repeat" required autocomplete="new-password"
+             pattern="[0-9a-z]{6,}|[0-9A-Z]{6,}|[0-9a-zA-Z]{6,}" placeholder="min 6 chars, letters and numbers">
+    </label>
+  </div>
+  <div style="display: none">
+    <label for="email">
+      <span>Email:</span>
+      <input type="email" id="email" required>
+    </label>
+  </div>
+  <div style="display: none">
+    <label for="tag">
+      <span>Band:</span>
+      <input type="text" id="tag" pattern="{0,64}">
+    </label>
+  </div>
+  <div style="display: none">
+    <label for="name">
+      <span>Full name:</span>
+      <input type="text" id="name" required pattern="{1,64}">
+    </label>
+  </div>
+  <div style="display: none">
+    <label for="birthday">
+      <span>Birthday:</span>
+      <input type="date" id="birthday" min="1901-01-01" max="2018-01-01">
+    </label>
+  </div>
+  <div style="display: none">
+    <label for="place">
+      <span>Place of birthday:</span>
+      <input type="text" id="place" pattern="{0,64}">
+    </label>
+  </div>
+  <div style="display: none">
+    <label for="country">
+      <span>Country living:</span>
+      <input type="text" id="country" pattern="{0,64}">
+    </label>
+  </div>
+  <div style="display: none">
+    <label for="hat-color">
+      <span>Hat color:</span>
+      <input type="color" id="hat-color" value="#51907F">
+    </label>
+  </div>
+  <div id="div-message" style="margin-top: 1em"></div>
+  <div id="verify-block" style="display: none">
+    <label for="verify">
+      <span>Verifying code:</span>
+      <input type="text" id="verify" required>
+    </label>
+  </div>
+  <div class="btn-div">
+    <button type="button" id="reg" class="new" onclick="regBtnOnclick(event);">New Account</button>
+    <button type="submit" id="autho" class="active-btn" onclick="authoBtnOnclick(event);">Sign In</button>
+  </div>
+</fieldset>
