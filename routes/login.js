@@ -5,23 +5,26 @@ const User = require('../models/user').User;
 
 router.post('/', (req, res, next) => {
   User.findOne({ login: req.body.login }, function(err, user) {
-    if (err) return next(err);
+    if (err) {
+      res.statusCode = 500;
+      res.send('Error! Server error! Please try again later.');
+    }
 
     if (!user) {
       res.statusCode = 403;
-      res.send(`User '${req.body.login}' is not founded!`);
+      res.send(`Error! User '${req.body.login}' is not founded!`);
       return;
     }
 
     if (!user.checkPassword(req.body.password)) {
       res.statusCode = 202;
-      res.send("Password is wrong!");
+      res.send("Error! Password is wrong!");
       return;
     }
 
     if (!user.isVerify) {
       res.statusCode = 203;
-      res.send(`Your email (${user.email}) is not verified.<br>
+      res.send(`Warning! Your email (${user.email}) is not verified.<br>
           Please, input verifying code from your email.`);
       return;
     }

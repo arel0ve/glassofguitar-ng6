@@ -1,0 +1,77 @@
+<form [formGroup]="form">
+  <fieldset id="autho-field">
+    <legend>SIGN IN</legend>
+    <div>
+      <label for="login">
+        <span>Login:</span>
+        <input type="text" id="login" formControlName="login" #login required>
+      </label>
+    </div>
+    <div>
+      <label for="password">
+        <span>Password:</span>
+        <input type="password" id="password" formControlName="password" #password required autocomplete="current-password"
+               pattern="[0-9a-z]{6,}|[0-9A-Z]{6,}|[0-9a-zA-Z]{6,}" placeholder="min 6 chars, letters and numbers">
+      </label>
+    </div>
+    <div>
+      <label for="passwordRepeat">
+        <span>Repeat password:</span>
+        <input type="password" id="passwordRepeat" formControlName="passwordRepeat" #passwordRepeat required autocomplete="new-password"
+               pattern="[0-9a-z]{6,}|[0-9A-Z]{6,}|[0-9a-zA-Z]{6,}" placeholder="min 6 chars, letters and numbers">
+      </label>
+    </div>
+    <div>
+      <label for="email">
+        <span>Email:</span>
+        <input type="email" id="email" formControlName="email" #email required>
+      </label>
+    </div>
+    <div>
+      <label for="tag">
+        <span>Band:</span>
+        <input type="text" id="tag" formControlName="tag">
+      </label>
+    </div>
+    <div>
+      <label for="name">
+        <span>Full name:</span>
+        <input type="text" id="name" formControlName="name" #name required>
+      </label>
+    </div>
+    <div>
+      <label for="birthday">
+        <span>Birthday:</span>
+        <input type="date" id="birthday" formControlName="birthday" min="1901-01-01" max="2018-01-01">
+      </label>
+    </div>
+    <div>
+      <label for="place">
+        <span>Place of birthday:</span>
+        <input type="text" id="place" formControlName="place">
+      </label>
+    </div>
+    <div>
+      <label for="country">
+        <span>Country living:</span>
+        <input type="text" id="country" formControlName="country">
+      </label>
+    </div>
+    <div>
+      <label for="hat-color">
+        <span>Hat color:</span>
+        <input type="color" id="hat-color" formControlName="hatColor" value="#51907F">
+      </label>
+    </div>
+    <div class="div-message">{{ message }}</div>
+    <div class="btn-div">
+      <div class="div-message"
+           *ngIf="form.invalid; else elseReg"
+           style="margin-top: 1em">Input data to required fields to continue sign up</div>
+      <ng-template #elseReg>
+        <button type="submit" id="regBtn" class="active-btn" (click)="doReg($event)">Sign Up</button>
+      </ng-template>
+    </div>
+  </fieldset>
+</form>
+

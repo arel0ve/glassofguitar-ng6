@@ -1,0 +1,16 @@
+<div class="opacity-wrapper">
+  <div class="wrapper-todo">
+    <div class="hat-window">
+      <div class="hat-window-title">
+        <span>{{ todoTitle }}</span>
+      </div>
+      <div class="close-btn" (click)="close()"></div>
+    </div>
+    <div class="info-block">
+      <app-login *ngIf="mode === 'login'"></app-login>
+      <app-logout *ngIf="mode === 'logout'"></app-logout>
+      <app-registration *ngIf="mode === 'reg'"></app-registration>
+      <app-verify *ngIf="mode === 'verify'"></app-verify>
+    </div>
+  </div>
+</div>

@@ -14,17 +14,19 @@
                pattern="[0-9a-z]{6,}|[0-9A-Z]{6,}|[0-9a-zA-Z]{6,}" placeholder="min 6 chars, letters and numbers">
       </label>
     </div>
+    <div>
+      <label for="verify">
+        <span>Verifying code:</span>
+        <input type="text" id="verify" formControlName="verifyCode" #verify required>
+      </label>
+    </div>
     <div class="div-message">{{ message }}</div>
     <div class="btn-div">
-      <a routerLink="/todo/reg">
-        <button type="button" id="showReg" class="new">New Account</button>
-      </a>
       <div class="div-message"
-           *ngIf="form.invalid; else elseLogin">Input data to required fields to continue sign in</div>
+           *ngIf="form.invalid; else elseLogin">Input data to required fields to continue verification</div>
       <ng-template #elseLogin>
-        <button type="submit" id="authoBtn" class="active-btn" (click)="doLogin($event)">Sign In</button>
+        <button type="submit" id="verifyBtn" class="active-btn" (click)="doVerify($event)">Verify</button>
       </ng-template>
     </div>
   </fieldset>
 </form>
-

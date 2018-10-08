@@ -1,12 +1,10 @@
-import {Directive, ElementRef, HostListener, ViewChild} from '@angular/core';
+import {Directive, HostListener} from '@angular/core';
 import {Guitar} from './guitar';
 
 @Directive({
   selector: '[appGuitarMouse]'
 })
 export class GuitarMouseDirective {
-
-  @ViewChild('guitar') guitarRef: ElementRef;
 
   @HostListener('mousedown', ['$event.offsetX', '$event.offsetY', '$event.button']) onMouseDown(x, y, btn) {
     const downInfo = window.guitar.getStringAndChordByXY(x, y);
@@ -38,8 +36,6 @@ export class GuitarMouseDirective {
       }
     }
 
-    this.guitarRef.nativeElement.focus();
-
   }
 
   @HostListener('mousemove', ['$event.offsetX', '$event.offsetY', '$event.buttons', '$event.movementY']) onMouseMove(x, y, btns, m) {
@@ -52,8 +48,6 @@ export class GuitarMouseDirective {
     if (downInfo.mode === 'string') {
       window.guitar.playString(downInfo.string);
     }
-
-    this.guitarRef.nativeElement.focus();
   }
 
   @HostListener('wheel', ['$event.offsetX', '$event.offsetY', '$event.deltaY']) onWheel(x, y, delta) {

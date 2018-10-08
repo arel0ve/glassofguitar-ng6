@@ -1,10 +1,10 @@
 <div class="wrapper" [ngStyle]="{'background-color': menuColor}">
 
-  <a href="/" class="home">
-    <img src="{{ '../../assets/icons/home-' + (isLogin ? 'not' : 'in') + '.png' }}" alt="h" class="main-menu-ico">
+  <a [routerLink]=" login ? '/user/' + login : '/'" class="home">
+    <img src="{{ '../../assets/icons/home-' + (this.isLogin === 'true' ? 'in' : 'not') + '.png' }}" alt="h" class="main-menu-ico">
   </a>
 
-  <a class="login" [ngClass]="logClass" routerLink="/todo/login">
+  <a class="login" [ngClass]="logClass" [routerLink]="loginLink">
     <img src="../../assets/icons/main-logo.png" alt="l" class="main-menu-ico">
   </a>
 

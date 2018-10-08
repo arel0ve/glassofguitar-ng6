@@ -1,0 +1,90 @@
+.opacity-wrapper {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, .0);
+}
+
+.wrapper-todo {
+  position: fixed;
+  display: inline-block;
+  top: 3%;
+  height: 95%;
+  left: 20%;
+  width: 60%;
+  box-shadow: inset 0px -5px 12px 7px rgba(49, 54, 49, .5);
+  border-radius: 10px;
+  background-color: rgb(121, 132, 127);
+  color: rgb(207, 227, 254);
+  font-family: "Ubuntu Regular", sans-serif;
+}
+
+.wrapper-todo b {
+  color: rgb(77, 81, 89);
+}
+
+.hat-window {
+  height: 30px;
+}
+
+.hat-window-title {
+  display: inline-block;
+  width: calc(100% - 50px);
+  text-align: center;
+  text-transform: uppercase;
+  font-kerning: normal;
+  font-size: 1.2em;
+  margin-left: 12px;
+  padding-top: 5px;
+  border-bottom: thick dotted rgba(77, 81, 89, .7);
+}
+
+.close-btn {
+  display: inline-block;
+  width: 30px;
+  height: 100%;
+  text-align: center;
+  font-size: 1.5em;
+  vertical-align: middle;
+  cursor: pointer;
+  color: rgb(127, 81, 77);
+}
+
+.close-btn::before {
+  content: "✗";
+}
+
+.close-btn:hover {
+  color: rgb(181, 81, 77);
+}
+
+.close-btn:active {
+  color: rgb(127, 49, 54);
+}
+
+.info-block {
+  margin: 6px 12px;
+  max-height: calc(100% - 42px);
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.info-block::-webkit-scrollbar {
+  width: 6px;
+}
+
+.info-block::-webkit-scrollbar-track-piece {
+  background-color: rgba(0, 0, 0, .0);
+}
+
+.info-block::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .5);
+  border-radius: 50% / 4px;
+}
+
+.info-block::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, .7);
+}

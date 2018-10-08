@@ -14,23 +14,27 @@ export class WorkspaceComponent implements OnInit {
   songId: Observable<string>;
   user: any;
   song: any;
-  private sub: any;
+  // private sub: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.user = {
-      isLogin: false,
+      isLogin: 'false',
       hatColor: '#123456',
-
     };
     this.song = {};
-    this.sub = this.route.params.subscribe(params => {
-      this.login = params['login'] || '0';
-      this.songId = params['songId'] || '0';
-    });
+    // @ts-ignore
+    this.login = this.route.url.value[1] ? this.route.url.value[1].path : '0';
+    // @ts-ignore
+    this.songId = this.route.url.value[2] ? this.route.url.value[2].path : '0';
+    // this.sub = this.route.params.subscribe(params => {
+    //   console.log(params['login']);
+    //   this.login = params['login'] || '0';
+    //   this.songId = params['songId'] || '0';
+    // });
 
-    this.http.get(`http://localhost:9000/api/user/${this.login}/${this.songId}`).subscribe(user => {
+    this.http.get(`http://localhost:9000/api/user/${this.login}/${this.songId}`, {withCredentials: true}).subscribe(user => {
       this.user = user;
       // @ts-ignore
       this.song = Object.assign({name: this.user.name, tag: this.user.tag}, user.currentSong);

@@ -10,7 +10,7 @@ const busboy = require('connect-busboy');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
-const authoRouter = require('./routes/autho');
+const loginRouter = require('./routes/login');
 const regRouter = require('./routes/registr');
 const verRouter = require('./routes/verify');
 const logoutRouter = require('./routes/logout');
@@ -34,7 +34,7 @@ const app = express();
 const corsOptions = {
   origin: 'http://localhost:4200',
   credentials: true
-}
+};
 app.use(cors(corsOptions));
 
 // view engine setup
@@ -73,9 +73,9 @@ app.use('/', indexRouter);
 app.use('/api/user/', usersRouter);
 
 app.use('/api/registration', regRouter);
-app.use('/v', verRouter);
-app.use('/a', authoRouter);
-app.use('/o', logoutRouter);
+app.use('/api/verify', verRouter);
+app.use('/api/login', loginRouter);
+app.use('/api/logout', logoutRouter);
 
 app.use('/n', newSongRouter);
 app.use('/s', saveSongRouter);

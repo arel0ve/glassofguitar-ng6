@@ -1,35 +1,33 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {FormGroup, FormControl} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-verify',
+  templateUrl: './verify.component.html',
+  styleUrls: ['./verify.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class VerifyComponent implements OnInit {
 
-  mode: string;
-  private sub: any;
   message: string;
-
   form = new FormGroup({
     login: new FormControl(),
-    password: new FormControl()
+    password: new FormControl(),
+    verifyCode: new FormControl()
   });
 
   constructor(private http: HttpClient, private exitRouter: Router) { }
 
   ngOnInit() {
-    this.message = '';
   }
 
-  doLogin(e) {
-    this.http.post('http://localhost:9000/api/login',
+  doVerify(e) {
+    this.http.post('http://localhost:9000/api/verify',
         {
           login: this.form.value.login,
-          password: this.form.value.password
+          password: this.form.value.password,
+          verifyCode: this.form.value.verifyCode
         },
         {
           withCredentials: true,

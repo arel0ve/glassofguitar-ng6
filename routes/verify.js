@@ -11,19 +11,19 @@ router.post('/', (req, res, next) => {
 
     if (!user) {
       res.statusCode = 403;
-      res.send(`User '${req.body.login}' is not founded!`);
+      res.send(`Error! User '${req.body.login}' is not founded!`);
       return;
     }
 
     if (!user.checkPassword(req.body.password)) {
       res.statusCode = 202;
-      res.send(`Password is wrong!`);
+      res.send(`Error! Password is wrong!`);
       return;
     }
 
     if (req.body.verifyCode !== user.verifyCode) {
       res.statusCode = 203;
-      res.send(`Verify code is wrong!`);
+      res.send(`Error! Verify code is wrong!`);
       return;
     }
 
@@ -31,7 +31,7 @@ router.post('/', (req, res, next) => {
     user.save(function (err) {
       if (err) {
         res.statusCode = 501;
-        res.send("Error in updating data! Please press 'Verify' again.");
+        res.send("Error! Error in updating data! Please press 'Verify' again.");
         return;
       }
 

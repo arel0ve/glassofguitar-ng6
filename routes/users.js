@@ -125,7 +125,7 @@ router.get(['/:login', '/:login/:song'], function(req, res, next) {
       };
     }
 
-    res.statusCOde = 200;
+    res.statusCode = 200;
     res.send(sendObj);
 
   });

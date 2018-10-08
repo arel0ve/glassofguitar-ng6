@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -19,6 +20,11 @@ import { ChangedNotesDirective } from './notes/changed.notes.directive';
 import { HoversvgDirective } from './notes/hoversvg.directive';
 import { WorkspaceComponent } from './workspace/workspace.component';
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
+import { TodoComponent } from './todo/todo.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { VerifyComponent } from './verify/verify.component';
+import { AddsongComponent } from './addsong/addsong.component';
 
 
 const appRoutes: Routes = [
@@ -28,7 +34,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'user/:user',
-    redirectTo: ':user/0',
+    redirectTo: 'user/:user/0',
     pathMatch: 'full'
   },
   {
@@ -37,8 +43,9 @@ const appRoutes: Routes = [
   },
   {
     path: 'todo/:mode',
-    component: LoginComponent
-  }
+    component: TodoComponent,
+    runGuardsAndResolvers: 'always'
+  },
 ];
 
 @NgModule({
@@ -58,13 +65,20 @@ const appRoutes: Routes = [
     ChangedNotesDirective,
     HoversvgDirective,
     WorkspaceComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent,
+    TodoComponent,
+    RegistrationComponent,
+    VerifyComponent,
+    AddsongComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'})
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })

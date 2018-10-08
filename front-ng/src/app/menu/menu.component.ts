@@ -1,12 +1,13 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnChanges {
 
+  @Input() login;
   @Input() isLogin;
   @Input() menuColor;
 
@@ -14,12 +15,17 @@ export class MenuComponent implements OnInit {
 
   logClass: string;
   showSearch: boolean;
+  loginLink: string;
 
   constructor() { }
 
   ngOnInit() {
     this.showSearch = false;
-    this.logClass = this.isLogin ? 'log-out' : 'log-in';
+  }
+
+  ngOnChanges() {
+    this.logClass = this.isLogin === 'true' ? 'log-out' : 'log-in';
+    this.loginLink = this.isLogin === 'true' ? '/todo/logout' : '/todo/login';
   }
 
   onShowSearch() {
