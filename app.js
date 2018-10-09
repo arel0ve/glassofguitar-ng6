@@ -15,7 +15,7 @@ const regRouter = require('./routes/registr');
 const verRouter = require('./routes/verify');
 const logoutRouter = require('./routes/logout');
 
-const newSongRouter = require('./routes/new-song');
+const addSongRouter = require('./routes/add-song');
 const saveSongRouter = require('./routes/save-song');
 
 const biographyRouter = require('./routes/biography');
@@ -77,7 +77,7 @@ app.use('/api/verify', verRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/logout', logoutRouter);
 
-app.use('/n', newSongRouter);
+app.use('/api/addsong', addSongRouter);
 app.use('/s', saveSongRouter);
 
 app.use('/b', biographyRouter);

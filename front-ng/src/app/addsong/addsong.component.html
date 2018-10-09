@@ -1,3 +1,28 @@
-<p>
-  addsong works!
-</p>
+<form [formGroup]="form">
+  <fieldset id="add-song-field">
+    <legend>ADD SONG</legend>
+    <div>
+      <label for="artist">
+        <span>Artist:</span>
+        <input type="text" id="artist" formControlName="artist" #artist required>
+      </label>
+    </div>
+    <div>
+      <label for="song">
+        <span>Song title:</span>
+        <input type="text" id="song" formControlName="song" #song required>
+      </label>
+    </div>
+    <div class="div-message">{{ message }}</div>
+    <div class="btn-div">
+      <div class="div-message"
+           *ngIf="form.invalid; else elseLogin">Input data to required fields to continue creating</div>
+      <ng-template #elseLogin>
+        <button type="submit" id="createBtn" class="active-btn" (click)="doCreate($event)">Create</button>
+      </ng-template>
+      <button type="submit" id="cancel" class="active-btn" (click)="close()">Cancel</button>
+    </div>
+  </fieldset>
+</form>
+
+

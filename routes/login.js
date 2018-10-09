@@ -8,6 +8,7 @@ router.post('/', (req, res, next) => {
     if (err) {
       res.statusCode = 500;
       res.send('Error! Server error! Please try again later.');
+      return;
     }
 
     if (!user) {

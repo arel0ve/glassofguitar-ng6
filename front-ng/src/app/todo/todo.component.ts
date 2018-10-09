@@ -39,6 +39,9 @@ export class TodoComponent implements OnInit, OnDestroy {
       case 'verify':
         this.todoTitle = 'Verification';
         break;
+      case 'addsong':
+        this.todoTitle = 'New Song';
+        break;
       default:
         this.todoTitle = '';
         break;

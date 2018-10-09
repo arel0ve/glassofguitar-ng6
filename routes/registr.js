@@ -11,7 +11,8 @@ router.post('/', (req, res, next) => {
   User.findOne({ login: req.body.login }, function (err, user) {
     if (err) {
       res.statusCode = 500;
-      res.send('Error! Server error. Please, try again later.')
+      res.send('Error! Server error. Please, try again later.');
+      return;
     }
 
     if (user) {

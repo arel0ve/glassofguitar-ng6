@@ -10,8 +10,6 @@ import {HttpClient} from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
 
-  mode: string;
-  private sub: any;
   message: string;
 
   form = new FormGroup({

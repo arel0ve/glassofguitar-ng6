@@ -1,6 +1,7 @@
 import {AfterViewChecked, Component, ElementRef, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import { Guitar } from '../guitar/guitar';
 import { Animation } from '../animation';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-notes',
@@ -27,7 +28,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   __delayBeforeNextNote: number;
   __timerPlay;
 
-  constructor() { }
+  constructor(private exitRouter: Router) { }
 
   ngOnInit() {
     this.guitar = window.guitar;
@@ -53,6 +54,10 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
 
   ngAfterViewChecked() {
     this.columns = this.notesRef.nativeElement.querySelectorAll('.column');
+  }
+
+  addSong() {
+    this.exitRouter.navigateByUrl(`/todo/addsong`);
   }
 
   play() {

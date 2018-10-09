@@ -7,7 +7,11 @@ const User = require('../models/user').User;
 router.post('/', (req, res, next) => {
 
   User.findOne({ login: req.body.login }, function(err, user) {
-    if (err) return next(err);
+    if (err) {
+      res.statusCode = 500;
+      res.send('Error! Server error! Please try again later.');
+      return;
+    }
 
     if (!user) {
       res.statusCode = 403;
