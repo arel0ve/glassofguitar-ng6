@@ -6,7 +6,7 @@ const Song = require('../models/song').Song;
 
 router.post('/', (req, res, next) => {
   if (!req.session.user) {
-    res.statusCode = 403;
+    res.statusCode = 203;
     res.send("Error! You have to register and verify to create new song.");
     return;
   }
@@ -19,7 +19,7 @@ router.post('/', (req, res, next) => {
     }
 
     if (!user) {
-      res.statusCode = 404;
+      res.statusCode = 203;
       res.send("Error! Your login is not register in our database.");
       return;
     }
