@@ -92,3 +92,38 @@
 .search-field:focus {
   border: inset;
 }
+
+.search-result {
+  position: fixed;
+  z-index: 999;
+  top: 3em;
+  right: 4.15em;
+  width: 16.36em;
+  font-family: "Ubuntu Regular", sans-serif;
+  font-size: 1.1em;
+}
+
+.search-result a {
+  display: block;
+  text-decoration: none;
+  color: rgb(177, 207, 227);
+  background: rgba(21, 27, 21, .7);
+  margin: 2px 0;
+}
+
+.search-result a:hover {
+  background: rgba(7, 9, 7, .95);
+  margin: 2px 0;
+  box-shadow: 1px 2px 3px 1px rgba(0, 2, 0, .7);
+  border-top-right-radius: 10px 50%;
+  border-bottom-right-radius: 10px 50%;
+}
+
+.search-result b {
+  color: rgb(127, 144, 154);
+}
+
+.search-result div {
+  background: rgba(12, 14, 12, .9);
+  color: rgb(227, 77, 81);
+}

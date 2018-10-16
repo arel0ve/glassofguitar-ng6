@@ -6,13 +6,13 @@ const User = require('../models/user').User;
 router.post('/', (req, res, next) => {
   if (!req.session.user) {
     res.statusCode = 203;
-    res.send("You have to register and verify to saving song's notes.");
+    res.send("Error! You have to register and verify to saving song's notes.");
     return;
   }
 
   if (req.session.user !== req.body.user) {
     res.statusCode = 203;
-    res.send("You can not save songs of another users.");
+    res.send("Error! You can not save songs of another users.");
     return;
   }
 
@@ -21,7 +21,7 @@ router.post('/', (req, res, next) => {
 
     if (!user) {
       res.statusCode = 203;
-      res.send("It's mistake! Your login is not register in our database.");
+      res.send("Error! It's mistake! Your login is not register in our database.");
       return;
     }
 
@@ -35,7 +35,7 @@ router.post('/', (req, res, next) => {
 
     if (!song) {
       res.statusCode = 203;
-      res.send('This song has not already created.');
+      res.send('Error! This song has not already created.');
       return;
     }
 
@@ -46,7 +46,7 @@ router.post('/', (req, res, next) => {
     user.save(function (err) {
       if (err) {
         res.statusCode = 203;
-        res.send("Error in updating data!");
+        res.send("Error! Error in updating data!");
         return;
       }
 

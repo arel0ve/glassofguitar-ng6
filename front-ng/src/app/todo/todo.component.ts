@@ -1,5 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild, ComponentFactoryResolver} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {LoginComponent} from './login/login.component';
+import {LogoutComponent} from './logout/logout.component';
+import {RegistrationComponent} from './registration/registration.component';
+import {VerifyComponent} from './verify/verify.component';
+import {AddsongComponent} from './addsong/addsong.component';
+import {InfoComponent} from './info/info.component';
+import {TodoDirective} from './todo.directive';
 
 @Component({
   selector: 'app-todo',
@@ -11,8 +18,14 @@ export class TodoComponent implements OnInit, OnDestroy {
   mode: string;
   todoTitle: string;
   navigationSubscription;
+  currentComponent: any;
+  @ViewChild(TodoDirective) adHost: TodoDirective;
 
-  constructor(private route: ActivatedRoute, private exitRouter: Router) {
+  constructor(
+      private route: ActivatedRoute,
+      private exitRouter: Router,
+      private componentFactoryResolver: ComponentFactoryResolver
+  ) {
     this.navigationSubscription = this.exitRouter.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd) {
@@ -24,28 +37,42 @@ export class TodoComponent implements OnInit, OnDestroy {
   ngOnInit() {  }
 
   initialiseInvites() {
-    // @ts-ignore
-    this.mode = this.route.url.value[1] ? this.route.url.value[1].path : 'login';
-    switch (this.mode) {
-      case 'login':
-        this.todoTitle = 'Authorization';
-        break;
-      case 'logout':
-        this.todoTitle = 'Quit';
-        break;
-      case 'reg':
-        this.todoTitle = 'Registration';
-        break;
-      case 'verify':
-        this.todoTitle = 'Verification';
-        break;
-      case 'addsong':
-        this.todoTitle = 'New Song';
-        break;
-      default:
-        this.todoTitle = '';
-        break;
-    }
+    this.route.params.subscribe(value => {
+      this.mode = value.mode;
+      switch (this.mode) {
+        case 'login':
+          this.todoTitle = 'Authorization';
+          this.currentComponent = LoginComponent;
+          break;
+        case 'logout':
+          this.todoTitle = 'Quit';
+          this.currentComponent = LogoutComponent;
+          break;
+        case 'reg':
+          this.todoTitle = 'Registration';
+          this.currentComponent = RegistrationComponent;
+          break;
+        case 'verify':
+          this.todoTitle = 'Verification';
+          this.currentComponent = VerifyComponent;
+          break;
+        case 'addsong':
+          this.todoTitle = 'New Song';
+          this.currentComponent = AddsongComponent;
+          break;
+        case 'info':
+          this.todoTitle = 'How to play';
+          this.currentComponent = InfoComponent;
+          break;
+        default:
+          this.todoTitle = '';
+          break;
+      }
+      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.currentComponent);
+      const viewContainerRef = this.adHost.viewContainerRef;
+      viewContainerRef.clear();
+      viewContainerRef.createComponent(componentFactory);
+    });
   }
 
   ngOnDestroy() {

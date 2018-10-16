@@ -1,0 +1,39 @@
+.increased-text {
+  display: inline-block;
+  color: rgb(0, 0, 0);
+  text-align: justify;
+}
+
+.increased-text p {
+  text-indent: 5%;
+}
+
+.increased-text hr {
+  border: none;
+  border-top: 3px double rgba(0, 0, 0, .7);
+  color: rgba(0, 0, 0, .9);
+  overflow: visible;
+  text-align: center;
+  height: 5px;
+  margin: 0 5%;
+}
+
+.increased-text hr:after {
+  background-color: rgb(121, 132, 127);
+  content: '⋱☘⋰';
+  padding: 0 4px;
+  position: relative;
+  top: -14px;
+}
+
+.increased-text strong {
+  color: rgb(181, 81, 77);
+  text-shadow: 1px 1px rgba(0, 0, 0, .7);
+}
+
+.increased-text kbd {
+  background-color: rgb(107, 112, 109);
+  border-style: solid;
+  border-width: 1px 2px 2px 1px;
+  padding: 0 1px;
+}

@@ -14,7 +14,6 @@ export class WorkspaceComponent implements OnInit {
   songId: Observable<string>;
   user: any;
   song: any;
-  // private sub: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
@@ -24,15 +23,10 @@ export class WorkspaceComponent implements OnInit {
       hatColor: '#123456',
     };
     this.song = {};
-    // @ts-ignore
-    this.login = this.route.url.value[1] ? this.route.url.value[1].path : '0';
-    // @ts-ignore
-    this.songId = this.route.url.value[2] ? this.route.url.value[2].path : '0';
-    // this.sub = this.route.params.subscribe(params => {
-    //   console.log(params['login']);
-    //   this.login = params['login'] || '0';
-    //   this.songId = params['songId'] || '0';
-    // });
+    this.route.params.subscribe(value => {
+      this.login = value.user || '0';
+      this.songId = value.song || '0';
+    });
 
     this.http.get(`http://localhost:9000/api/user/${this.login}/${this.songId}`, {withCredentials: true}).subscribe(user => {
       this.user = user;

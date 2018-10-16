@@ -14,7 +14,7 @@
     </div>
 
     <div class="action-menu">
-      <div class="hat-btn" appHoversvg>
+      <a class="hat-btn" routerLink="todo/info" appHoversvg>
         <svg version="1.1" width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
           <text id="helpTxt" x="10" y="25">
             <tspan id="helpSpan">
@@ -22,7 +22,7 @@
             </tspan>
           </text>
         </svg>
-      </div>
+      </a>
 
       <div class="hat-btn" appHoversvg>
         <svg version="1.1" width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
@@ -51,6 +51,7 @@
   </div>
   <div class="info-notes">
     <div class="plus-btn" (click)="plusColumns()"></div>
-    <div></div>
+    <div [class]="{'successful-saving': successfulSaving,
+      'unsuccessful-saving': !successfulSaving && successfulSaving !== null}"></div>
   </div>
 </div>

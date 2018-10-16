@@ -11,8 +11,25 @@
   <div class="search" [class.search-animation]="showSearch">
     <input type="search" #searchField class="search-field" tabindex="1"
            [class.search-field-animation]="showSearch"
-           placeholder="search..." title="Hold down 'Shift' to search by author">
+           placeholder="search..." title="Hold down 'Shift' to search by author" (input)="onSearch($event)">
     <img src="../../assets/icons/search.png" alt="s" class="main-menu-ico" (click)="onShowSearch()">
   </div>
-
 </div>
+<div *ngIf="foundSongs.length">
+  <div *ngFor="let song of foundSongs" class="search-result">
+    <div *ngIf="song.type === 'song'">
+      <a [routerLink]="song.href">
+        <b>{{ song.artist }}</b> - {{ song.title }}
+      </a>
+    </div>
+    <div *ngIf="song.type === 'user'">
+      <a [routerLink]="song.href">
+        <b>{{ song.tag }}</b>{{ song.author }}
+      </a>
+    </div>
+    <div *ngIf="song.type === 'error'">
+      {{ song.message }}
+    </div>
+  </div>
+</div>
+

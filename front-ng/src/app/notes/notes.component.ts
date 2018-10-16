@@ -1,7 +1,8 @@
 import {AfterViewChecked, Component, ElementRef, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import { Guitar } from '../guitar/guitar';
 import { Animation } from '../animation';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-notes',
@@ -24,11 +25,16 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   barLength: number;
   selectedColumn: number;
   columns: HTMLDivElement[];
+  successfulSaving: boolean;
 
   __delayBeforeNextNote: number;
   __timerPlay;
 
-  constructor(private exitRouter: Router) { }
+  constructor(
+      private exitRouter: Router,
+      private router: ActivatedRoute,
+      private http: HttpClient
+  ) { }
 
   ngOnInit() {
     this.guitar = window.guitar;
@@ -37,6 +43,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
     this.numerator = 2;
     this.denominator = 2;
     this.barLength = 16 / this.denominator * this.numerator;
+    this.successfulSaving = null;
   }
 
   ngOnChanges() {
@@ -122,6 +129,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
 
   changeSpeed(e) {
     this.speed = +e.target.innerHTNL;
+    this.saveAllNotes();
   }
 
   changeSize(e, isNumerator: boolean) {
@@ -138,6 +146,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
 
     setTimeout(() => {
       this.columns = this.notesRef.nativeElement.querySelectorAll('.column');
+      this.saveAllNotes();
     }, 0);
   }
 
@@ -149,12 +158,9 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   changeNote(e, i: number, j: number) {
     let value = e.target.value;
     e.target.value = '';
-    console.log(value);
-    console.log(i + ' : ' + j);
-    console.log(this.notes);
     value = value === '' || value === '-' ? '-' : Guitar.getLetterByNum(+value);
     this.notes[i] = this.notes[i].slice(0, j) + value + this.notes[i].slice(j + 1);
-    console.log(this.notes);
+    this.saveAllNotes();
   }
 
   private defaultSelection(num = this.selectedColumn) {
@@ -197,6 +203,29 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
           }
         }
       }
+    });
+  }
+
+  saveAllNotes() {
+    this.router.params.subscribe(value => {
+      console.log(value);
+      const user = value.user || '0';
+      const songId = value.songId || '0';
+
+      this.http.post('http://localhost:9000/api/savesong',
+          {
+            user,
+            songId,
+            speed: this.speed,
+            size: `${this.numerator}/${this.denominator}`,
+            notes: this.notes
+          },
+          {
+            withCredentials: true,
+            responseType: 'text'
+          }).subscribe(message => {
+            this.successfulSaving = !message.includes('Error!') && !message.includes('Warning!');
+      });
     });
   }
 }

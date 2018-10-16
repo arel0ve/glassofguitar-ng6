@@ -78,13 +78,13 @@ app.use('/api/login', loginRouter);
 app.use('/api/logout', logoutRouter);
 
 app.use('/api/addsong', addSongRouter);
-app.use('/s', saveSongRouter);
+app.use('/api/savesong', saveSongRouter);
 
 app.use('/b', biographyRouter);
 app.use('/i', imageRouter);
 app.use('/p', pictureSaveRouter);
 
-app.use('/q', queryRouter);
+app.use('/api/query', queryRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

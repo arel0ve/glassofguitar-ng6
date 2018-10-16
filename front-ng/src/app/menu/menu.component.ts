@@ -1,4 +1,6 @@
 import {Component, ElementRef, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {fromEvent} from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -16,11 +18,13 @@ export class MenuComponent implements OnInit, OnChanges {
   logClass: string;
   showSearch: boolean;
   loginLink: string;
+  foundSongs: any[];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.showSearch = false;
+    this.foundSongs = [];
   }
 
   ngOnChanges() {
@@ -33,5 +37,32 @@ export class MenuComponent implements OnInit, OnChanges {
     if (this.showSearch) {
       this.searchElem.nativeElement.focus();
     }
+  }
+
+  onSearch(e) {
+    if (!e.target.value) {
+      return;
+    }
+    const type = e.shiftKey ? 'author' : 'song';
+    this.http.post('http://localhost:9000/api/query',
+        {
+          type,
+          query: e.target.value
+        },
+        {
+          withCredentials: true,
+          responseType: 'json'
+        }).subscribe((searchResult: Array<string>) => {
+          this.foundSongs = searchResult || [];
+          fromEvent(document, 'click')
+              .subscribe((event) => {
+                // @ts-ignore
+                if (event.target.closest('.search-result')) {
+                  return;
+                }
+                this.foundSongs = [];
+              });
+    });
+
   }
 }

@@ -7,11 +7,7 @@
       <div class="close-btn" (click)="close()"></div>
     </div>
     <div class="info-block">
-      <app-login *ngIf="mode === 'login'"></app-login>
-      <app-logout *ngIf="mode === 'logout'"></app-logout>
-      <app-registration *ngIf="mode === 'reg'"></app-registration>
-      <app-verify *ngIf="mode === 'verify'"></app-verify>
-      <app-addsong *ngIf="mode === 'addsong'"></app-addsong>
+      <ng-template appAdTodo></ng-template>
     </div>
   </div>
 </div>

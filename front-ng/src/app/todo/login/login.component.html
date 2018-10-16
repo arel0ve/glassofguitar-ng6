@@ -16,9 +16,7 @@
     </div>
     <div class="div-message">{{ message }}</div>
     <div class="btn-div">
-      <a routerLink="/todo/reg">
-        <button type="button" id="showReg" class="new">New Account</button>
-      </a>
+      <button type="button" id="showReg" class="new" (click)="goReg()">New Account</button>
       <div class="div-message"
            *ngIf="form.invalid; else elseLogin">Input data to required fields to continue sign in</div>
       <ng-template #elseLogin>

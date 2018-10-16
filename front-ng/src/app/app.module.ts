@@ -1,13 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { UserComponent } from './user/user.component';
-import { SongComponent } from './song/song.component';
+import { SongComponent } from './user/song/song.component';
 import { GuitarComponent } from './guitar/guitar.component';
 import { CapoKeyboardDirective } from './guitar/capo.keyboard.directive';
 import { ChordKeyboardDirective } from './guitar/chord.keyboard.directive';
@@ -19,13 +18,15 @@ import { NotesComponent } from './notes/notes.component';
 import { ChangedNotesDirective } from './notes/changed.notes.directive';
 import { HoversvgDirective } from './notes/hoversvg.directive';
 import { WorkspaceComponent } from './workspace/workspace.component';
-import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
+import { TodoModule } from './todo/todo.module';
 import { TodoComponent } from './todo/todo.component';
-import { RegistrationComponent } from './registration/registration.component';
-import { VerifyComponent } from './verify/verify.component';
-import { AddsongComponent } from './addsong/addsong.component';
-
+import {AddsongComponent} from './todo/addsong/addsong.component';
+import {LoginComponent} from './todo/login/login.component';
+import {LogoutComponent} from './todo/logout/logout.component';
+import {RegistrationComponent} from './todo/registration/registration.component';
+import {VerifyComponent} from './todo/verify/verify.component';
+import {InfoComponent} from './todo/info/info.component';
+import {TodoDirective} from './todo/todo.directive';
 
 const appRoutes: Routes = [
   {
@@ -65,18 +66,22 @@ const appRoutes: Routes = [
     ChangedNotesDirective,
     HoversvgDirective,
     WorkspaceComponent,
-    LoginComponent,
-    LogoutComponent,
     TodoComponent,
-    RegistrationComponent,
-    VerifyComponent,
-    AddsongComponent
+    TodoDirective,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    ReactiveFormsModule,
+    TodoModule,
     RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'})
+  ],
+  entryComponents: [
+    AddsongComponent,
+    LoginComponent,
+    LogoutComponent,
+    RegistrationComponent,
+    VerifyComponent,
+    InfoComponent,
   ],
   exports: [RouterModule],
   providers: [],

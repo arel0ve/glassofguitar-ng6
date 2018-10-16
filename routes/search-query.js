@@ -12,25 +12,36 @@ router.post('/', (req, res, next) => {
   if (req.body.type === "song") {
 
     User.findBySong(req.body.query, function(err, users) {
-      if (err) return next(err);
-
-      if (users.length === 0) {
-        res.statusCode = 203;
-        res.send(`<div>Songs with '${req.body.query}' not found</div>`);
+      if (err) {
+        res.statusCode = 501;
+        res.send([{
+          type: 'error',
+          message: 'Server error'
+        }]);
         return;
       }
 
-      let rezult = {
-        length: 0,
-        html: ""
-      };
+      if (users.length === 0) {
+        res.statusCode = 203;
+        res.send([{
+          type: 'error',
+          message: `Songs with '${req.body.query}' not found`
+        }]);
+        return;
+      }
+
+      let rezult = [];
 
       for (let user of users) {
         for (let song of user.songs) {
           let full = song.artist + ' - ' + song.title;
           if (~full.search(reg)) {
-            rezult.html += `<a href="/${user.login}/${song.songId}"><b>${song.artist}</b> - ${song.title}</a>`;
-            rezult.length++;
+            rezult.push({
+              type: 'song',
+              href: `/user/${user.login}/${song.songId}`,
+              artist: song.artist,
+              title: song.title
+            });
           }
         }
         if (rezult.length > 10) break;
@@ -38,38 +49,52 @@ router.post('/', (req, res, next) => {
 
       if (rezult.length === 0) {
         res.statusCode = 202;
-        res.send(`<div>Songs with '${req.body.query}' not found</div>`);
+        res.send([{
+          type: 'error',
+          message: `Songs with '${req.body.query}' not found`
+        }]);
         return;
       }
 
       res.statusCode = 200;
-      res.send(rezult.html);
+      res.send(rezult);
 
     });
 
   } else {
     User.findByName(req.body.query, function (err, users) {
-      if (err) return next(err);
-
-      if (users.length === 0) {
-        res.statusCode = 203;
-        res.send(`<div>Users with '${req.body.query}' not found</div>`);
+      if (err) {
+        res.statusCode = 501;
+        res.send([{
+          type: 'error',
+          message: 'Server error'
+        }]);
         return;
       }
 
-      let rezult = {
-        length: 0,
-        html: ""
-      };
+      if (users.length === 0) {
+        res.statusCode = 203;
+        res.send([{
+          type: 'error',
+          message: `Users with '${req.body.query}' not found`
+        }]);
+        return;
+      }
+
+      let rezult = [];
 
       for (let user of users) {
-        let tag = (user.tag && user.tag !== "") ? `<b>${user.tag}</b>.` : "";
-        rezult.html += `<a href="/${user.login}">${tag}${user.name}</a>`;
-        rezult.length++;
+        let tag = (user.tag && user.tag !== "") ? `${user.tag}.` : "";
+        rezult.push({
+          type: 'user',
+          href: `/user/${user.login}`,
+          tag,
+          name: user.name
+        });
       }
 
       res.statusCode = 200;
-      res.send(rezult.html);
+      res.send(rezult);
     })
   }
 

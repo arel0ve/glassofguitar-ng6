@@ -23,6 +23,10 @@ export class LoginComponent implements OnInit {
     this.message = '';
   }
 
+  goReg() {
+    this.exitRouter.navigateByUrl('/todo/reg');
+  }
+
   doLogin(e) {
     this.http.post('http://localhost:9000/api/login',
         {
