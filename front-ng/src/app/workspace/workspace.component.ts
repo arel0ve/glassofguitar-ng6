@@ -1,21 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {Observable} from 'rxjs';
+import {GetUserService} from '../api/get-user/get-user.service';
 
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
   styleUrls: ['./workspace.component.scss']
 })
-export class WorkspaceComponent implements OnInit {
+export class WorkspaceComponent implements OnInit, OnDestroy {
 
   login: Observable<string>;
   songId: Observable<string>;
+  navigationSubscription;
   user: any;
   song: any;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) { }
+  constructor(
+      private getUser: GetUserService,
+      private route: ActivatedRoute,
+      private exitRouter: Router
+  ) {
+    this.navigationSubscription = this.exitRouter.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.initialiseInvites();
+      }
+    });
+  }
+
+  initialiseInvites() {
+    this.route.params.subscribe(value => {
+      this.login = value.user || '0';
+      this.songId = value.song || '0';
+
+      this.getUser.getUser({
+        login: this.login,
+        songId: this.songId
+      }).subscribe(user => {
+        this.user = user;
+        // @ts-ignore
+        this.song = Object.assign({name: this.user.name, tag: this.user.tag}, user.currentSong);
+      });
+    });
+  }
 
   ngOnInit() {
     this.user = {
@@ -23,16 +51,15 @@ export class WorkspaceComponent implements OnInit {
       hatColor: '#123456',
     };
     this.song = {};
-    this.route.params.subscribe(value => {
-      this.login = value.user || '0';
-      this.songId = value.song || '0';
-    });
+  }
 
-    this.http.get(`http://localhost:9000/api/user/${this.login}/${this.songId}`, {withCredentials: true}).subscribe(user => {
-      this.user = user;
-      // @ts-ignore
-      this.song = Object.assign({name: this.user.name, tag: this.user.tag}, user.currentSong);
-    });
+  ngOnDestroy() {
+    // avoid memory leaks here by cleaning up after ourselves. If we
+    // don't then we will continue to run our initialiseInvites()
+    // method on every navigationEnd event.
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
   }
 
 }

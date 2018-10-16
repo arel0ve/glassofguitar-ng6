@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import {RegistrationService} from '../../api/todo/registration/registration.service';
 
 @Component({
   selector: 'app-registration',
@@ -24,7 +24,7 @@ export class RegistrationComponent implements OnInit {
     hatColor: new FormControl()
   });
 
-  constructor(private http: HttpClient, private exitRouter: Router) { }
+  constructor(private registrationService: RegistrationService, private exitRouter: Router) { }
 
   ngOnInit() {
     this.message = '';
@@ -36,22 +36,17 @@ export class RegistrationComponent implements OnInit {
       return;
     }
 
-    this.http.post('http://localhost:9000/api/registration',
-        {
-          login: this.form.value.login,
-          password: this.form.value.password,
-          email: this.form.value.email,
-          tag : this.form.value.tag,
-          name: this.form.value.name,
-          birthday: this.form.value.birthday,
-          place: this.form.value.place,
-          country: this.form.value.country,
-          hatColor: this.form.value.hatColor
-        },
-        {
-          withCredentials: true,
-          responseType: 'text'
-        }).subscribe(message => {
+    this.registrationService.doReg({
+      login: this.form.value.login,
+      password: this.form.value.password,
+      email: this.form.value.email,
+      tag : this.form.value.tag,
+      name: this.form.value.name,
+      birthday: this.form.value.birthday,
+      place: this.form.value.place,
+      country: this.form.value.country,
+      hatColor: this.form.value.hatColor
+    }).subscribe(message => {
           if (!message.includes('Error!') && !message.includes('Warning!')) {
             this.exitRouter.navigateByUrl(`/user/${message}/0`);
           } else {

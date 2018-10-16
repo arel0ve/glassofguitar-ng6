@@ -2,7 +2,7 @@ import {AfterViewChecked, Component, ElementRef, Input, OnChanges, OnInit, ViewC
 import { Guitar } from '../guitar/guitar';
 import { Animation } from '../animation';
 import {ActivatedRoute, Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import {SaveSongService} from '../api/save-song/save-song.service';
 
 @Component({
   selector: 'app-notes',
@@ -33,7 +33,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   constructor(
       private exitRouter: Router,
       private router: ActivatedRoute,
-      private http: HttpClient
+      private saveSongService: SaveSongService,
   ) { }
 
   ngOnInit() {
@@ -212,18 +212,13 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
       const user = value.user || '0';
       const songId = value.songId || '0';
 
-      this.http.post('http://localhost:9000/api/savesong',
-          {
-            user,
-            songId,
-            speed: this.speed,
-            size: `${this.numerator}/${this.denominator}`,
-            notes: this.notes
-          },
-          {
-            withCredentials: true,
-            responseType: 'text'
-          }).subscribe(message => {
+      this.saveSongService.saveSong({
+        user: user,
+        songId: songId,
+        speed: this.speed,
+        size: `${this.numerator}/${this.denominator}`,
+        notes: this.notes
+      }).subscribe(message => {
             this.successfulSaving = !message.includes('Error!') && !message.includes('Warning!');
       });
     });

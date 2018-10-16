@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormGroup, FormControl} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
+import {LoginService} from '../../api/todo/login/login.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,10 @@ export class LoginComponent implements OnInit {
     password: new FormControl()
   });
 
-  constructor(private http: HttpClient, private exitRouter: Router) { }
+  constructor(
+      private exitRouter: Router,
+      private loginService: LoginService,
+  ) { }
 
   ngOnInit() {
     this.message = '';
@@ -28,15 +31,10 @@ export class LoginComponent implements OnInit {
   }
 
   doLogin(e) {
-    this.http.post('http://localhost:9000/api/login',
-        {
-          login: this.form.value.login,
-          password: this.form.value.password
-        },
-        {
-          withCredentials: true,
-          responseType: 'text'
-        }).subscribe(message => {
+    this.loginService.doLogin({
+      login: this.form.value.login,
+      password: this.form.value.password
+    }).subscribe(message => {
           if (!message.includes('Error!') && !message.includes('Warning!')) {
             this.exitRouter.navigateByUrl(`/user/${message}/0`);
           } else {

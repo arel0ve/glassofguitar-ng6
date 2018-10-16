@@ -1,7 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -27,6 +26,7 @@ import {RegistrationComponent} from './todo/registration/registration.component'
 import {VerifyComponent} from './todo/verify/verify.component';
 import {InfoComponent} from './todo/info/info.component';
 import {TodoDirective} from './todo/todo.directive';
+import {ServiceModule} from './api/service.module';
 
 const appRoutes: Routes = [
   {
@@ -40,7 +40,8 @@ const appRoutes: Routes = [
   },
   {
     path: 'user/:user/:song',
-    component: WorkspaceComponent
+    component: WorkspaceComponent,
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'todo/:mode',
@@ -71,8 +72,8 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     TodoModule,
+    ServiceModule,
     RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'})
   ],
   entryComponents: [

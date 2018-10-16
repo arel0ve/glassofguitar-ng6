@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Location} from '@angular/common';
-import {HttpClient} from '@angular/common/http';
+import {LogoutService} from '../../api/todo/logout/logout.service';
 
 @Component({
   selector: 'app-logout',
@@ -11,7 +11,10 @@ export class LogoutComponent implements OnInit {
 
   message: string;
 
-  constructor(private http: HttpClient, private location: Location) { }
+  constructor(
+      private location: Location,
+      private logoutService: LogoutService,
+  ) { }
 
   ngOnInit() {
     this.message = 'Are you sure want to quit from your account?';
@@ -22,17 +25,12 @@ export class LogoutComponent implements OnInit {
   }
 
   logout() {
-    this.http.post('http://localhost:9000/api/logout',
-        null,
-        {
-          responseType: 'text',
-          withCredentials: true
-        }).subscribe(res => {
-          if (res !== 'Ok!') {
-            this.message = 'Something wrong! Please press \'Log Out\' again...';
-          } else {
-            this.location.back();
-          }
+    this.logoutService.doLogout().subscribe(res => {
+      if (res !== 'Ok!') {
+        this.message = 'Something wrong! Please press \'Log Out\' again...';
+      } else {
+        this.location.back();
+      }
     });
   }
 

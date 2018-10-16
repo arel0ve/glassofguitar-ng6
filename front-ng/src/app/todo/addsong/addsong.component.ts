@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {FormGroup, FormControl} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
 import {Location} from '@angular/common';
+import {AddSongService} from '../../api/todo/add-song/add-song.service';
 
 @Component({
   selector: 'app-addsong',
@@ -18,7 +18,11 @@ export class AddsongComponent implements OnInit {
     song: new FormControl()
   });
 
-  constructor(private http: HttpClient, private exitRouter: Router, private location: Location) { }
+  constructor(
+      private exitRouter: Router,
+      private location: Location,
+      private addSongService: AddSongService,
+  ) { }
 
   ngOnInit() {
     this.message = '';
@@ -29,15 +33,10 @@ export class AddsongComponent implements OnInit {
   }
 
   doCreate() {
-    this.http.post('http://localhost:9000/api/addsong',
-        {
-          artist: this.form.value.artist,
-          title: this.form.value.song
-        },
-        {
-          withCredentials: true,
-          responseType: 'text'
-        }).subscribe(message => {
+    this.addSongService.addSong({
+      artist: this.form.value.artist,
+      song: this.form.value.song
+    }).subscribe(message => {
           if (!message.includes('Error!') && !message.includes('Warning!')) {
             this.exitRouter.navigateByUrl(`/user/${message}`);
           } else {

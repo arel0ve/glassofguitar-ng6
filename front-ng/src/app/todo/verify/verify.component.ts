@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {VerifyService} from '../../api/todo/verify/verify.service';
 
 @Component({
   selector: 'app-verify',
@@ -17,22 +17,20 @@ export class VerifyComponent implements OnInit {
     verifyCode: new FormControl()
   });
 
-  constructor(private http: HttpClient, private exitRouter: Router) { }
+  constructor(
+      private verifyService: VerifyService,
+      private exitRouter: Router
+  ) { }
 
   ngOnInit() {
   }
 
   doVerify(e) {
-    this.http.post('http://localhost:9000/api/verify',
-        {
-          login: this.form.value.login,
-          password: this.form.value.password,
-          verifyCode: this.form.value.verifyCode
-        },
-        {
-          withCredentials: true,
-          responseType: 'text'
-        }).subscribe(message => {
+    this.verifyService.doVerify({
+      login: this.form.value.login,
+      password: this.form.value.password,
+      verifyCode: this.form.value.verifyCode
+    }).subscribe(message => {
           if (!message.includes('Error!') && !message.includes('Warning!')) {
             this.exitRouter.navigateByUrl(`/user/${message}/0`);
           } else {

@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {fromEvent} from 'rxjs';
+import {SearchQueryService} from '../api/search-query/search-query.service';
 
 @Component({
   selector: 'app-menu',
@@ -20,7 +20,7 @@ export class MenuComponent implements OnInit, OnChanges {
   loginLink: string;
   foundSongs: any[];
 
-  constructor(private http: HttpClient) { }
+  constructor(private searchQueryService: SearchQueryService) { }
 
   ngOnInit() {
     this.showSearch = false;
@@ -44,16 +44,10 @@ export class MenuComponent implements OnInit, OnChanges {
       return;
     }
     const type = e.shiftKey ? 'author' : 'song';
-    this.http.post('http://localhost:9000/api/query',
-        {
-          type,
-          query: e.target.value
-        },
-        {
-          withCredentials: true,
-          responseType: 'json'
-        }).subscribe((searchResult: Array<string>) => {
+    this.searchQueryService.findQuery({type, query: e.target.value})
+        .subscribe((searchResult: Array<string>) => {
           this.foundSongs = searchResult || [];
+          console.log(this.foundSongs);
           fromEvent(document, 'click')
               .subscribe((event) => {
                 // @ts-ignore
