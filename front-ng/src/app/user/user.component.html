@@ -7,7 +7,7 @@
     <div>{{ user.name }}</div>
   </a>
 
-  <div class="user-photo">
+  <div class="user-photo" (click)="showAvatar()">
     <img src="../../assets/photos/{{ !user.photo || user.photo === '' ? 'no-photo.png' : user.photo }}" alt="p" class="main-menu-ico">
   </div>
 

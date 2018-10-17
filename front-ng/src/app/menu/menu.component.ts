@@ -1,11 +1,32 @@
 import {Component, ElementRef, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {fromEvent} from 'rxjs';
 import {SearchQueryService} from '../api/search-query/search-query.service';
+import {animate, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
+  animations: [
+    trigger('showFound', [
+      transition(':enter', [
+        style({
+          opacity: 0,
+          height: '0'
+        }),
+        animate('.5s ease-out', style({
+          opacity: 1,
+          height: '*'
+        })),
+      ]),
+      transition(':leave', [
+        animate('.5s ease-in', style({
+          opacity: 0,
+          height: '0'
+        }))
+      ])
+    ])
+  ]
 })
 export class MenuComponent implements OnInit, OnChanges {
 

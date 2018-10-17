@@ -7,6 +7,7 @@ import {VerifyComponent} from './verify/verify.component';
 import {AddsongComponent} from './addsong/addsong.component';
 import {InfoComponent} from './info/info.component';
 import {TodoDirective} from './todo.directive';
+import {AvatarComponent} from "./avatar/avatar.component";
 
 @Component({
   selector: 'app-todo',
@@ -63,6 +64,10 @@ export class TodoComponent implements OnInit, OnDestroy {
         case 'info':
           this.todoTitle = 'How to play';
           this.currentComponent = InfoComponent;
+          break;
+        case 'avatar':
+          this.todoTitle = 'Avatar';
+          this.currentComponent = AvatarComponent;
           break;
         default:
           this.todoTitle = '';

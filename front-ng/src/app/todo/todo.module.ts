@@ -8,6 +8,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { VerifyComponent } from './verify/verify.component';
 import { InfoComponent } from './info/info.component';
+import { AvatarComponent } from './avatar/avatar.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { InfoComponent } from './info/info.component';
     LogoutComponent,
     RegistrationComponent,
     VerifyComponent,
-    InfoComponent
+    InfoComponent,
+    AvatarComponent
   ],
   exports: [
     AddsongComponent,
@@ -29,6 +31,7 @@ import { InfoComponent } from './info/info.component';
     RegistrationComponent,
     VerifyComponent,
     InfoComponent,
+    AvatarComponent
   ]
 })
 export class TodoModule { }

@@ -19,8 +19,8 @@ const addSongRouter = require('./routes/add-song');
 const saveSongRouter = require('./routes/save-song');
 
 const biographyRouter = require('./routes/biography');
-const imageRouter = require('./routes/image');
-const pictureSaveRouter = require('./routes/picture-save');
+const getAvatarRouter = require('./routes/get-avatar');
+const postAvatarRouter = require('./routes/post-avatar');
 
 const queryRouter = require('./routes/search-query');
 
@@ -81,8 +81,8 @@ app.use('/api/addsong', addSongRouter);
 app.use('/api/savesong', saveSongRouter);
 
 app.use('/b', biographyRouter);
-app.use('/i', imageRouter);
-app.use('/p', pictureSaveRouter);
+app.use('/api/getavatar', getAvatarRouter);
+app.use('/api/postavatar', postAvatarRouter);
 
 app.use('/api/query', queryRouter);
 

@@ -16,7 +16,7 @@
   </div>
 </div>
 <div *ngIf="foundSongs.length" class="search-result">
-  <div *ngFor="let song of foundSongs">
+  <div *ngFor="let song of foundSongs" @showFound>
     <div *ngIf="song.type === 'song'">
       <a [routerLink]="song.href">
         <b>{{ song.artist }}</b> - {{ song.title }}

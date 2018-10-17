@@ -1,0 +1,10 @@
+.increased-photo {
+  position: absolute;
+  top: calc(30px + 2em);
+  width: calc(98% - 14px);
+  max-width: calc(98% - 14px);
+  height: calc(100% - 6px);
+  max-height: calc(98% - 2em - 30px);
+  background: no-repeat center;
+  background-size: contain;
+}

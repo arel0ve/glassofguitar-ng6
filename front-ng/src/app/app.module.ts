@@ -1,6 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -19,14 +20,17 @@ import { HoversvgDirective } from './notes/hoversvg.directive';
 import { WorkspaceComponent } from './workspace/workspace.component';
 import { TodoModule } from './todo/todo.module';
 import { TodoComponent } from './todo/todo.component';
-import {AddsongComponent} from './todo/addsong/addsong.component';
-import {LoginComponent} from './todo/login/login.component';
-import {LogoutComponent} from './todo/logout/logout.component';
-import {RegistrationComponent} from './todo/registration/registration.component';
-import {VerifyComponent} from './todo/verify/verify.component';
-import {InfoComponent} from './todo/info/info.component';
 import {TodoDirective} from './todo/todo.directive';
 import {ServiceModule} from './api/service.module';
+import {
+  AddsongComponent,
+  AvatarComponent,
+  LoginComponent,
+  LogoutComponent,
+  InfoComponent,
+  RegistrationComponent,
+  VerifyComponent
+} from './todo';
 
 const appRoutes: Routes = [
   {
@@ -74,6 +78,7 @@ const appRoutes: Routes = [
     BrowserModule,
     TodoModule,
     ServiceModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'})
   ],
   entryComponents: [
@@ -83,6 +88,7 @@ const appRoutes: Routes = [
     RegistrationComponent,
     VerifyComponent,
     InfoComponent,
+    AvatarComponent,
   ],
   exports: [RouterModule],
   providers: [],

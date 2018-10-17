@@ -1,4 +1,5 @@
 import {Component, ElementRef, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -12,7 +13,7 @@ export class UserComponent implements OnInit, OnChanges {
   @ViewChild('userInfo') infoRef: ElementRef;
   @ViewChild('songs') songsRef: ElementRef;
 
-  constructor() { }
+  constructor(private exitRouter: Router) { }
 
   ngOnInit() { }
 
@@ -29,5 +30,11 @@ export class UserComponent implements OnInit, OnChanges {
 
   leaveInfo() {
     this.songsRef.nativeElement.classList.remove('user-track-list-down');
+  }
+
+  showAvatar() {
+    if (this.user['currentLogin']) {
+      this.exitRouter.navigateByUrl('/todo/avatar');
+    }
   }
 }

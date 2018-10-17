@@ -14,6 +14,7 @@ router.get(['/:login', '/:login/:song'], function(req, res, next) {
         title: 'GLASSOF-GUITAR: Play guitar online and write tabs free.',
         hatColor: '#51907F',
         isLogin: !!req.session.user ? "true" : "false",
+        currentLogin: req.session.user,
         login: "/",
         tag: "Developer",
         name: "Valerii Psol",
@@ -67,12 +68,13 @@ router.get(['/:login', '/:login/:song'], function(req, res, next) {
       bio += "...";
     }
 
-    let photo = (!user.photo || user.photo === "") ? "" : `../images/users/${user.photo}`;
+    let photo = (!user.photo || user.photo === "") ? "" : `../photos/users/${user.photo}`;
 
     let sendObj = {
       title: `${user.fullName}: Glassof-Guitar`,
       hatColor: user.hatColor,
       isLogin: !!req.session.user ? "true" : "false",
+      currentLogin: req.session.user,
       login: `/${user.login}`,
       tag: user.tag,
       name: user.name,

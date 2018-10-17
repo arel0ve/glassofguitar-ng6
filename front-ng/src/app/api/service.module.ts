@@ -9,6 +9,7 @@ import {GetUserService} from './get-user/get-user.service';
 import {SearchQueryService} from './search-query/search-query.service';
 import {RegistrationService} from './todo/registration/registration.service';
 import {VerifyService} from './todo/verify/verify.service';
+import {AvatarService} from './todo/avatar/avatar.service';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import {VerifyService} from './todo/verify/verify.service';
     VerifyService,
     GetUserService,
     SearchQueryService,
+    AvatarService,
   ],
   exports: [],
   declarations: []

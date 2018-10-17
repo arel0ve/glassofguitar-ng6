@@ -392,7 +392,7 @@ class DetailInfo extends HTMLElement {
 
                   increasedInfo.style.height = "calc(100% - 25px)";
                   return response.json();
-                  
+
                 case 203:
                   return response.json();
                 default:

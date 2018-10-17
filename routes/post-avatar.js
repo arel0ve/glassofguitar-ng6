@@ -35,7 +35,7 @@ router.post('/', (req, res, next) => {
 
       filename = user.login + numberPhoto + ".png";
 
-      let filePath = path.join(__dirname, "../public/images/users/");
+      let filePath = path.join(__dirname, "../front-ng/src/assets/photos/users/");
       let fstream = fs.createWriteStream(filePath + filename);
       file.pipe(fstream);
 
@@ -48,7 +48,7 @@ router.post('/', (req, res, next) => {
 
         if (numberPhoto !== 0) {
           let oldFilename = user.login + (numberPhoto - 1) + ".png";
-          let filePath = path.join(__dirname, "../public/images/users/");
+          let filePath = path.join(__dirname, "../front-ng/src/assets/photos/users/");
           fs.remove(filePath + oldFilename, err => {
             if (err) return next(err);
 
@@ -57,7 +57,7 @@ router.post('/', (req, res, next) => {
             user.save(function (err) {
               if (err) {
                 res.statusCode = 501;
-                res.send("Error in updating data! Please upload image again.");
+                res.send("Error in updating data! Please upload avatar again.");
                 return;
               }
 
@@ -72,7 +72,7 @@ router.post('/', (req, res, next) => {
           user.save(function (err) {
             if (err) {
               res.statusCode = 501;
-              res.send("Error in updating data! Please upload image again.");
+              res.send("Error in updating data! Please upload avatar again.");
               return;
             }
 
