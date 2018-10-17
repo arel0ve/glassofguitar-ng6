@@ -46,13 +46,10 @@ export class RegistrationComponent implements OnInit {
       place: this.form.value.place,
       country: this.form.value.country,
       hatColor: this.form.value.hatColor
-    }).subscribe(message => {
-          if (!message.includes('Error!') && !message.includes('Warning!')) {
-            this.exitRouter.navigateByUrl(`/user/${message}/0`);
-          } else {
-            this.message = message;
-          }
-    });
+    }).subscribe(
+        url => this.exitRouter.navigateByUrl(`/user/${url}/0`),
+        err => this.message = err.error
+    );
 
     e.preventDefault();
   }

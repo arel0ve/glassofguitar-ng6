@@ -11,13 +11,13 @@ router.post('/', (req, res, next) => {
   User.findOne({ login: req.body.login }, function (err, user) {
     if (err) {
       res.statusCode = 500;
-      res.send('Error! Server error. Please, try again later.');
+      res.send('Server error. Please, try again later.');
       return;
     }
 
     if (user) {
       res.statusCode = 400;
-      res.send(`Error! Login '${req.body.login}' is already used.`);
+      res.send(`Login '${req.body.login}' is already used.`);
       return;
     }
 
@@ -26,7 +26,7 @@ router.post('/', (req, res, next) => {
 
       if (user) {
         res.statusCode = 400;
-        res.send(`Error! Email '${req.body.email}' is already used.`);
+        res.send(`Email '${req.body.email}' is already used.`);
         return;
       }
 
@@ -54,7 +54,7 @@ router.post('/', (req, res, next) => {
           })
           .catch(() => {
             res.statusCode = 501;
-            res.send("Error! Error in saving to database. Please, press 'Create' again.");
+            res.send("Error in saving to database. Please, press 'Create' again.");
           });
 
       // const output = `<h3>Dear ${req.body.name}!</h3>

@@ -36,13 +36,10 @@ export class AddsongComponent implements OnInit {
     this.addSongService.addSong({
       artist: this.form.value.artist,
       song: this.form.value.song
-    }).subscribe(message => {
-          if (!message.includes('Error!') && !message.includes('Warning!')) {
-            this.exitRouter.navigateByUrl(`/user/${message}`);
-          } else {
-            this.message = message;
-          }
-    });
+    }).subscribe(
+        url => this.exitRouter.navigateByUrl(`/user/${url}`),
+        err => this.message = err.error
+    );
   }
 
 }

@@ -16,9 +16,10 @@ export class AvatarComponent implements OnInit {
 
   ngOnInit() {
     this.photoUrl = 'url(../../../assets/photos/no-photo.png)';
-    this.avatarService.getAvatar().subscribe(value => {
-      this.photoUrl = `url(${value['photo']})`;
-    });
+    this.avatarService.getAvatar()
+        .subscribe(
+            value => this.photoUrl = `url(${value['photo']})`,
+            () => this.photoUrl = 'url(../../../assets/photos/no-photo.png)');
   }
 
   loadAvatar(event: Event) {
@@ -38,10 +39,8 @@ export class AvatarComponent implements OnInit {
           canv.height = 640;
           const ctx = canv.getContext('2d');
 
-          // @ts-ignore
-          let width = this.width;
-          // @ts-ignore
-          let height = this.height;
+          let width = this['width'] || 640;
+          let height = this['height'] || 640;
 
           width = Math.min(width, height);
           height = Math.min(width, height);
@@ -58,8 +57,7 @@ export class AvatarComponent implements OnInit {
           });
 
         };
-        // @ts-ignore
-        img.src = e.target.result;
+        img.src = e.target['result'];
       };
       reader.readAsDataURL(this.file);
     }

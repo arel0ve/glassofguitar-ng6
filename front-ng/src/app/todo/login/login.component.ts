@@ -34,13 +34,10 @@ export class LoginComponent implements OnInit {
     this.loginService.doLogin({
       login: this.form.value.login,
       password: this.form.value.password
-    }).subscribe(message => {
-          if (!message.includes('Error!') && !message.includes('Warning!')) {
-            this.exitRouter.navigateByUrl(`/user/${message}/0`);
-          } else {
-            this.message = message;
-          }
-    });
+    }).subscribe(
+        url => this.exitRouter.navigateByUrl(`/user/${url}/0`),
+        err => this.message = err.error
+    );
 
     e.preventDefault();
   }

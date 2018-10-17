@@ -39,8 +39,7 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
         songId: this.songId
       }).subscribe(user => {
         this.user = user;
-        // @ts-ignore
-        this.song = Object.assign({name: this.user.name, tag: this.user.tag}, user.currentSong);
+        this.song = Object.assign({name: this.user.name, tag: this.user.tag}, user['currentSong']);
       });
     });
   }

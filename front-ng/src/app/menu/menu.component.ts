@@ -71,8 +71,7 @@ export class MenuComponent implements OnInit, OnChanges {
           console.log(this.foundSongs);
           fromEvent(document, 'click')
               .subscribe((event) => {
-                // @ts-ignore
-                if (event.target.closest('.search-result')) {
+                if (!event.target['closest'] || event.target['closest']('.search-result')) {
                   return;
                 }
                 this.foundSongs = [];

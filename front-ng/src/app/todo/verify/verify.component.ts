@@ -30,13 +30,10 @@ export class VerifyComponent implements OnInit {
       login: this.form.value.login,
       password: this.form.value.password,
       verifyCode: this.form.value.verifyCode
-    }).subscribe(message => {
-          if (!message.includes('Error!') && !message.includes('Warning!')) {
-            this.exitRouter.navigateByUrl(`/user/${message}/0`);
-          } else {
-            this.message = message;
-          }
-    });
+    }).subscribe(
+        url => this.exitRouter.navigateByUrl(`/user/${url}/0`),
+        err => this.message = err.error
+    );
 
     e.preventDefault();
   }

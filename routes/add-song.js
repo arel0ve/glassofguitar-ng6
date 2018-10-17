@@ -6,28 +6,28 @@ const Song = require('../models/song').Song;
 
 router.post('/', (req, res, next) => {
   if (!req.session.user) {
-    res.statusCode = 203;
-    res.send("Error! You have to register and verify to create new song.");
+    res.statusCode = 403;
+    res.send("You have to register and verify to create new song.");
     return;
   }
 
   User.findOne({ login: req.session.user }, function (err, user) {
     if (err) {
       res.statusCode = 500;
-      res.send('Error! Server error! Please try again later.');
+      res.send('Server error! Please try again later.');
       return;
     }
 
     if (!user) {
-      res.statusCode = 203;
-      res.send("Error! Your login is not register in our database.");
+      res.statusCode = 404;
+      res.send("Your login is not register in our database.");
       return;
     }
 
     for (let song of user.songs) {
       if (song.artist === req.body.artist && song.title === req.body.title) {
-        res.statusCode = 203;
-        res.send(`Warning! Song "${req.body.artist} - ${req.body.title}" has already created.`);
+        res.statusCode = 402;
+        res.send(`Song "${req.body.artist} - ${req.body.title}" has already been created.`);
         return;
       }
     }
@@ -44,11 +44,11 @@ router.post('/', (req, res, next) => {
     user.save(function (err) {
       if (err) {
         res.statusCode = 501;
-        res.send("Error! Error in updating data! Please press 'Create Song' again.");
+        res.send("Error in updating data! Please press 'Create Song' again.");
         return;
       }
 
-      res.statusCode = 200;
+      res.statusCode = 400;
       res.send(`${user.login}/${"" + (user.songs.length - 1)}`);
     });
   })
