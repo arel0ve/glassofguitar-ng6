@@ -9,7 +9,7 @@ export class SaveSongService {
   constructor(private http: HttpClient) { }
 
   saveSong({user, songId, speed, size, notes}) {
-    return this.http.post('http://localhost:9000/api/savesong',
+    return this.http.post('api/savesong',
         {
           user,
           songId,

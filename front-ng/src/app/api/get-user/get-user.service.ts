@@ -11,7 +11,7 @@ export class GetUserService {
 
   getUser({login, songId}) {
     return this.http.get(
-        `http://localhost:9000/api/user/${login}/${songId}`,
+        `api/user/${login}/${songId}`,
         {withCredentials: true}
         )
         .pipe(

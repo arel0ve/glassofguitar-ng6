@@ -68,7 +68,6 @@ export class MenuComponent implements OnInit, OnChanges {
     this.searchQueryService.findQuery({type, query: e.target.value})
         .subscribe((searchResult: Array<string>) => {
           this.foundSongs = searchResult || [];
-          console.log(this.foundSongs);
           fromEvent(document, 'click')
               .subscribe((event) => {
                 if (!event.target['closest'] || event.target['closest']('.search-result')) {

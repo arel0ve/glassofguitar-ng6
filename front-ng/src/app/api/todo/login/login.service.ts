@@ -9,7 +9,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   doLogin({login, password}) {
-    return this.http.post('http://localhost:9000/api/login',
+    return this.http.post('api/login',
         {
           login,
           password

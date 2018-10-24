@@ -9,10 +9,10 @@ export class AvatarService {
   constructor(private http: HttpClient) { }
 
   getAvatar() {
-    return this.http.get('http://localhost:9000/api/getavatar', {withCredentials: true});
+    return this.http.get('api/getavatar', {withCredentials: true});
   }
 
   postAvatar(formData) {
-    return this.http.post('http://localhost:9000/api/postavatar', formData, {withCredentials: true});
+    return this.http.post('api/postavatar', formData, {withCredentials: true});
   }
 }

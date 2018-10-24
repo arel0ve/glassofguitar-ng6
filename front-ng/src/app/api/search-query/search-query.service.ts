@@ -9,7 +9,7 @@ export class SearchQueryService {
   constructor(private http: HttpClient) { }
 
   findQuery({type, query}) {
-    return this.http.post('http://localhost:9000/api/query',
+    return this.http.post('api/query',
         {
           type,
           query

@@ -1,54 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  if (!req.session.user) {
-    res.render('index', {
-      title: 'GLASSOF-GUITAR: Play guitar online and write tabs free.',
-      hatColor: '#51907F',
-      isLogin: !!req.session.user ? "true" : "false",
-      login: "/",
-      tag: "Developer",
-      name: "Valerii Psol",
-      birthday: new Date(1994, 7, 18),
-      place: "Andriivka, Berdiansk region",
-      country: "Ukraine",
-      biography: "",
-      songs: [
-        '<a href="#"><b>Ludwig van Beethoven</b> - Für Elise</a>'
-      ],
-      songArtist: 'Ludwig van Beethoven',
-      songTitle: 'Für Elise',
-      notes: JSON.stringify({
-        size: '3/8',
-        speed: '63',
-        notes: [
-          '------','------','------','------','0-----','-4----',
-          '0-----','-4----','0-----','-0----','-3----','-1----',
-          '--2---','------','------','----3-','---2--','--2---',
-          '-0----','------','------','---2--','--1---','-0----',
-          '-1----','------','------','---2--','0-----','-4----',
-          '0-----','-4----','0-----','-0----','-3----','-1----',
-          '--2---','------','------','----3-','---2--','--2---',
-          '-0----','------','------','---2--','-1----','-0----',
-          '--2---','------','------','-0----','-1----','-3----',
-          '0-----','------','------','--0---','1-----','0-----',
-          '-3----','------','------','---3--','0-----','-3----',
-          '-1----','------','------','---2--','-3----','-1----',
-          '--0---','------','------','---2--','0-----','-4----',
-          '0-----','-4----','0-----','-0----','-3----','-1----',
-          '--2---','------','------','----3-','---2--','--2---',
-          '-0----','------','------','---2--','-1----','-0----',
-          '--2---','------','------','------','------','------'
-        ]
-      })
-    });
-
-  } else {
-    res.redirect(`/${req.session.user}`);
-  }
-
+  res.sendFile(path.join(__dirname, '../front-ng/dist/angular-prj/index.html'));
 });
 
 module.exports = router;

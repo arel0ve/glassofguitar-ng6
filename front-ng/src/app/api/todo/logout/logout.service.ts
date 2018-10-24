@@ -9,7 +9,7 @@ export class LogoutService {
   constructor(private http: HttpClient) { }
 
   doLogout() {
-    return this.http.post('http://localhost:9000/api/logout',
+    return this.http.post('api/logout',
         null,
         {
           responseType: 'text',

@@ -7,7 +7,8 @@ import {VerifyComponent} from './verify/verify.component';
 import {AddsongComponent} from './addsong/addsong.component';
 import {InfoComponent} from './info/info.component';
 import {TodoDirective} from './todo.directive';
-import {AvatarComponent} from "./avatar/avatar.component";
+import {AvatarComponent} from './avatar/avatar.component';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-todo',
@@ -24,6 +25,7 @@ export class TodoComponent implements OnInit, OnDestroy {
 
   constructor(
       private route: ActivatedRoute,
+      private location: Location,
       private exitRouter: Router,
       private componentFactoryResolver: ComponentFactoryResolver
   ) {
@@ -90,7 +92,12 @@ export class TodoComponent implements OnInit, OnDestroy {
   }
 
   close() {
-    this.exitRouter.navigateByUrl('/');
+    if (this.todoTitle === 'Registration') {
+      this.location.back();
+      this.location.back();
+    } else {
+      this.location.back();
+    }
   }
 
 }

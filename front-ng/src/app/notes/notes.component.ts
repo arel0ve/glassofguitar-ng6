@@ -3,6 +3,8 @@ import { Guitar } from '../guitar/guitar';
 import { Animation } from '../animation';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SaveSongService} from '../api/save-song/save-song.service';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-notes',
@@ -17,6 +19,8 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   @ViewChild('playBtn') playRef: ElementRef;
 
   guitar: Guitar;
+  user: string;
+  songId: string;
 
   notes: string[];
   speed: number;
@@ -26,6 +30,8 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   selectedColumn: number;
   columns: HTMLDivElement[];
   successfulSaving: boolean;
+
+  private unsubscribe: Subject<void> = new Subject();
 
   __delayBeforeNextNote: number;
   __timerPlay;
@@ -38,7 +44,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
 
   ngOnInit() {
     this.guitar = window.guitar;
-    this.notes = ['------'];
+    this.notes = [];
     this.speed = 60;
     this.numerator = 2;
     this.denominator = 2;
@@ -56,6 +62,8 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
       this.barLength = 16 / this.denominator * this.numerator;
       this.selectedColumn = 0;
       this.__delayBeforeNextNote = Math.round(60000 / (this.speed * 4));
+
+      this.giveParams();
     }
   }
 
@@ -206,21 +214,29 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
     });
   }
 
+  giveParams() {
+    this.router.params.pipe(takeUntil(this.unsubscribe)).subscribe(value => {
+      this.user = value.user || '0';
+      this.songId = value.song || '0';
+    });
+  }
+
   saveAllNotes() {
-    this.router.params.subscribe(value => {
-      console.log(value);
-      const user = value.user || '0';
-      const songId = value.songId || '0';
+    this.unsubscribe.next();
+    this.giveParams();
 
       this.saveSongService.saveSong({
-        user: user,
-        songId: songId,
+        user: this.user,
+        songId: this.songId,
         speed: this.speed,
         size: `${this.numerator}/${this.denominator}`,
         notes: this.notes
-      }).subscribe(message => {
-            this.successfulSaving = !message.includes('Error!') && !message.includes('Warning!');
-      });
-    });
+      }).subscribe(
+          () => this.successfulSaving = true,
+          err => {
+            this.successfulSaving = false;
+            console.log(err.error);
+          }
+      );
   }
 }

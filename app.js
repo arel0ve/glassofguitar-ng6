@@ -60,14 +60,7 @@ app.use(session({
   })
 }));
 
-app.use(function (req, res, next) {
-  // res.set('Cache-Control', 'public, max-age=31557600');
-  next();
-});
-
 app.use(busboy());
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/user/', usersRouter);
@@ -80,11 +73,21 @@ app.use('/api/logout', logoutRouter);
 app.use('/api/addsong', addSongRouter);
 app.use('/api/savesong', saveSongRouter);
 
-app.use('/b', biographyRouter);
+// app.use('/b', biographyRouter);
 app.use('/api/getavatar', getAvatarRouter);
 app.use('/api/postavatar', postAvatarRouter);
 
 app.use('/api/query', queryRouter);
+
+app.use(function (req, res, next) {
+  res.set('Cache-Control', 'public, max-age=31557600');
+  next();
+});
+
+app.use(express.static(path.join(__dirname, 'front-ng/dist/angular-prj/')));
+
+app.use('*', indexRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -99,7 +102,8 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.sendFile(path.join(__dirname, 'front-ng/dist/angular-prj/index.html'));
+  // res.render('error');
 });
 
 module.exports = app;

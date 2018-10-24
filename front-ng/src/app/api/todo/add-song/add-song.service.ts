@@ -9,7 +9,7 @@ export class AddSongService {
   constructor(private http: HttpClient) { }
 
   addSong({artist, song}) {
-    return this.http.post('http://localhost:9000/api/addsong',
+    return this.http.post('api/addsong',
         {
           artist,
           title: song
