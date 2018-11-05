@@ -4,8 +4,13 @@ import { RegistrationService } from './registration.service';
 
 describe('RegistrationService', () => {
   beforeEach(() => {
+    const registrationApi = jasmine.createSpy('RegistrationService');
     TestBed.configureTestingModule({
-      providers: [RegistrationService]
+      providers: [
+        {
+          provide: RegistrationService, useValue: registrationApi
+        }
+      ]
     });
   });
 

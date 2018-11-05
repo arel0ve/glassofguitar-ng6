@@ -4,8 +4,13 @@ import { AvatarService } from './avatar.service';
 
 describe('AvatarService', () => {
   beforeEach(() => {
+    const avatarApi = jasmine.createSpy('AvatarService');
     TestBed.configureTestingModule({
-      providers: [AvatarService]
+      providers: [
+        {
+          provide: AvatarService, useValue: avatarApi
+        }
+      ]
     });
   });
 

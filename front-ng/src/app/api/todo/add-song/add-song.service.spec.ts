@@ -3,9 +3,14 @@ import { TestBed, inject } from '@angular/core/testing';
 import { AddSongService } from './add-song.service';
 
 describe('AddSongService', () => {
+  const addSongApi = jasmine.createSpy('AddSongService');
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AddSongService]
+      providers: [
+        {
+          provide: AddSongService, useValue: addSongApi
+        }
+      ]
     });
   });
 

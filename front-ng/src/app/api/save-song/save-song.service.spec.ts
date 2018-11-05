@@ -4,8 +4,13 @@ import { SaveSongService } from './save-song.service';
 
 describe('SaveSongService', () => {
   beforeEach(() => {
+    const saveSongApi = jasmine.createSpy('SaveSongService');
     TestBed.configureTestingModule({
-      providers: [SaveSongService]
+      providers: [
+        {
+          provide: SaveSongService, useValue: saveSongApi
+        }
+      ]
     });
   });
 

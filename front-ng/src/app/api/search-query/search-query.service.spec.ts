@@ -4,8 +4,13 @@ import { SearchQueryService } from './search-query.service';
 
 describe('SearchQueryService', () => {
   beforeEach(() => {
+    const searchQueryApi = jasmine.createSpy('SearchQueryService');
     TestBed.configureTestingModule({
-      providers: [SearchQueryService]
+      providers: [
+        {
+          provide: SearchQueryService, useValue: searchQueryApi
+        }
+      ]
     });
   });
 

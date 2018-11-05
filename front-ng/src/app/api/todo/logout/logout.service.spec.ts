@@ -4,8 +4,13 @@ import { LogoutService } from './logout.service';
 
 describe('LogoutService', () => {
   beforeEach(() => {
+    const logoutApi = jasmine.createSpy('LogoutService');
     TestBed.configureTestingModule({
-      providers: [LogoutService]
+      providers: [
+        {
+          provide: LogoutService, useValue: logoutApi
+        }
+      ]
     });
   });
 

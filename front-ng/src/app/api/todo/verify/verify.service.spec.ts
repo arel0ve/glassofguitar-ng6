@@ -3,9 +3,14 @@ import { TestBed, inject } from '@angular/core/testing';
 import { VerifyService } from './verify.service';
 
 describe('VerifyService', () => {
+  const verifyApi = jasmine.createSpy('VerifyService');
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [VerifyService]
+      providers: [
+        {
+          provide: VerifyService, useValue: verifyApi
+        }
+      ]
     });
   });
 
