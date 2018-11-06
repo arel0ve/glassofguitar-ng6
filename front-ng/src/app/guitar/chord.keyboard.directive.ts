@@ -11,13 +11,14 @@ export class ChordKeyboardDirective {
       return;
     }
 
-    if (e.keyCode === 8 || e.keyCode === 46) {
+    if (e.code === 'Delete' || e.code === 'Backspace') {
       window.guitar.chord = null;
       window.guitar.drawChord();
     }
 
-    if (e.keyCode > 64 && e.keyCode < 72) {
-      let tempChord = String.fromCharCode(e.keyCode);
+    if (e.code === 'KeyA' || e.code === 'KeyB' || e.code === 'KeyC'
+        || e.code === 'KeyD' || e.code === 'KeyE' || e.code === 'KeyF' || e.code === 'KeyG') {
+      let tempChord = e.code[3];
 
       if (e.shiftKey) {
         tempChord = tempChord + 'd';
@@ -36,8 +37,9 @@ export class ChordKeyboardDirective {
     }
   }
 
-  @HostListener('keyup', ['$event.keyCode']) onKeyUp(keyCode) {
-    if (keyCode > 64 && keyCode < 72) {
+  @HostListener('keyup', ['$event.code']) onKeyUp(code) {
+    if (code === 'KeyA' || code === 'KeyB' || code === 'KeyC'
+        || code === 'KeyD' || code === 'KeyE' || code === 'KeyF' || code === 'KeyG') {
       window.guitar.chord = null;
 
       window.guitar.drawChord();

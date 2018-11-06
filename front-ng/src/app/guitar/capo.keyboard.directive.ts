@@ -5,28 +5,28 @@ import {Directive, HostListener} from '@angular/core';
 })
 export class CapoKeyboardDirective {
 
-  @HostListener('keydown', ['$event.keyCode']) onKeyDown(keyCode) {
+  @HostListener('keydown', ['$event.code']) onKeyDown(code) {
 
     if (!window.guitar) {
       return;
     }
 
-    if (keyCode === 192 || keyCode === 96) {
+    if (code === 'Backquote') {
       window.guitar.capo = 0;
-    } else if (keyCode > 48 && keyCode < 58) {
-      window.guitar.capo = keyCode - 48;
-    } else if (keyCode === 48) {
+    } else if (code === 'Digit0') {
       window.guitar.capo = 10;
-    } else if (keyCode === 45 || keyCode === 173 || keyCode === 189) {
+    } else if (code.includes('Digit')) {
+      window.guitar.capo = +code[5];
+    } else if (code === 'Minus') {
       window.guitar.capo = 11;
-    } else if (keyCode === 61 || keyCode === 187) {
+    } else if (code === 'Equal') {
       window.guitar.capo = 12;
     }
 
-    if (keyCode > 47 && keyCode < 58 ||
-      keyCode === 192 || keyCode === 96 ||
-      keyCode === 45 || keyCode === 173 || keyCode === 189 ||
-      keyCode === 61 || keyCode === 187) {
+    if (code.includes('Digit') ||
+      code === 'Backquote' ||
+      code === 'Minus' ||
+      code === 'Equal') {
       window.guitar.drawStrings()
         .then(() => {
           return window.guitar.drawCapo();

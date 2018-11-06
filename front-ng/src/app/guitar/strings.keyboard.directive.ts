@@ -5,40 +5,40 @@ import {Directive, HostListener} from '@angular/core';
 })
 export class StringsKeyboardDirective {
 
-  @HostListener('keydown', ['$event.keyCode']) onKeyDown(keyCode) {
+  @HostListener('keydown', ['$event.code']) onKeyDown(code) {
 
     if (!window.guitar) {
       return;
     }
 
-    switch (keyCode) {
-      case 80:
+    switch (code) {
+      case 'KeyP':
         window.guitar.playString(0);
         break;
-      case 79:
+      case 'KeyO':
         window.guitar.playString(1);
         break;
-      case 73:
+      case 'KeyI':
         window.guitar.playString(2);
         break;
-      case 190:
+      case 'Period':
         window.guitar.playString(3);
         break;
-      case 188:
+      case 'Comma':
         window.guitar.playString(4);
         break;
-      case 77:
+      case 'KeyM':
         window.guitar.playString(5);
         break;
 
-      case 38:
+      case 'ArrowUp':
         window.guitar.playStringsAll({mode: 'up'});
         break;
-      case 40:
+      case 'ArrowDown':
         window.guitar.playStringsAll({mode: 'down'});
         break;
 
-      case 32:
+      case 'Space':
         window.guitar.muteStringsAll();
         break;
 
