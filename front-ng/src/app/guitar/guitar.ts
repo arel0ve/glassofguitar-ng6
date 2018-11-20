@@ -351,7 +351,8 @@ export class Guitar {
       this.__wsListen.onmessage = (res) => {
         const msg = JSON.parse(res.data);
         if (msg.mode === 'listen' && this.__user && msg.user === this.__user) {
-          this.playStringsByNotes(msg.data);
+          const chord = msg.chord ? msg.chord : '000000';
+          this.playString(msg.string, chord);
         }
       };
     }
@@ -796,14 +797,6 @@ export class Guitar {
 
   playStringsByNotes(notes = '------') {
 
-    if (this.__wsPlay && this.__user && notes !== '------') {
-      this.__wsPlay.send(JSON.stringify({
-        mode: 'play',
-        user: this.__user,
-        data: notes
-      }));
-    }
-
     for (let i = 0; i < 6; i++) {
       if (notes[i] === '-') {
         continue;
@@ -826,6 +819,15 @@ export class Guitar {
   }
 
   playString(num = 0, chord = this.__currentChord) {
+
+    if (this.__wsPlay && this.__user) {
+      this.__wsPlay.send(JSON.stringify({
+        mode: 'play',
+        user: this.__user,
+        string: num,
+        chord: chord
+      }));
+    }
 
     let shift = this.capo;
 

@@ -279,7 +279,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   streamStop() {
-    this.ws.close(200, JSON.stringify({user: this.user}));
+    this.ws.close(1000, JSON.stringify({user: this.user}));
     this.ws = null;
     window.guitar.ws = {
       type: '',

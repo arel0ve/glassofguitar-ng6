@@ -8,7 +8,6 @@ let streams = [];
 wss.on('connection', ws => {
   ws.on('message', msg => {
     msg = JSON.parse(msg);
-    console.log(msg);
     let streamer = _.find(streams, {user: msg.user});
     if (!streamer) {
       streams.push({
@@ -24,13 +23,16 @@ wss.on('connection', ws => {
 
     if (msg.mode === 'play') {
       streamer.watchers.forEach(watcher => {
-        watcher.send(
-            JSON.stringify({
-              mode: 'listen',
-              user: streamer.user,
-              data: msg.data
-            })
-        );
+        if (watcher.readyState === 1) {
+          watcher.send(
+              JSON.stringify({
+                mode: 'listen',
+                user: streamer.user,
+                string: msg.string,
+                chord: msg.chord
+              })
+          );
+        }
       });
     }
   });
