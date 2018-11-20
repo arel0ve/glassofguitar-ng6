@@ -352,6 +352,11 @@ export class Guitar {
         const msg = JSON.parse(res.data);
         if (msg.mode === 'listen' && this.__user && msg.user === this.__user) {
           const chord = msg.chord ? msg.chord : '000000';
+          for (let i = 0; i < chord.length; i++) {
+            if (chord[i] !== '0' || msg.string === i) {
+              this.standFingerOnBoard(i, Guitar.getNumByLetter(chord[i]), true);
+            }
+          }
           this.playString(msg.string, chord);
         }
       };
