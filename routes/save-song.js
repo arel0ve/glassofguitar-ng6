@@ -26,7 +26,6 @@ async function saveSong(req, res, next) {
 
     let song = null;
     for (let userSong of user.songs) {
-      console.log(userSong);
       if (userSong._id.toString() === req.body.songId) {
         song = userSong;
       }

@@ -6,56 +6,52 @@ const nodemailer = require('nodemailer');
 const User = require('../models/user').User;
 
 /* POST registration with mail verifying. */
-router.post('/', (req, res, next) => {
+router.post('/', registr);
 
-  User.findOne({ login: req.body.login }, function (err, user) {
-    if (err) {
-      res.statusCode = 500;
-      res.send('Server error. Please, try again later.');
-      return;
-    }
+async function registr(req, res, next) {
+
+  try {
+    let user = await User.findOne({ login: req.body.login });
 
     if (user) {
-      res.statusCode = 400;
-      res.send(`Login '${req.body.login}' is already used.`);
+      res.status(400).send(`Login '${req.body.login}' is already used.`);
       return;
     }
 
-    User.findOne({ email: req.body.email }, function(err, user) {
-      if (err) return next(err);
+    user = await User.findOne({ email: req.body.email });
 
-      if (user) {
-        res.statusCode = 400;
-        res.send(`Email '${req.body.email}' is already used.`);
-        return;
-      }
+    if (user) {
+      res.status(400).send(`Email '${req.body.email}' is already used.`);
+      return;
+    }
 
-      let verifyCode = Math.floor(Math.random() * (Math.pow(2, 16) - 1)).toString(16);
+    let verifyCode = Math.floor(Math.random() * (Math.pow(2, 16) - 1)).toString(16);
 
-      let newUser = new User({
-        login: req.body.login,
-        isVerify: true,
-        verifyCode: verifyCode,
-        email: req.body.email,
-        password: req.body.password,
-        tag: req.body.tag,
-        name: req.body.name,
-        birthday: req.body.birthday,
-        place: req.body.place,
-        country: req.body.country,
-        hatColor: req.body.hatColor
-      });
+    let newUser = new User({
+      login: req.body.login,
+      isVerify: true,
+      verifyCode: verifyCode,
+      email: req.body.email,
+      password: req.body.password,
+      tag: req.body.tag,
+      name: req.body.name,
+      birthday: req.body.birthday,
+      place: req.body.place,
+      country: req.body.country,
+      hatColor: req.body.hatColor,
+      songs: []
+    });
 
-      newUser.save()
-          .then(() => {
-            req.session.user = null;
-            res.statusCode = 200;
-            res.send(newUser.login);
-          })
-          .catch(() => {
-            res.statusCode = 501;
-            res.send("Error in saving to database. Please, press 'Create' again.");
-          });
+    await newUser.save();
+
+    req.session.user = null;
+    res.status(200).send(newUser.login);
+
+
+  } catch(e) {
+    console.log(e);
+    res.status(500).send("Server Error!");
+  }
 
       // const output = `<h3>Dear ${req.body.name}!</h3>
       //   <p>Congratulation with registration on Glassof-Guitar!</p>
@@ -133,10 +129,6 @@ router.post('/', (req, res, next) => {
       //       });
       // });
 
-    });
-
-  });
-
-});
+}
 
 module.exports = router;
