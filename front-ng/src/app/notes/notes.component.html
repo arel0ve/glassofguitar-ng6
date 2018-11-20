@@ -25,8 +25,9 @@
       </a>
 
       <div class="hat-btn">
-        <i class="large material-icons" (click)="streamStart()" *ngIf="login === user">voice_chat</i>
-        <i class="large material-icons" (click)="streamPlay()" *ngIf="login !== user">tv</i>
+        <i class="large material-icons" (click)="streamStart()" *ngIf="login === user && !ws">voice_chat</i>
+        <i class="large material-icons" (click)="streamPlay()" *ngIf="login !== user && !ws">tv</i>
+        <i class="large material-icons" (click)="streamStop()" *ngIf="ws">videocam_off</i>
       </div>
 
       <!--<div class="hat-btn" appHoversvg>-->

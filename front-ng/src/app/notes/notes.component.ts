@@ -32,10 +32,12 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   columns: HTMLDivElement[];
   successfulSaving: boolean;
 
+  ws: WebSocket;
+
   private unsubscribe: Subject<void> = new Subject();
 
-  __delayBeforeNextNote: number;
-  __timerPlay;
+  private __delayBeforeNextNote: number;
+  private __timerPlay;
 
   constructor(
       private exitRouter: Router,
@@ -219,6 +221,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
     this.router.params.pipe(takeUntil(this.unsubscribe)).subscribe(value => {
       this.user = value.user || '0';
       this.songId = value.song || '0';
+      window.guitar.user = this.user;
     });
   }
 
@@ -242,20 +245,45 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   streamStart() {
-    const ws = new WebSocket('ws://localhost:40510');
+    this.ws = new WebSocket('ws://localhost:40510');
 
-    ws.onopen = e => {
-      console.log(e);
-      ws.send(this.user);
+    this.ws.onopen = () => {
+      this.ws.send(
+          JSON.stringify({
+            mode: 'stream',
+            user: this.user
+          })
+      );
+      window.guitar.ws = {
+        type: 'play',
+        ws: this.ws
+      };
     };
   }
 
   streamPlay() {
-    const ws = new WebSocket('ws://localhost:40510');
+    this.ws = new WebSocket('ws://localhost:40510');
 
-    ws.onopen = e => {
-      console.log(e);
-      ws.send(this.user);
+    this.ws.onopen = () => {
+      this.ws.send(
+          JSON.stringify({
+            mode: 'watch',
+            user: this.user
+          })
+      );
+      window.guitar.ws = {
+        type: 'listen',
+        ws: this.ws
+      };
+    };
+  }
+
+  streamStop() {
+    this.ws.close(200, JSON.stringify({user: this.user}));
+    this.ws = null;
+    window.guitar.ws = {
+      type: '',
+      ws: this.ws
     };
   }
 }

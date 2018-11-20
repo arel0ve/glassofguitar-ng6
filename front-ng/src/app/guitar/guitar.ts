@@ -32,6 +32,11 @@ export class Guitar {
   private __volume: number;
   private __speedPlayAll: number;
 
+  private __wsPlay: WebSocket;
+  private __wsListen: WebSocket;
+
+  private __user: any;
+
   public class;
 
   static getNumByLetter(l): number {
@@ -126,6 +131,11 @@ export class Guitar {
 
     this.__volume = 0;
     this.__speedPlayAll = 0;
+
+    this.__wsPlay = null;
+    this.__wsListen = null;
+
+    this.__user = null;
 
     this.class = Guitar;
   }
@@ -310,6 +320,49 @@ export class Guitar {
 
   get volume() {
     return Math.round(this.__volume * 100);
+  }
+
+  get ws() {
+    if (!!this.__wsPlay) {
+      return {
+        type: 'play',
+        ws: this.__wsPlay
+      };
+    } else if (!!this.__wsPlay) {
+      return {
+        type: 'listen',
+        ws: this.__wsListen
+      };
+    } else {
+      return {
+        type: '',
+        ws: null
+      };
+    }
+  }
+
+  set ws(newWs) {
+    this.__wsListen = null;
+    this.__wsPlay = null;
+    if (newWs.type === 'play') {
+      this.__wsPlay = newWs.ws;
+    } else if (newWs.type === 'listen') {
+      this.__wsListen = newWs.ws;
+      this.__wsListen.onmessage = (res) => {
+        const msg = JSON.parse(res.data);
+        if (msg.mode === 'listen' && this.__user && msg.user === this.__user) {
+          this.playStringsByNotes(msg.data);
+        }
+      };
+    }
+  }
+
+  get user() {
+    return this.__user;
+  }
+
+  set user(newUser) {
+    this.__user = newUser;
   }
 
 
@@ -742,6 +795,15 @@ export class Guitar {
   }
 
   playStringsByNotes(notes = '------') {
+
+    if (this.__wsPlay && this.__user && notes !== '------') {
+      this.__wsPlay.send(JSON.stringify({
+        mode: 'play',
+        user: this.__user,
+        data: notes
+      }));
+    }
+
     for (let i = 0; i < 6; i++) {
       if (notes[i] === '-') {
         continue;
