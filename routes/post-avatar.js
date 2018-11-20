@@ -5,90 +5,80 @@ const path = require('path');
 
 const User = require('../models/user').User;
 
-router.post('/', (req, res, next) => {
+router.post('/', postAvatar);
 
+async function postAvatar(req, res, next) {
   if (!req.session.user) {
-    res.statusCode = 403;
-    res.send("To changing picture you should be registered.");
+    res.status(403).send("To changing picture you should be registered.");
     return;
   }
 
-  User.findOne({ login: req.session.user }, function(err, user) {
-    if (err) return next(err);
+  let user = await User.findOne({ login: req.session.user });
 
-    if (!user) {
-      res.statusCode = 403;
-      res.send("It's mistake! Your login is not register in our database.");
-      return;
+  if (!user) {
+    res.status(403).send("It's mistake! Your login is not register in our database.");
+    return;
+  }
+
+  req.busboy.on('file', function (fieldname, file, filename) {
+    console.log("Uploading: " + filename);
+
+    let numberPhoto;
+
+    if (!user.photo || user.photo === "") {
+      numberPhoto = 0;
+    } else {
+      numberPhoto = user.numberPhoto;
     }
 
-    req.busboy.on('file', function (fieldname, file, filename) {
-      console.log("Uploading: " + filename);
+    filename = user.login + numberPhoto + ".png";
 
-      let numberPhoto;
+    let filePath = path.join(__dirname, "../front-ng/dist/angular-prj/assets/photos/users/");
+    let fstream = fs.createWriteStream(filePath + filename);
+    file.pipe(fstream);
 
-      if (!user.photo || user.photo === "") {
-        numberPhoto = 0;
-      } else {
-        numberPhoto = user.numberPhoto;
-      }
+    fstream.on('error', function () {
+      res.status(501).send("Error in saving file");
+    });
 
-      filename = user.login + numberPhoto + ".png";
+    fstream.on('close', function () {
 
-      let filePath = path.join(__dirname, "../front-ng/dist/angular-prj/assets/photos/users/");
-      let fstream = fs.createWriteStream(filePath + filename);
-      file.pipe(fstream);
+      if (numberPhoto !== 0) {
+        let oldFilename = user.login + (numberPhoto - 1) + ".png";
+        let filePath = path.join(__dirname, "../front-ng/dist/angular-prj/assets/photos/users/");
+        fs.remove(filePath + oldFilename, err => {
+          if (err) return next(err);
 
-      fstream.on('error', function () {
-        res.statusCode = 501;
-        res.send("Error in saving file");
-      });
-
-      fstream.on('close', function () {
-
-        if (numberPhoto !== 0) {
-          let oldFilename = user.login + (numberPhoto - 1) + ".png";
-          let filePath = path.join(__dirname, "../front-ng/dist/angular-prj/assets/photos/users/");
-          fs.remove(filePath + oldFilename, err => {
-            if (err) return next(err);
-
-            user.numberPhoto++;
-            user.photo = filename;
-            user.save(function (err) {
-              if (err) {
-                res.statusCode = 501;
-                res.send("Error in updating data! Please upload avatar again.");
-                return;
-              }
-
-              res.statusCode = 200;
-              res.send("Ok!");
-            });
-
-          });
-        } else {
-          user.numberPhoto = 1;
+          user.numberPhoto++;
           user.photo = filename;
           user.save(function (err) {
             if (err) {
-              res.statusCode = 501;
-              res.send("Error in updating data! Please upload avatar again.");
+              res.status(501).send("Error in updating data! Please, upload avatar again.");
               return;
             }
 
-            res.statusCode = 200;
-            res.send("Ok!");
+            res.status(200).send("Ok!");
           });
 
-        }
+        });
+      } else {
+        user.numberPhoto = 1;
+        user.photo = filename;
+        user.save(function (err) {
+          if (err) {
+            res.status(501).send("Error in updating data! Please upload avatar again.");
+            return;
+          }
 
-      });
+          res.status(200).send("Ok!");
+        });
+
+      }
+
     });
-
-    return req.pipe(req.busboy);
-
   });
 
-});
+  return req.pipe(req.busboy);
+}
 
 module.exports = router;
