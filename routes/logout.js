@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/', (req, res, next) => {
+router.post('/', logout);
 
-    req.session.user = null;
+function logout(req, res, next) {
+  req.session.user = null;
 
-    res.statusCode = 200;
-    res.send("Ok!");
-});
+  res.statusCode = 200;
+  res.send("Ok!");
+}
 
 module.exports = router;
