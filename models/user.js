@@ -3,8 +3,6 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let Song = require('./song').Song;
-
 let schema = new Schema({
   login: {
     type: String,
@@ -82,9 +80,10 @@ let schema = new Schema({
     default: Date.now
   },
 
-  songs: {
-    type: [Song.schema]
-  }
+  songs: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Melody'
+  }]
 });
 
 schema.method('encryptPassword', function (password) {

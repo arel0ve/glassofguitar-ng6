@@ -239,4 +239,13 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
           }
       );
   }
+
+  stream() {
+    const ws = new WebSocket('ws://localhost:40510');
+
+    ws.onopen = e => {
+      console.log(e);
+      ws.send(this.user);
+    };
+  }
 }

@@ -29,6 +29,8 @@ mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true});
 
 const MongoStore = require('connect-mongo')(session);
 
+const ws = require('./ws/guitar-stream.ws');
+
 const app = express();
 
 const corsOptions = {

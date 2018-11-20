@@ -2,13 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let schema = new Schema({
-  songId: {
-    type: String,
-    lowercase: true,
-    required: true,
-    unique: true
-  },
-
   artist: {
     type: String,
     required: true
@@ -59,4 +52,4 @@ schema.virtual('fullTitle')
       return this.title;
     });
 
-exports.Song = mongoose.model('Song', schema);
+exports.Melody = mongoose.model('Melody', schema);

@@ -2,56 +2,48 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/user').User;
-const Song = require('../models/song').Song;
+const Melody = require('../models/song').Melody;
 
-router.post('/', (req, res, next) => {
+router.post('/', addSong);
+
+async function addSong(req, res, next) {
   if (!req.session.user) {
-    res.statusCode = 403;
-    res.send("You have to register and verify to create new song.");
+    res.status(403).send("You have to register and verify to create new song.");
     return;
   }
 
-  User.findOne({ login: req.session.user }, function (err, user) {
-    if (err) {
-      res.statusCode = 500;
-      res.send('Server error! Please try again later.');
-      return;
-    }
+  try {
+    let user = await User.findOne({ login: req.session.user });
 
     if (!user) {
-      res.statusCode = 404;
-      res.send("Your login is not register in our database.");
+      res.status(404).send("Your login is not register in our database.");
       return;
     }
 
     for (let song of user.songs) {
       if (song.artist === req.body.artist && song.title === req.body.title) {
-        res.statusCode = 402;
-        res.send(`Song "${req.body.artist} - ${req.body.title}" has already been created.`);
+        res.status(402).send(`Song "${req.body.artist} - ${req.body.title}" has already been created.`);
         return;
       }
     }
 
-    let song = new Song({
-      songId: "" + user.songs.length,
+    let song = new Melody({
       artist: req.body.artist,
       title: req.body.title,
       author: user.login
     });
 
-    user.songs.push(song);
+    song = await song.save();
 
-    user.save(function (err) {
-      if (err) {
-        res.statusCode = 501;
-        res.send("Error in updating data! Please press 'Create Song' again.");
-        return;
-      }
+    user.songs.push(song._id);
 
-      res.statusCode = 400;
-      res.send(`${user.login}/${"" + (user.songs.length - 1)}`);
-    });
-  })
-});
+    await user.save();
+
+    res.status(200).send(`${user.login}/${song._id}`);
+  } catch(e) {
+    console.log(e);
+    res.status(500).send(`Error in updating data! Please try press 'Create Song' again later.`)
+  }
+}
 
 module.exports = router;

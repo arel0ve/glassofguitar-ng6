@@ -4,58 +4,62 @@ const router = express.Router();
 const User = require('../models/user').User;
 
 /* GET users listing. */
-router.get(['/:login', '/:login/:song'], function(req, res, next) {
+router.get(['/:login', '/:login/:song'], getUserByLogin);
 
-  User.findOne({ login: req.params.login }, function (err, user) {
+async function getUserByLogin(req, res, next) {
+  try {
+    let user = await User.findOne({ login: req.params.login })
+        .populate('songs', 'artist title author size speed notes _id');
 
     if (!user) {
-      res.statusCode = 203;
-      res.send(JSON.stringify({
-        title: 'GLASSOF-GUITAR: Play guitar online and write tabs free.',
-        hatColor: '#51907F',
-        isLogin: !!req.session.user ? "true" : "false",
-        currentLogin: req.session.user,
-        login: "/",
-        tag: "Developer",
-        name: "Valerii Psol",
-        birthday: new Date(1994, 7, 18),
-        place: "Andriivka, Berdiansk region",
-        country: "Ukraine",
-        biography: "",
-        songs: [{
-          artist: 'Ludwig van Beethoven',
-          title: 'Für Elise',
-          author: '0',
-          id: '0'
-        }],
-        currentSong: {
-          artist: 'Ludwig van Beethoven',
-          title: 'Für Elise',
-          notes: {
-            size: '3/8',
-            speed: '63',
-            notes: [
-              '------','------','------','------','0-----','-4----',
-              '0-----','-4----','0-----','-0----','-3----','-1----',
-              '--2---','------','------','----3-','---2--','--2---',
-              '-0----','------','------','---2--','--1---','-0----',
-              '-1----','------','------','---2--','0-----','-4----',
-              '0-----','-4----','0-----','-0----','-3----','-1----',
-              '--2---','------','------','----3-','---2--','--2---',
-              '-0----','------','------','---2--','-1----','-0----',
-              '--2---','------','------','-0----','-1----','-3----',
-              '0-----','------','------','--0---','1-----','0-----',
-              '-3----','------','------','---3--','0-----','-3----',
-              '-1----','------','------','---2--','-3----','-1----',
-              '--0---','------','------','---2--','0-----','-4----',
-              '0-----','-4----','0-----','-0----','-3----','-1----',
-              '--2---','------','------','----3-','---2--','--2---',
-              '-0----','------','------','---2--','-1----','-0----',
-              '--2---','------','------','------','------','------'
-            ]
+      res.status(203).json(
+          {
+            title: 'GLASSOF-GUITAR: Play guitar online and write tabs free.',
+            hatColor: '#51907F',
+            isLogin: !!req.session.user ? "true" : "false",
+            currentLogin: req.session.user,
+            login: "/",
+            tag: "Developer",
+            name: "Valerii Psol",
+            birthday: new Date(1994, 7, 18),
+            place: "Andriivka, Berdiansk region",
+            country: "Ukraine",
+            biography: "",
+            songs: [{
+              artist: 'Ludwig van Beethoven',
+              title: 'Für Elise',
+              author: '0',
+              id: '0'
+            }],
+            currentSong: {
+              artist: 'Ludwig van Beethoven',
+              title: 'Für Elise',
+              notes: {
+                size: '3/8',
+                speed: '63',
+                notes: [
+                  '------','------','------','------','0-----','-4----',
+                  '0-----','-4----','0-----','-0----','-3----','-1----',
+                  '--2---','------','------','----3-','---2--','--2---',
+                  '-0----','------','------','---2--','--1---','-0----',
+                  '-1----','------','------','---2--','0-----','-4----',
+                  '0-----','-4----','0-----','-0----','-3----','-1----',
+                  '--2---','------','------','----3-','---2--','--2---',
+                  '-0----','------','------','---2--','-1----','-0----',
+                  '--2---','------','------','-0----','-1----','-3----',
+                  '0-----','------','------','--0---','1-----','0-----',
+                  '-3----','------','------','---3--','0-----','-3----',
+                  '-1----','------','------','---2--','-3----','-1----',
+                  '--0---','------','------','---2--','0-----','-4----',
+                  '0-----','-4----','0-----','-0----','-3----','-1----',
+                  '--2---','------','------','----3-','---2--','--2---',
+                  '-0----','------','------','---2--','-1----','-0----',
+                  '--2---','------','------','------','------','------'
+                ]
+              }
+            }
           }
-        }
-      }));
+      );
       return;
     }
 
@@ -102,7 +106,7 @@ router.get(['/:login', '/:login/:song'], function(req, res, next) {
         artist: userSong.artist,
         title: userSong.title,
         author: user.login,
-        id: userSong.songId
+        id: userSong._id
       });
     }
 
@@ -110,7 +114,7 @@ router.get(['/:login', '/:login/:song'], function(req, res, next) {
 
     if (!!req.params.song)  {
       for (let userSong of user.songs) {
-        if (userSong.songId === req.params.song) {
+        if (userSong._id.toString() === req.params.song) {
           song = userSong;
         }
       }
@@ -127,11 +131,13 @@ router.get(['/:login', '/:login/:song'], function(req, res, next) {
       };
     }
 
-    res.statusCode = 200;
-    res.send(sendObj);
-
-  });
-
-});
+    res.status(200).json(sendObj);
+  } catch(e) {
+    console.log(e);
+    res.status(500).send({
+      message: "Server error"
+    })
+  }
+}
 
 module.exports = router;
