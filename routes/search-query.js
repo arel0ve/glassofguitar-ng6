@@ -2,28 +2,23 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/user').User;
-const Song = require('../models/song').Song;
+const Song = require('../models/song').Melody;
 
-/* POST registration. */
-router.post('/', (req, res, next) => {
+/* POST search query. */
+router.post('/', searchQuery);
 
-  let reg = new RegExp(req.body.query, "i");
+async function searchQuery(req, res, next) {
+  try {
+    let reg = new RegExp(req.body.query, "i");
 
-  if (req.body.type === "song") {
+    if (req.body.type === "song") {
 
-    User.findBySong(req.body.query, function(err, users) {
-      if (err) {
-        res.statusCode = 501;
-        res.send([{
-          type: 'error',
-          message: 'Server error'
-        }]);
-        return;
-      }
+      let songs = await Song.find({}).or([{artist: reg}, {title: reg}])
+          .select('artist title author _id')
+          .limit(10);
 
-      if (users.length === 0) {
-        res.statusCode = 203;
-        res.send([{
+      if (songs.length === 0) {
+        res.status(203).json([{
           type: 'error',
           message: `Songs with '${req.body.query}' not found`
         }]);
@@ -32,49 +27,23 @@ router.post('/', (req, res, next) => {
 
       let rezult = [];
 
-      for (let user of users) {
-        for (let song of user.songs) {
-          let full = song.artist + ' - ' + song.title;
-          if (~full.search(reg)) {
-            rezult.push({
-              type: 'song',
-              href: `/user/${user.login}/${song.songId}`,
-              artist: song.artist,
-              title: song.title
-            });
-          }
-        }
-        if (rezult.length > 10) break;
+      for (let song of songs) {
+        rezult.push({
+          type: 'song',
+          href: `/user/${song.author}/${song._id}`,
+          artist: song.artist,
+          title: song.title
+        })
       }
 
-      if (rezult.length === 0) {
-        res.statusCode = 202;
-        res.send([{
-          type: 'error',
-          message: `Songs with '${req.body.query}' not found`
-        }]);
-        return;
-      }
+      res.status(200).json(rezult);
 
-      res.statusCode = 200;
-      res.send(rezult);
+    } else {
 
-    });
-
-  } else {
-    User.findByName(req.body.query, function (err, users) {
-      if (err) {
-        res.statusCode = 501;
-        res.send([{
-          type: 'error',
-          message: 'Server error'
-        }]);
-        return;
-      }
+      let users = await User.findByName(req.body.query);
 
       if (users.length === 0) {
-        res.statusCode = 203;
-        res.send([{
+        res.status(203).json([{
           type: 'error',
           message: `Users with '${req.body.query}' not found`
         }]);
@@ -93,11 +62,15 @@ router.post('/', (req, res, next) => {
         });
       }
 
-      res.statusCode = 200;
-      res.send(rezult);
-    })
+      res.status(200).json(rezult);
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(500).json([{
+      type: 'error',
+      message: 'Server error'
+    }]);
   }
-
-});
+};
 
 module.exports = router;
