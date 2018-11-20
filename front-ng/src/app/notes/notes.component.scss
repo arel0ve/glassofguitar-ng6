@@ -37,18 +37,19 @@
   justify-content: space-between;
 }
 
-.play-menu {
+.play-menu, .action-menu {
   display: inline-block;
-  margin-top: 5px;
-  color: rgb(107, 121, 127);
   user-select: none;
 }
 
-.play-menu i {
+.play-menu i,
+.action-menu i {
   cursor: pointer;
   transform: rotate(0);
   padding: 0 5px;
   text-shadow: 0 0 3px rgba(77, 177, 254, .7);
+  color: rgb(107, 121, 127);
+  margin-top: 5px;
 }
 
 @keyframes btn-rotate {
@@ -68,11 +69,30 @@
   }
 }
 
+@keyframes btn-show {
+  0% {
+    color: rgb(107, 121, 127);
+  }
+
+  50% {
+    color: rgb(214, 242, 254);
+  }
+
+  100% {
+    color: rgb(161, 181, 201);
+  }
+}
+
 .play-menu i:hover {
   animation: btn-rotate 1.2s forwards;
 }
 
-.play-menu i:active {
+.action-menu i:hover {
+  animation: btn-show 1.2s forwards;
+}
+
+.play-menu i:active,
+.action-menu i:active {
   color: rgb(54, 61, 63);
 }
 

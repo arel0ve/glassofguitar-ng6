@@ -6,7 +6,6 @@
       <i class="large material-icons" (click)="addSong()">add_circle</i>
       <i #playBtn class="large material-icons" (click)="play()">play_circle_filled</i>
       <i class="large material-icons" (click)="stop()">replay</i>
-      <i class="large material-icons" (click)="stream()">voice_chat</i>
     </div>
 
     <div class="song-title">
@@ -25,12 +24,17 @@
         </svg>
       </a>
 
-      <div class="hat-btn" appHoversvg>
-        <svg version="1.1" width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-          <path #fullScr d="m 10 5 h 15 v 15 m -5 5 h -15  v -15" stroke-linecap="round"
-                stroke-linejoin="round" stroke-opacity=".3" fill="rgba(0, 0, 0, .5)"></path>
-        </svg>
+      <div class="hat-btn">
+        <i class="large material-icons" (click)="streamStart()" *ngIf="login === user">voice_chat</i>
+        <i class="large material-icons" (click)="streamPlay()" *ngIf="login !== user">tv</i>
       </div>
+
+      <!--<div class="hat-btn" appHoversvg>-->
+        <!--<svg version="1.1" width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">-->
+          <!--<path #fullScr d="m 10 5 h 15 v 15 m -5 5 h -15  v -15" stroke-linecap="round"-->
+                <!--stroke-linejoin="round" stroke-opacity=".3" fill="rgba(0, 0, 0, .5)"></path>-->
+        <!--</svg>-->
+      <!--</div>-->
     </div>
 
   </div>

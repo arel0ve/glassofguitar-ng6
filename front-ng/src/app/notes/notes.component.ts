@@ -14,6 +14,7 @@ import {Subject} from 'rxjs';
 export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
 
   @Input() song;
+  @Input() login;
 
   @ViewChild('notesBlock') notesRef: ElementRef;
   @ViewChild('playBtn') playRef: ElementRef;
@@ -240,7 +241,16 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
       );
   }
 
-  stream() {
+  streamStart() {
+    const ws = new WebSocket('ws://localhost:40510');
+
+    ws.onopen = e => {
+      console.log(e);
+      ws.send(this.user);
+    };
+  }
+
+  streamPlay() {
     const ws = new WebSocket('ws://localhost:40510');
 
     ws.onopen = e => {

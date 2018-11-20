@@ -11,12 +11,3 @@ User.find({}, (err, users) => {
 Song.find({}, (err, songs) => {
   console.log(songs);
 });
-
-// Song.findOneAndDelete({songId: '0'}, (err, songs) => {
-//   console.log(songs);
-//   // let song = songs[0];
-//   //
-//   // song.save(err => {
-//   //   console.log(err);
-//   // })
-// });
