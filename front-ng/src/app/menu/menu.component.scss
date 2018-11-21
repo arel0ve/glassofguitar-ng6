@@ -28,6 +28,13 @@
   height: 100%;
 }
 
+.show-menu-btn {
+  display: inline-block;
+  @media (min-width: 576px) {
+    display: none;
+  }
+}
+
 .home {
   margin-left: 10px;
   @media (min-width: 576px) {

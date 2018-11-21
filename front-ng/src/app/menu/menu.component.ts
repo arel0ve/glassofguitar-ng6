@@ -2,6 +2,7 @@ import {Component, ElementRef, Input, OnChanges, OnInit, ViewChild} from '@angul
 import {fromEvent} from 'rxjs';
 import {SearchQueryService} from '../api/search-query/search-query.service';
 import {animate, style, transition, trigger} from '@angular/animations';
+import {ShowModeService} from "../services/show-mode/show-mode.service";
 
 @Component({
   selector: 'app-menu',
@@ -41,7 +42,8 @@ export class MenuComponent implements OnInit, OnChanges {
   loginLink: string;
   foundSongs: any[];
 
-  constructor(private searchQueryService: SearchQueryService) { }
+  constructor(private searchQueryService: SearchQueryService,
+              private showModeService: ShowModeService) { }
 
   ngOnInit() {
     this.showSearch = false;
@@ -77,5 +79,13 @@ export class MenuComponent implements OnInit, OnChanges {
               });
     });
 
+  }
+
+  showUser() {
+    if (this.showModeService.mode$.value === 'workspace') {
+      this.showModeService.mode$.next('user');
+    } else {
+      this.showModeService.mode$.next('workspace');
+    }
   }
 }

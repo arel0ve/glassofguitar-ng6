@@ -2,7 +2,7 @@
   position: absolute;
   padding-left: 7px;
   top: 1.65em;
-  width: calc(20% + 6px);
+  width: calc(100% - 7px);
   height: calc(100vh - 3.3em);
   max-height: calc(100vh - 3.3em);
   display: inline-block;
@@ -12,9 +12,11 @@
   overflow-y: auto;
   @media (min-width: 576px) {
     top: 2.2em;
+    width: calc(20% + 6px);
   }
   @media (min-width: 992px) {
     top: 3.3em;
+    width: calc(20% + 6px);
   }
 }
 
@@ -49,7 +51,7 @@
   color: rgb(177, 207, 227);
   width: 100%;
   text-align: center;
-  font-size: 0.8em;
+  font-size: 2em;
   border-bottom: 0 dotted rgba(127, 144, 154, .7);
   padding-bottom: 8px;
   transition: border-bottom .3s, padding-bottom .3s;
@@ -106,7 +108,7 @@
   top: -50px;
   transition: transform .6s, top .6s, background .6s, box-shadow .6s;
   overflow-wrap: break-word;
-  font-size: 0.8em;
+  font-size: 1.5em;
   @media (min-width: 576px) {
     top: -40px;
     font-size: 0.9em;
@@ -136,6 +138,7 @@
   position: relative;
   top: -90px;
   transition: top .6s;
+  font-size: 1.5em;
   @media (min-width: 576px) {
     top: -75px;
     font-size: 0.9em;

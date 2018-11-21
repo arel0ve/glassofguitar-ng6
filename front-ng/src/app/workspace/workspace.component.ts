@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {GetUserService} from '../api/get-user/get-user.service';
+import {ShowModeService} from "../services/show-mode/show-mode.service";
 
 @Component({
   selector: 'app-workspace',
@@ -16,16 +17,23 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
   user: any;
   song: any;
 
+  mode = 'both';
+
   constructor(
       private getUser: GetUserService,
       private route: ActivatedRoute,
-      private exitRouter: Router
+      private exitRouter: Router,
+      private showModeService: ShowModeService
   ) {
     this.navigationSubscription = this.exitRouter.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd) {
         this.initialiseInvites();
       }
+    });
+
+    this.showModeService.mode$.subscribe(mode => {
+      this.mode = mode;
     });
   }
 
