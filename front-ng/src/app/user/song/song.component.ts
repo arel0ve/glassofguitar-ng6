@@ -21,12 +21,18 @@ export class SongComponent implements OnInit {
   constructor(private router: Router, private showModeService: ShowModeService) {}
 
   ngOnInit() {
-    this.isEnter = false;
     this.isProgress = false;
     this.isSelected = false;
 
-    this.angle = Math.floor(Math.random() * 30) + (Math.random() > 0.5 ? 30 : -60);
-    this.brightness = Math.abs(Math.cos(this.angle / (180 / Math.PI))) + .1;
+    if (this.showModeService.mode$.value === 'both') {
+      this.isEnter = false;
+      this.angle = Math.floor(Math.random() * 30) + (Math.random() > 0.5 ? 30 : -60);
+      this.brightness = Math.abs(Math.cos(this.angle / (180 / Math.PI))) + .1;
+    } else {
+      this.isEnter = true;
+      this.angle = 0;
+      this.brightness = 1;
+    }
   }
 
   enterSong() {
