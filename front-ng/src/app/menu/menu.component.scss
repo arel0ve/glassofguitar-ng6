@@ -4,11 +4,17 @@
   opacity: .75;
   height: 1.1em;
   width: 100%;
-  font-size: 3em;
+  font-size: 1.5em;
   display: flex;
   justify-content: space-between;
   transition: opacity .3s;
   font-family: "Guild Regular", sans-serif;
+  @media (min-width: 576px) {
+    font-size: 2em;
+  }
+  @media (min-width: 992px) {
+    font-size: 3em;
+  }
 }
 
 .wrapper:hover {
@@ -74,19 +80,31 @@
 .search-field {
   display: inline-block;
   vertical-align: top;
-  font-size: .75em;
+  font-size: .5em;
   font-family: "Guild Regular", sans-serif;
   width: 0;
   border-width: 2px 0;
   padding: 1px 0;
   transition: width .6s, border .3s .3s, padding .6s;
+  @media (min-width: 576px) {
+    font-size: .6em;
+  }
+  @media (min-width: 992px) {
+    font-size: .75em;
+  }
 }
 
 .search-field-animation {
-  width: 8em;
+  width: 6em;
   border-width: 2px 2px;
   padding: 1px 1px;
   transition: width 1.2s, border .6s .6s, padding 1.2s;
+  @media (min-width: 576px) {
+    width: 7em;
+  }
+  @media (min-width: 992px) {
+    width: 8em;
+  }
 }
 
 .search-field:focus {
@@ -96,11 +114,23 @@
 .search-result {
   position: fixed;
   z-index: 999;
-  top: 3em;
-  right: 4.15em;
-  width: 16.36em;
+  top: 2em;
+  right: 2.15em;
+  width: 12em;
   font-family: "Ubuntu Regular", sans-serif;
-  font-size: 1.1em;
+  font-size: 0.7em;
+  @media (min-width: 576px) {
+    font-size: 0.9em;
+    top: 2.5em;
+    right: 3.15em;
+    width: 14em;
+  }
+  @media (min-width: 992px) {
+    font-size: 1.1em;
+    top: 3em;
+    right: 4.15em;
+    width: 16.36em;
+  }
 }
 
 .search-result a {

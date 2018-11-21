@@ -1,17 +1,27 @@
 .wrapper {
   position: absolute;
-  top: calc(3.3em + 33vmin);
+  top: calc(2.5em + 33vmin);
   left: 21%;
   margin: 10px 5px 0;
   background: linear-gradient(rgba(7, 9, 7, .5) 67%, rgba(7, 9, 7, .5), rgba(7, 9, 7, .0));
-  height: calc(100% - 33vmin - 3.3em - 18px);
+  height: calc(100% - 33vmin - 2.5em - 18px);
   max-height: calc(100% - 33vmin - 18px);
   width: calc(78% - 10px);
   box-shadow: 1px -3px 2px 1px rgba(2, 3, 2, .7);
   font-family: "Erika Monospace", monospace;
-  font-size: 1.2em;
+  font-size: 0.8em;
   overflow-x: hidden;
   overflow-y: auto;
+  @media (min-width: 576px) {
+    top: calc(2.8em + 33vmin);
+    height: calc(100% - 33vmin - 2.8em - 18px);
+    font-size: 1em;
+  }
+  @media (min-width: 992px) {
+    top: calc(3.3em + 33vmin);
+    height: calc(100% - 33vmin - 3.3em - 18px);
+    font-size: 1.2em;
+  }
 }
 
 .wrapper::-webkit-scrollbar {

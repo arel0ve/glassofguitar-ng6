@@ -1,5 +1,12 @@
 .track {
   perspective: 500px;
+  font-size: 0.8em;
+  @media (min-width: 576px) {
+    font-size: 0.9em;
+  }
+  @media (min-width: 992px) {
+    font-size: 1em;
+  }
 }
 
 .front, .back {

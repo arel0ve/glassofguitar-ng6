@@ -1,7 +1,7 @@
 .wrapper {
   position: absolute;
   padding-left: 7px;
-  top: 3.3em;
+  top: 1.65em;
   width: calc(20% + 6px);
   height: calc(100vh - 3.3em);
   max-height: calc(100vh - 3.3em);
@@ -10,6 +10,12 @@
   font-family: "Ubuntu Regular", sans-serif;
   overflow-x: hidden;
   overflow-y: auto;
+  @media (min-width: 576px) {
+    top: 2.2em;
+  }
+  @media (min-width: 992px) {
+    top: 3.3em;
+  }
 }
 
 .wrapper::-webkit-scrollbar {
@@ -43,10 +49,16 @@
   color: rgb(177, 207, 227);
   width: 100%;
   text-align: center;
-  font-size: 1.2em;
+  font-size: 0.8em;
   border-bottom: 0 dotted rgba(127, 144, 154, .7);
   padding-bottom: 8px;
   transition: border-bottom .3s, padding-bottom .3s;
+  @media (min-width: 576px) {
+    font-size: 1em;
+  }
+  @media (min-width: 992px) {
+    top: 1.2em;
+  }
 }
 
 .user-name:hover {
@@ -91,9 +103,18 @@
   box-shadow: 1px 7px 7px 2px rgba(127, 254, 142, .5);
   transform: rotateX(55deg) scale(.85);
   transform-style: preserve-3d;
-  top: -30px;
+  top: -50px;
   transition: transform .6s, top .6s, background .6s, box-shadow .6s;
   overflow-wrap: break-word;
+  font-size: 0.8em;
+  @media (min-width: 576px) {
+    top: -40px;
+    font-size: 0.9em;
+  }
+  @media (min-width: 992px) {
+    top: -30px;
+    font-size: 1em;
+  }
 }
 
 .user-info:hover {
@@ -113,8 +134,16 @@
 
 .user-track-list {
   position: relative;
-  top: -60px;
+  top: -90px;
   transition: top .6s;
+  @media (min-width: 576px) {
+    top: -75px;
+    font-size: 0.9em;
+  }
+  @media (min-width: 992px) {
+    top: -60px;
+    font-size: 1em;
+  }
 }
 
 .user-track-list-down {
