@@ -29,7 +29,8 @@ wss.on('connection', ws => {
                 mode: 'listen',
                 user: streamer.user,
                 string: msg.string,
-                chord: msg.chord
+                chord: msg.chord,
+                capo: msg.capo
               })
           );
         }

@@ -351,12 +351,16 @@ export class Guitar {
       this.__wsListen.onmessage = (res) => {
         const msg = JSON.parse(res.data);
         if (msg.mode === 'listen' && this.__user && msg.user === this.__user) {
-          const chord = msg.chord ? msg.chord : '000000';
+          let chord = msg.chord ? msg.chord : '000000';
           for (let i = 0; i < chord.length; i++) {
             if (chord[i] !== '0' || msg.string === i) {
-              this.standFingerOnBoard(i, Guitar.getNumByLetter(chord[i]), true);
+              this.standFingerOnBoard(i, Guitar.getNumByLetter(chord[i]) + msg.capo, true);
             }
           }
+          chord = chord.split('');
+          chord[msg.string] = Guitar.getLetterByNum(Guitar.getNumByLetter(chord[msg.string]) + msg.capo);
+          chord = chord.join('');
+          console.log(chord);
           this.playString(msg.string, chord);
         }
       };
@@ -830,7 +834,8 @@ export class Guitar {
         mode: 'play',
         user: this.__user,
         string: num,
-        chord: chord
+        chord: chord,
+        capo: this.capo
       }));
     }
 

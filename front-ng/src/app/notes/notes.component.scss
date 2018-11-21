@@ -42,8 +42,7 @@
   user-select: none;
 }
 
-.play-menu i,
-.action-menu i {
+.play-menu i {
   cursor: pointer;
   transform: rotate(0);
   padding: 0 5px;
@@ -69,31 +68,72 @@
   }
 }
 
-@keyframes btn-show {
-  0% {
-    color: rgb(107, 121, 127);
-  }
-
-  50% {
-    color: rgb(214, 242, 254);
-  }
-
-  100% {
-    color: rgb(161, 181, 201);
-  }
-}
-
 .play-menu i:hover {
   animation: btn-rotate 1.2s forwards;
 }
 
-.action-menu i:hover {
-  animation: btn-show 1.2s forwards;
+.play-menu i:active {
+  color: rgb(54, 61, 63);
 }
 
-.play-menu i:active,
+.action-menu i {
+  cursor: pointer;
+  padding: 0 5px;
+  margin-top: 5px;
+  &.start {
+    text-shadow: 0 0 3px rgba(77, 254, 227, .7);
+    color: rgb(107, 177, 127);
+  }
+  &.stop {
+    text-shadow: 0 0 3px rgba(254, 27, 77, .7);
+    color: rgb(177, 77, 72);
+  }
+}
+
+@keyframes btn-show-start {
+  0% {
+    color: rgb(107, 177, 127);
+  }
+
+  50% {
+    color: rgb(177, 254, 227);
+  }
+
+  100% {
+    color: rgb(127, 227, 181);
+  }
+}
+
+@keyframes btn-show-stop {
+  0% {
+    color: rgb(177, 77, 72);
+  }
+
+  50% {
+    color: rgb(254, 154, 142);
+  }
+
+  100% {
+    color: rgb(227, 127, 121);
+  }
+}
+
+.action-menu i:hover {
+  &.start {
+    animation: btn-show-start 1.2s forwards;
+  }
+  &.stop {
+    animation: btn-show-stop 1.2s forwards;
+  }
+}
+
 .action-menu i:active {
-  color: rgb(54, 61, 63);
+  &.start {
+    color: rgb(54, 127, 63);
+  }
+  &.stop {
+    color: rgb(127, 42, 54);
+  }
 }
 
 .song-title {
