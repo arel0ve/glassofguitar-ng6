@@ -30,39 +30,48 @@
 
 .home {
   margin-left: 10px;
-}
-
-.home::after {
-  content: "home";
-  color: rgb(0, 0, 0);
-  cursor: pointer;
-  padding-top: 5px;
-  display: inline-block;
+  @media (min-width: 576px) {
+    &::after {
+      content: "home";
+      color: rgb(0, 0, 0);
+      cursor: pointer;
+      padding-top: 5px;
+      display: inline-block;
+    }
+  }
 }
 
 .login {
   color: rgb(0, 0, 0);
   text-decoration: none;
+  text-align: center;
+  display: inline-block;
 }
 
-.log-in::before {
-  content: "log";
-  cursor: pointer;
+.log-in {
+  @media (min-width: 576px) {
+    &::before {
+      content: "log";
+      cursor: pointer;
+    }
+    &::after {
+      content: "in";
+      cursor: pointer;
+    }
+  }
 }
 
-.log-in::after {
-  content: "in";
-  cursor: pointer;
-}
-
-.log-out::before {
-  content: "log";
-  cursor: pointer;
-}
-
-.log-out::after {
-  content: "out";
-  cursor: pointer;
+.log-out {
+  @media (min-width: 576px) {
+    &::before {
+      content: "log";
+      cursor: pointer;
+    }
+    &::after {
+      content: "out";
+      cursor: pointer;
+    }
+  }
 }
 
 .search {
@@ -73,21 +82,21 @@
 }
 
 .search-animation {
-  width: 7.1em;
+  width: 7.5em;
   transition: width 1.2s;
 }
 
 .search-field {
   display: inline-block;
   vertical-align: top;
-  font-size: .5em;
+  font-size: .6em;
   font-family: "Guild Regular", sans-serif;
   width: 0;
   border-width: 2px 0;
   padding: 1px 0;
   transition: width .6s, border .3s .3s, padding .6s;
   @media (min-width: 576px) {
-    font-size: .6em;
+    font-size: .65em;
   }
   @media (min-width: 992px) {
     font-size: .75em;
@@ -95,12 +104,12 @@
 }
 
 .search-field-animation {
-  width: 6em;
+  width: 10em;
   border-width: 2px 2px;
   padding: 1px 1px;
   transition: width 1.2s, border .6s .6s, padding 1.2s;
   @media (min-width: 576px) {
-    width: 7em;
+    width: 9em;
   }
   @media (min-width: 992px) {
     width: 8em;
