@@ -32,13 +32,13 @@
   background: radial-gradient(at left, rgb(127, 254, 127) 10%, rgba(95, 254, 127, .75) 50%, rgba(95, 191, 127, .5));
 }
 
-a {
+span {
   display: block;
   text-decoration: none;
   overflow-wrap: break-word;
 }
 
-.front a {
+.front span {
   color: rgb(177, 207, 227);
 }
 
@@ -46,7 +46,7 @@ a {
   color: rgb(127, 144, 154);
 }
 
-.back a {
+.back span {
   color: rgba(177, 207, 227, 0);
 }
 

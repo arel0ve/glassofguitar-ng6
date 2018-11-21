@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {ShowModeService} from "../../services/show-mode/show-mode.service";
 
 @Component({
   selector: 'app-song',
@@ -16,7 +18,7 @@ export class SongComponent implements OnInit {
   isProgress: boolean;
   isSelected: boolean;
 
-  constructor() {}
+  constructor(private router: Router, private showModeService: ShowModeService) {}
 
   ngOnInit() {
     this.isEnter = false;
@@ -57,5 +59,14 @@ export class SongComponent implements OnInit {
 
   leaveSong() {
    this.isSelected = false;
+  }
+
+  navigateToSong() {
+    const author = this.song.author ? this.song.author + '/' : '';
+    this.router.navigate([`/user/${author}${this.song.id}`]).then(() => {
+      if (this.showModeService.mode$.value === 'user') {
+        this.showModeService.mode$.next('workspace');
+      }
+    });
   }
 }
