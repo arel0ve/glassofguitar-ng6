@@ -3,7 +3,7 @@
   top: 1.65em;
   left: 0;
   height: 33vmin;
-  width: 100%;
+  width: calc(100% - 10px);
   margin: 7px 5px 5px;
   @media (min-width: 576px) {
     top: 2.2em;

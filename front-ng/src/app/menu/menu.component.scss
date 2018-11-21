@@ -6,6 +6,7 @@
   width: 100%;
   font-size: 1.5em;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   transition: opacity .3s;
   font-family: "Guild Regular", sans-serif;
@@ -50,9 +51,11 @@
 
 .login {
   color: rgb(0, 0, 0);
+  width: 1.5em;
   text-decoration: none;
-  text-align: center;
-  display: inline-block;
+  @media (min-width: 576px) {
+    width: 4em;
+  }
 }
 
 .log-in {
@@ -130,16 +133,16 @@
 .search-result {
   position: fixed;
   z-index: 999;
-  top: 2em;
-  right: 2.15em;
-  width: 12em;
+  top: 2.1em;
+  right: 3.15em;
+  width: 13em;
   font-family: "Ubuntu Regular", sans-serif;
   font-size: 0.7em;
   @media (min-width: 576px) {
     font-size: 0.9em;
     top: 2.5em;
-    right: 3.15em;
-    width: 14em;
+    right: 3.5em;
+    width: 13em;
   }
   @media (min-width: 992px) {
     font-size: 1.1em;

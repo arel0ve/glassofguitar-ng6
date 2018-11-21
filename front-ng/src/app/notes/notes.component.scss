@@ -6,7 +6,7 @@
   background: linear-gradient(rgba(7, 9, 7, .5) 67%, rgba(7, 9, 7, .5), rgba(7, 9, 7, .0));
   height: calc(100% - 33vmin - 2.5em - 18px);
   max-height: calc(100% - 33vmin - 18px);
-  width: 100%;
+  width: calc(100% - 10px);
   box-shadow: 1px -3px 2px 1px rgba(2, 3, 2, .7);
   font-family: "Erika Monospace", monospace;
   font-size: 0.8em;
