@@ -2,7 +2,7 @@ import {Component, ElementRef, Input, OnChanges, OnInit, ViewChild} from '@angul
 import {fromEvent} from 'rxjs';
 import {SearchQueryService} from '../api/search-query/search-query.service';
 import {animate, style, transition, trigger} from '@angular/animations';
-import {ShowModeService} from "../services/show-mode/show-mode.service";
+import {ShowModeService} from '../services/show-mode/show-mode.service';
 
 @Component({
   selector: 'app-menu',

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ShowModeService} from "../../services/show-mode/show-mode.service";
+import {ShowModeService} from '../../services/show-mode/show-mode.service';
 
 @Component({
   selector: 'app-song',

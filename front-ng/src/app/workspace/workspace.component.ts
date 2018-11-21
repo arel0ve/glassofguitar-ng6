@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {GetUserService} from '../api/get-user/get-user.service';
-import {ShowModeService} from "../services/show-mode/show-mode.service";
+import {ShowModeService} from '../services/show-mode/show-mode.service';
 
 @Component({
   selector: 'app-workspace',
