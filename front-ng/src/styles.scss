@@ -24,3 +24,27 @@ body {
   src: url("assets/fonts/erika-ormig-monospace.ttf");
   font-display: fallback;
 }
+
+.loader-wrapper {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(27, 21, 24, .7);
+}
+
+.loader {
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  left: calc(50% - 60px);
+  top: calc(50% - 60px);
+  border: 16px solid rgb(49, 54, 49);
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
