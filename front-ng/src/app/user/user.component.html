@@ -1,11 +1,11 @@
 <div class="wrapper">
 
-  <a href="/{{ user.login }}" class="user-name">
+  <div class="user-name">
     <div>
       <b>{{ user.tag }}</b>
     </div>
     <div>{{ user.name }}</div>
-  </a>
+  </div>
 
   <div class="user-photo">
     <img src="../../assets/photos/{{ !user.photo || user.photo === '' ? 'no-photo.png' : user.photo }}"
