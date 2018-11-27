@@ -25,8 +25,6 @@ export class GuitarComponent implements OnInit {
 
     window.guitar = this.guitar;
 
-    window.addEventListener('resize', () => {
-      this.guitar.drawGuitar();
-    });
+    window.addEventListener('resize', () => this.guitar.drawGuitar());
   }
 }
