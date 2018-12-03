@@ -6,20 +6,20 @@ export class Guitar {
   private __stringsCanv: HTMLCanvasElement;
   private __infoCanv: HTMLCanvasElement;
 
-  private __sounds: Sound[];
+  private readonly __sounds: Sound[];
   private __chordsList: object;
   private __currentChord: string;
 
+  private readonly __stringsWidth: number[];
+  private readonly __stringsTop: number[];
+  private readonly __wallWidthPerc: number;
   private __shiftCapo: number;
-  private __stringsWidth: number[];
-  private __stringsTop: number[];
-  private __wallWidthPerc: number;
   private __wallWidth: number;
 
-  private __shiftZeroLadPerc: number;
+  private readonly __shiftZeroLadPerc: number;
 
-  private __shiftLadsPx: number[];
-  private __lengthLadsPx: number[];
+  private readonly __shiftLadsPx: number[];
+  private readonly __lengthLadsPx: number[];
 
   private __shiftStartStrings: number[];
 

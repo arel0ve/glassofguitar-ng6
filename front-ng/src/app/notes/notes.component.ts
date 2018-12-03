@@ -139,7 +139,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   changeSpeed(e) {
-    this.speed = +e.target.innerHTNL;
+    this.speed = +e.target.innerHTML;
     this.saveAllNotes();
   }
 
@@ -228,20 +228,19 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   saveAllNotes() {
     this.unsubscribe.next();
     this.giveParams();
-
-      this.saveSongService.saveSong({
-        user: this.user,
-        songId: this.songId,
-        speed: this.speed,
-        size: `${this.numerator}/${this.denominator}`,
-        notes: this.notes
-      }).subscribe(
-          () => this.successfulSaving = true,
-          err => {
-            this.successfulSaving = false;
-            console.log(err.error);
-          }
-      );
+    this.saveSongService.saveSong({
+      user: this.user,
+      songId: this.songId,
+      speed: this.speed,
+      size: `${this.numerator}/${this.denominator}`,
+      notes: this.notes
+    }).subscribe(
+        () => this.successfulSaving = true,
+        err => {
+          this.successfulSaving = false;
+          console.log(err.error);
+        }
+    );
   }
 
   streamStart() {
