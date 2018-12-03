@@ -360,7 +360,6 @@ export class Guitar {
           chord = chord.split('');
           chord[msg.string] = Guitar.getLetterByNum(Guitar.getNumByLetter(chord[msg.string]) + msg.capo);
           chord = chord.join('');
-          console.log(chord);
           this.playString(msg.string, chord);
         }
       };
