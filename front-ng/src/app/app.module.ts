@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -79,7 +80,8 @@ const appRoutes: Routes = [
     TodoModule,
     ServiceModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'})
+    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
+    FontAwesomeModule
   ],
   entryComponents: [
     AddsongComponent,

@@ -90,7 +90,7 @@
   color: rgb(54, 61, 63);
 }
 
-.action-menu i {
+.action-menu i, fa-icon {
   cursor: pointer;
   padding: 0 5px;
   margin-top: 5px;
@@ -174,10 +174,6 @@
 .song-title strong {
   color: rgb(127, 142, 154);
   font-weight: 200;
-}
-
-.action-menu {
-  width: 68px;
 }
 
 .hat-btn {
