@@ -1,7 +1,21 @@
 {
-  "name": "angular-prj",
-  "version": "0.0.0",
+  "name": "glass-of-guitar",
+  "description": "Web application for playing the guitar with youdistr device and sharing your notes",
+  "version": "1.0.0",
+  "homepage": "http://www.glassofguitar.com/",
+  "author": {
+    "name": "Valerii Psol",
+    "email": "vpsyol@gmail.com"
+  },
   "main": "elect.js",
+  "build": {
+    "appId": "com.glassofguitar.app",
+    "productName": "GlassOfGuitar",
+    "copyright": "Copyright © 2018 Valerii Psol",
+    "directories": {
+      "output": "GlassOfGuitarApp"
+    }
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,8 +23,8 @@
     "test": "ng test --source-map=false --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "pack": "npm run build && electron-builder --dir",
-    "dist": "npm run build && electron-builder",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
     "postinstall": "electron-builder install-app-deps"
   },
   "private": true,
