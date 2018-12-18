@@ -1,5 +1,4 @@
 import {AfterViewChecked, Component, ElementRef, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
-import { faArrowsAlt } from '@fortawesome/free-solid-svg-icons';
 import { Guitar } from '../guitar/guitar';
 import { Animation } from '../animation';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -13,8 +12,6 @@ import {Subject} from 'rxjs';
   styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
-
-  faArrowsAlt = faArrowsAlt;
 
   @Input() song;
   @Input() login;
@@ -287,5 +284,9 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
       type: '',
       ws: this.ws
     };
+  }
+
+  showHelp() {
+    this.exitRouter.navigate(['/todo/info']);
   }
 }

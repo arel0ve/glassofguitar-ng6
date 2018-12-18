@@ -14,23 +14,12 @@
     </div>
 
     <div class="action-menu">
-      <div class="hat-btn">
-        <i class="large material-icons start" (click)="streamStart()" *ngIf="login === user && !ws">voice_chat</i>
-        <i class="large material-icons start" (click)="streamPlay()" *ngIf="login !== user && !ws">tv</i>
-        <i class="large material-icons stop" (click)="streamStop()" *ngIf="ws">videocam_off</i>
-      </div>
+      <i class="large material-icons start" (click)="streamStart()" *ngIf="login === user && !ws">voice_chat</i>
+      <i class="large material-icons start" (click)="streamPlay()" *ngIf="login !== user && !ws">tv</i>
+      <i class="large material-icons stop" (click)="streamStop()" *ngIf="ws">videocam_off</i>
 
-      <a class="hat-btn" routerLink="/todo/info" appHoversvg>
-        <svg version="1.1" width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-          <text id="helpTxt" x="10" y="25">
-            <tspan id="helpSpan">
-              ?
-            </tspan>
-          </text>
-        </svg>
-      </a>
-
-      <fa-icon [icon]="faArrowsAlt"></fa-icon>
+      <i class="large material-icons action" (click)="showHelp()">help_outline</i>
+      <i class="large material-icons action">fullscreen</i>
     </div>
 
   </div>

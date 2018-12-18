@@ -90,8 +90,11 @@
   color: rgb(54, 61, 63);
 }
 
-.action-menu i, fa-icon {
+i {
   cursor: pointer;
+}
+
+.action-menu i {
   padding: 0 5px;
   margin-top: 5px;
   &.start {
@@ -101,6 +104,10 @@
   &.stop {
     text-shadow: 0 0 3px rgba(254, 27, 77, .7);
     color: rgb(177, 77, 72);
+  }
+  &.action {
+    text-shadow: 0 0 3px rgba(81, 177, 254, .7);
+    color: rgb(63, 107, 172);
   }
 }
 
@@ -132,12 +139,29 @@
   }
 }
 
+@keyframes btn-show-action {
+  0% {
+    color: rgb(63, 107, 172);
+  }
+
+  50% {
+    color: rgb(107, 214, 254);
+  }
+
+  100% {
+    color: rgb(81, 154, 227);
+  }
+}
+
 .action-menu i:hover {
   &.start {
     animation: btn-show-start 1.2s forwards;
   }
   &.stop {
     animation: btn-show-stop 1.2s forwards;
+  }
+  &.action {
+    animation: btn-show-action 1.2s forwards;
   }
 }
 
@@ -147,6 +171,9 @@
   }
   &.stop {
     color: rgb(127, 42, 54);
+  }
+  &.action {
+    color: rgb(54, 72, 127);
   }
 }
 
@@ -174,27 +201,6 @@
 .song-title strong {
   color: rgb(127, 142, 154);
   font-weight: 200;
-}
-
-.hat-btn {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  margin: 0 2px;
-}
-
-#helpSpan {
-  font-size: 25px;
-  stroke-opacity: .3;
-  fill-opacity: .5;
-  user-select: none;
-}
-
-#fullScr {
-  stroke-opacity: .3;
 }
 
 .bar {
