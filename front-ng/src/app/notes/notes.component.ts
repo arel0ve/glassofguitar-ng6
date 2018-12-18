@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {SaveSongService} from '../api/save-song/save-song.service';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {FullscreenService} from '../services/fullscreen/fullscreen.service';
 
 @Component({
   selector: 'app-notes',
@@ -43,6 +44,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
       private exitRouter: Router,
       private router: ActivatedRoute,
       private saveSongService: SaveSongService,
+      private fullscreenService: FullscreenService
   ) { }
 
   ngOnInit() {
@@ -288,5 +290,9 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
 
   showHelp() {
     this.exitRouter.navigate(['/todo/info']);
+  }
+
+  goFullscreen() {
+    this.fullscreenService.guitar$.next(true);
   }
 }

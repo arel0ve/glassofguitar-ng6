@@ -1,4 +1,4 @@
-<div #guitar class="wrapper" tabindex="0"
+<div #guitar [class.wrapper]="!fullscreen" [class.full-wrapper]="fullscreen" tabindex="0"
      appCapoKeyboard appChordKeyboard appStringsKeyboard appPreventDefaultKeyboard
      appGuitarMouse appPreventDefaultMouse (click)="guitar.focus()">
   <canvas #guitarCanv class="guitar-canv"></canvas>
