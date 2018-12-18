@@ -38,4 +38,8 @@ export class GuitarComponent implements OnInit {
       }, 15);
     });
   }
+
+  exitFullscreen() {
+    this.fullscreenService.guitar$.next(false);
+  }
 }

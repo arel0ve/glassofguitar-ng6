@@ -49,3 +49,36 @@
     z-index: 120;
   }
 }
+
+@keyframes btn-show-action {
+  0% {
+    color: rgb(63, 107, 172);
+  }
+
+  50% {
+    color: rgb(107, 214, 254);
+  }
+
+  100% {
+    color: rgb(81, 154, 227);
+  }
+}
+
+i {
+  position: fixed;
+  z-index: 150;
+  top: 12px;
+  left: 12px;
+  font-size: 24px;
+  border-radius: 50%;
+  background-color: #1b151b;
+  box-shadow: 0 0 12px #150e1b;
+  text-shadow: 0 0 3px rgba(81, 177, 254, .7);
+  color: rgb(63, 107, 172);
+  &:hover {
+    animation: btn-show-action 1.2s forwards;
+  }
+  &:active {
+    color: rgb(54, 72, 127);
+  }
+}
