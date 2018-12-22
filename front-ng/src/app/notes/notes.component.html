@@ -8,11 +8,6 @@
       <i class="large material-icons" (click)="stop()">replay</i>
     </div>
 
-    <div class="song-title">
-      <b>{{ song.artist }}</b>&nbsp;-&nbsp;<b>{{ song.title }}</b>&nbsp;by&nbsp;<strong>{{ song.name }}</strong>
-      {{ song.tag !== '' ? '(' + song.tag + ')': '' }}
-    </div>
-
     <div class="action-menu">
       <i class="large material-icons start" (click)="streamStart()" *ngIf="login === user && !ws">voice_chat</i>
       <i class="large material-icons start" (click)="streamPlay()" *ngIf="login !== user && !ws">tv</i>
@@ -20,8 +15,14 @@
 
       <i class="large material-icons action" (click)="showHelp()">help_outline</i>
       <i class="large material-icons action" (click)="goFullscreen()">fullscreen</i>
+      <i class="large material-icons action">library_music</i>
     </div>
 
+  </div>
+
+  <div class="song-title">
+    <b>{{ song.artist }}</b>&nbsp;-&nbsp;<b>{{ song.title }}</b>&nbsp;by&nbsp;<strong>{{ song.name }}</strong>
+    {{ song.tag !== '' ? '(' + song.tag + ')': '' }}
   </div>
 
   <div class="bar">
