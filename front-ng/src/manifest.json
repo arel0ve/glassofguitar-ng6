@@ -3,7 +3,7 @@
   "short_name": "guitar",
   "description": "Glass Of Guitar - playing guitar online and save your tabs",
   "background_color": "#362A31",
-  "theme_color": "#273554",
+  "theme_color": "#362A31",
   "display": "standalone",
   "start_url": "/?utm_source=homescreen",
   "icons": [

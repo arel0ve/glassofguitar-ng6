@@ -32,6 +32,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   selectedColumn: number;
   columns: HTMLDivElement[];
   successfulSaving: boolean;
+  fullscreen: boolean;
 
   ws: WebSocket;
 
@@ -55,6 +56,14 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
     this.denominator = 2;
     this.barLength = 16 / this.denominator * this.numerator;
     this.successfulSaving = null;
+
+    this.fullscreen = this.fullscreenService.guitar$.value;
+    this.fullscreenService.notes$.subscribe(isFullscreen => {
+      this.fullscreen = isFullscreen;
+      setTimeout(() => {
+        this.guitar.drawGuitar();
+      }, 15);
+    });
   }
 
   ngOnChanges() {
@@ -292,7 +301,15 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
     this.exitRouter.navigate(['/todo/info']);
   }
 
-  goFullscreen() {
+  goFullscreenGuitar() {
     this.fullscreenService.guitar$.next(true);
+  }
+
+  goFullscreenNotes() {
+    this.fullscreenService.notes$.next(true);
+  }
+
+  exitFullscreenNotes() {
+    this.fullscreenService.notes$.next(false);
   }
 }

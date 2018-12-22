@@ -39,7 +39,7 @@ export class GuitarComponent implements OnInit {
     });
   }
 
-  exitFullscreen() {
+  exitFullscreenGuitar() {
     this.fullscreenService.guitar$.next(false);
   }
 }

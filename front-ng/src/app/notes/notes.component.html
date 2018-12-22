@@ -1,4 +1,4 @@
-<div #notesBlock class="wrapper">
+<div #notesBlock class="wrapper" [class.regular-wrapper]="!fullscreen" [class.full-wrapper]="fullscreen">
 
   <div class="hat">
 
@@ -12,10 +12,13 @@
       <i class="large material-icons start" (click)="streamStart()" *ngIf="login === user && !ws">voice_chat</i>
       <i class="large material-icons start" (click)="streamPlay()" *ngIf="login !== user && !ws">tv</i>
       <i class="large material-icons stop" (click)="streamStop()" *ngIf="ws">videocam_off</i>
+    </div>
 
+    <div class="action-menu">
+      <i class="large material-icons action" (click)="goFullscreenGuitar()">fullscreen</i>
+      <i class="large material-icons action" *ngIf="!fullscreen" (click)="goFullscreenNotes()">library_music</i>
+      <i class="large material-icons action" *ngIf="fullscreen" (click)="exitFullscreenNotes()">fullscreen_exit</i>
       <i class="large material-icons action" (click)="showHelp()">help_outline</i>
-      <i class="large material-icons action" (click)="goFullscreen()">fullscreen</i>
-      <i class="large material-icons action">library_music</i>
     </div>
 
   </div>
