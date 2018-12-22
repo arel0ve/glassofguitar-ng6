@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ServiceWorkerModule} from '@angular/service-worker';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -22,6 +23,7 @@ import { TodoModule } from './todo/todo.module';
 import { TodoComponent } from './todo/todo.component';
 import {TodoDirective} from './todo/todo.directive';
 import {ServiceModule} from './api/service.module';
+import {environment} from '../environments/environment';
 import {
   AddsongComponent,
   AvatarComponent,
@@ -79,7 +81,8 @@ const appRoutes: Routes = [
     TodoModule,
     ServiceModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'})
+    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   entryComponents: [
     AddsongComponent,

@@ -55,7 +55,7 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.user = {
       isLogin: 'false',
-      hatColor: '#123456',
+      hatColor: '#273554',
     };
     this.song = {};
   }

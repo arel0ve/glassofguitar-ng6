@@ -5,8 +5,6 @@ import { Song } from './song';
 
 import { USERS } from './users-list';
 
-import {} from '../window';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
