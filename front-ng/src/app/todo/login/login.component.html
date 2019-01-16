@@ -2,10 +2,17 @@
   <fieldset id="autho-field">
     <legend>SIGN IN</legend>
     <div>
-      <button type="button" class="social-btn" (click)="doLoginWithGoogle()">Sign In with Google</button>
+      <button type="button" class="social-btn" (click)="doLoginWithGoogle()" [disabled]="loading">
+        Sign In with Google
+      </button>
     </div>
     <div>
-      <button type="button" class="social-btn" (click)="doLoginWithFacebook()">Sign In with Facebook</button>
+      <button type="button" class="social-btn" (click)="doLoginWithFacebook()" [disabled]="loading">
+        Sign In with Facebook
+      </button>
+    </div>
+    <div>
+      - OR -
     </div>
     <div>
       <label for="email">
@@ -26,9 +33,25 @@
       <div class="div-message"
            *ngIf="form.invalid; else elseLogin">Input data to required fields to continue sign in</div>
       <ng-template #elseLogin>
-        <button type="button" id="authoBtn" class="social-btn" (click)="doLoginWithEmailAndPassword($event)">Sign In with Email</button>
+        <button type="button" id="authoBtn" class="social-btn"
+                [disabled]="loading"
+                (click)="doLoginWithEmailAndPassword($event)">
+          Sign In with Email
+        </button>
       </ng-template>
     </div>
   </fieldset>
 </form>
+<div class="lds-css ng-scope loading-spinner" *ngIf="loading">
+  <div class="lds-gear" style="width: 100%; height: 100%">
+    <div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</div>
 

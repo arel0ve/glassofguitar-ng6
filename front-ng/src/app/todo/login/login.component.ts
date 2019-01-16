@@ -14,6 +14,7 @@ import {catchError, map, switchMap} from 'rxjs/operators';
 export class LoginComponent implements OnInit {
 
   message: string;
+  loading = false;
 
   form = new FormGroup({
     email: new FormControl(),
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit {
     fromPromise(this.afAuth.auth.getRedirectResult())
         .subscribe(result => {
           if (result.user) {
+            this.loading = true;
             name = result.user.providerData[0]['displayName'];
             email = result.user.providerData[0]['email'];
             photoUrl = result.user.providerData[0]['photoURL'];
@@ -48,8 +50,14 @@ export class LoginComponent implements OnInit {
                       return _throw(error);
                     })
                 ).subscribe(
-                    url => this.exitRouter.navigate([`/user/${url}/0`]),
-                    err => this.message = err.error);
+                    url => {
+                      this.loading = false;
+                      this.exitRouter.navigate([`/user/${url}/0`]);
+                    },
+                    err => {
+                      this.loading = false;
+                      this.message = err.error;
+                    });
           }
         });
   }
@@ -71,14 +79,17 @@ export class LoginComponent implements OnInit {
   }
 
   doLoginWithGoogle() {
+    this.loading = true;
     this.loginService.authGoogle();
   }
 
   doLoginWithFacebook() {
+    this.loading = true;
     this.loginService.authFacebook();
   }
 
   doLoginWithEmailAndPassword(e) {
+    this.loading = true;
     this.loginService.authEmailAndPassword({
       email: this.form.value.email,
       password: this.form.value.password
@@ -107,8 +118,14 @@ export class LoginComponent implements OnInit {
               return this.loginService.doLoginWithToken({ token, email });
             })
         ).subscribe(
-        url => this.exitRouter.navigateByUrl(`/user/${url}/0`),
-        err => this.message = err.error);
+        url => {
+          this.loading = false;
+          this.exitRouter.navigate([`/user/${url}/0`]);
+        },
+        err => {
+          this.loading = false;
+          this.message = err.error;
+        });
   }
 
 }
