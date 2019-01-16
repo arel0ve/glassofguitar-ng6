@@ -13,6 +13,8 @@ export class UserComponent implements OnInit, OnChanges {
   @ViewChild('userInfo') infoRef: ElementRef;
   @ViewChild('songs') songsRef: ElementRef;
 
+  imgSrc = '';
+
   constructor(private exitRouter: Router) { }
 
   ngOnInit() { }
@@ -21,6 +23,13 @@ export class UserComponent implements OnInit, OnChanges {
     if (this.user.birthday) {
       const bd = new Date(this.user.birthday);
       this.user.birthday = bd.toDateString();
+    }
+    if (!this.user.photo) {
+      this.imgSrc = '../../assets/photos/no-photo.png';
+    } else if (!this.user.photo.includes('https:')) {
+      this.imgSrc = `../../assets/photos/${this.user.photo}`;
+    } else {
+      this.imgSrc = this.user.photo;
     }
   }
 

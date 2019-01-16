@@ -1,31 +1,54 @@
 const express = require('express');
 const router = express.Router();
 
+const admin = require('firebase-admin');
+
+const serviceAccount = require('../bin/serviceAccountKey');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://glass-of-guitar.firebaseio.com"
+});
+
 const User = require('../models/user').User;
 
 router.post('/', login);
 
 async function login(req, res, next) {
-  let user = await User.findOne({ login: req.body.login });
+
+  if (!req.body.token) {
+    res.status(400).send('You have not token');
+    return;
+  }
+
+  const decodedToken = await admin.auth().verifyIdToken(req.body.token);
+  if (!decodedToken || !decodedToken.uid) {
+    res.status(400).send('Wrong token');
+    return;
+  }
+  const uid = decodedToken.uid;
+
+  let user = await User.findOne({ uid });
 
   if (!user) {
-    res.status(403).send(`User '${req.body.login}' is not founded!`);
+    let newUser = new User({
+      uid: uid,
+      email: req.body.email,
+      phone: req.body.phone,
+      name: req.body.name,
+      photoUrl: req.body.photoUrl
+    });
+
+    await newUser.save();
+    const login = newUser.login ? newUser.login : newUser._id.toString();
+    req.session.user = newUser._id;
+    res.status(200).send(login);
     return;
   }
 
-  if (!user.checkPassword(req.body.password)) {
-    res.status(402).send("Password is wrong!");
-    return;
-  }
-
-  if (!user.isVerify) {
-    res.status(403).send(`Your email (${user.email}) is not verified.<br>
-          Please, input verifying code from your email.`);
-    return;
-  }
-
-  req.session.user = user.login;
-  res.status(200).send(user.login);
+  const login = user.login ? user.login : user._id.toString();
+  req.session.user = user._id;
+  res.status(200).send(login);
 }
 
 module.exports = router;

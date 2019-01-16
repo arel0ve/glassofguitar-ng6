@@ -1,7 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormGroup, FormControl} from '@angular/forms';
+import {AngularFireAuth} from '@angular/fire/auth';
 import {LoginService} from '../../api/todo/login/login.service';
+import {from as fromPromise, throwError as _throw} from 'rxjs';
+import {catchError, map, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -13,17 +16,42 @@ export class LoginComponent implements OnInit {
   message: string;
 
   form = new FormGroup({
-    login: new FormControl(),
+    email: new FormControl(),
     password: new FormControl()
   });
 
   constructor(
       private exitRouter: Router,
       private loginService: LoginService,
+      private afAuth: AngularFireAuth
   ) { }
 
   ngOnInit() {
     this.message = '';
+    let name = '';
+    let email = '';
+    let photoUrl = '';
+    fromPromise(this.afAuth.auth.getRedirectResult())
+        .subscribe(result => {
+          if (result.user) {
+            name = result.user.providerData[0]['displayName'];
+            email = result.user.providerData[0]['email'];
+            photoUrl = result.user.providerData[0]['photoURL'];
+            fromPromise(result.user.getIdToken())
+                .pipe(
+                    switchMap((token: string) => {
+                      this.message = 'Authenticated with firebase successful';
+                      return this.loginService.doLoginWithToken({ token, name, email, photoUrl });
+                    }),
+                    catchError(error => {
+                      console.error('signInWithRedirect', error);
+                      return _throw(error);
+                    })
+                ).subscribe(
+                    url => this.exitRouter.navigate([`/user/${url}/0`]),
+                    err => this.message = err.error);
+          }
+        });
   }
 
   goReg() {
@@ -32,7 +60,7 @@ export class LoginComponent implements OnInit {
 
   doLogin(e) {
     this.loginService.doLogin({
-      login: this.form.value.login,
+      email: this.form.value.email,
       password: this.form.value.password
     }).subscribe(
         url => this.exitRouter.navigateByUrl(`/user/${url}/0`),
@@ -40,6 +68,47 @@ export class LoginComponent implements OnInit {
     );
 
     e.preventDefault();
+  }
+
+  doLoginWithGoogle() {
+    this.loginService.authGoogle();
+  }
+
+  doLoginWithFacebook() {
+    this.loginService.authFacebook();
+  }
+
+  doLoginWithEmailAndPassword(e) {
+    this.loginService.authEmailAndPassword({
+      email: this.form.value.email,
+      password: this.form.value.password
+    })
+        .subscribe(
+            res => this.authWithLoginAndPassword(res),
+            err => {
+              if (err.code === 'auth/user-not-found') {
+                this.loginService.regEmailAndPassword({
+                  email: this.form.value.email,
+                  password: this.form.value.password
+                })
+                    .subscribe(res => this.authWithLoginAndPassword(res));
+              }
+            });
+
+    e.preventDefault();
+  }
+
+  authWithLoginAndPassword(res) {
+    const email = res.user.email;
+    fromPromise(res.user.getIdToken())
+        .pipe(
+            switchMap((token: string) => {
+              this.message = 'Authenticated with firebase successful';
+              return this.loginService.doLoginWithToken({ token, email });
+            })
+        ).subscribe(
+        url => this.exitRouter.navigateByUrl(`/user/${url}/0`),
+        err => this.message = err.error);
   }
 
 }

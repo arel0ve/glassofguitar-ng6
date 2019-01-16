@@ -25,7 +25,7 @@ const postAvatarRouter = require('./routes/post-avatar');
 const queryRouter = require('./routes/search-query');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/guitar0', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/guitar2', {useNewUrlParser: true});
 
 const MongoStore = require('connect-mongo')(session);
 

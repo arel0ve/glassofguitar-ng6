@@ -1,40 +1,25 @@
-const crypto = require('crypto');
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let schema = new Schema({
-  login: {
+  uid: {
     type: String,
-    lowercase: true,
-    required: true,
     unique: true
   },
 
-  isVerify: {
-    type: Boolean,
-    default: false
-  },
-
-  verifyCode: {
-    type: String
+  login: {
+    type: String,
+    lowercase: true
   },
 
   email: {
     type: String,
-    lowercase: true,
-    required: true,
-    unique: true
+    lowercase: true
   },
 
-  hashedPassword: {
+  phone: {
     type: String,
-    required: true
-  },
-
-  salt: {
-    type: String,
-    required: true
+    lowercase: true
   },
 
   tag: {
@@ -43,10 +28,13 @@ let schema = new Schema({
 
   name: {
     type: String,
-    required: true
   },
 
   photo: {
+    type: String
+  },
+
+  photoUrl: {
     type: String
   },
 
@@ -86,20 +74,6 @@ let schema = new Schema({
   }]
 });
 
-schema.method('encryptPassword', function (password) {
-  return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
-});
-
-schema.virtual('password')
-    .set(function(password) {
-      this.__plainPassword = password;
-      this.salt = Math.random() + '';
-      this.hashedPassword = this.encryptPassword(password);
-    })
-    .get(function() {
-      return this.__plainPassword;
-    });
-
 schema.virtual('fullName')
     .set(function(fullName) {
       if (~fullName.indexOf('.')) {
@@ -115,10 +89,6 @@ schema.virtual('fullName')
       }
       return this.name
     });
-
-schema.methods.checkPassword = function(password) {
-  return this.encryptPassword(password) === this.hashedPassword;
-};
 
 schema.static('findByName', function (name, callback) {
   return this.find({ $where: `

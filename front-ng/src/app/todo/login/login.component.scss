@@ -32,12 +32,6 @@ input:invalid:not(:focus) {
   outline: 1px solid #f00;
 }
 
-.btn-div {
-  margin-top: 25px;
-  display: flex;
-  justify-content: space-between;
-}
-
 button {
   cursor: pointer;
   font-family: "Ubuntu Regular", sans-serif;
@@ -51,4 +45,19 @@ button {
 
 .div-message {
   margin-top: 1em;
+}
+
+.social-btn {
+  font-size: 1.2em;
+  border-radius: 5px;
+  width: 80%;
+  color: #3498db;
+  border: outset;
+  &:hover {
+    color: #2e7bb7;
+  }
+  &:active {
+    color: #246999;
+    border: inset;
+  }
 }

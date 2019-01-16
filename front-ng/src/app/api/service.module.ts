@@ -10,10 +10,15 @@ import {SearchQueryService} from './search-query/search-query.service';
 import {RegistrationService} from './todo/registration/registration.service';
 import {VerifyService} from './todo/verify/verify.service';
 import {AvatarService} from './todo/avatar/avatar.service';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../../environments/environment';
+import {AngularFireAuthModule} from '@angular/fire/auth';
 
 @NgModule({
   imports: [
     CommonModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     HttpClientModule,
   ],
   providers: [

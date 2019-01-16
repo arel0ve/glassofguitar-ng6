@@ -12,6 +12,11 @@ async function getUserByLogin(req, res, next) {
         .populate('songs', 'artist title author size speed notes _id');
 
     if (!user) {
+      user = await User.findById(req.params.login)
+          .populate('songs', 'artist title author size speed notes _id');
+    }
+
+    if (!user) {
       res.status(203).json(
           {
             title: 'GLASSOF-GUITAR: Play guitar online and write tabs free.',
@@ -73,6 +78,7 @@ async function getUserByLogin(req, res, next) {
     }
 
     let photo = (!user.photo || user.photo === "") ? "" : `../photos/users/${user.photo}`;
+    photo = !photo ? user.photoUrl : photo;
 
     let sendObj = {
       title: `${user.fullName}: Glassof-Guitar`,

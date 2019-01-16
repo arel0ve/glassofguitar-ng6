@@ -2,9 +2,15 @@
   <fieldset id="autho-field">
     <legend>SIGN IN</legend>
     <div>
-      <label for="login">
-        <span>Login:</span>
-        <input type="text" id="login" formControlName="login" #login required>
+      <button type="button" class="social-btn" (click)="doLoginWithGoogle()">Sign In with Google</button>
+    </div>
+    <div>
+      <button type="button" class="social-btn" (click)="doLoginWithFacebook()">Sign In with Facebook</button>
+    </div>
+    <div>
+      <label for="email">
+        <span>Email:</span>
+        <input type="email" id="email" formControlName="email" #email required>
       </label>
     </div>
     <div>
@@ -15,12 +21,12 @@
       </label>
     </div>
     <div class="div-message">{{ message }}</div>
-    <div class="btn-div">
-      <button type="button" id="showReg" class="new" (click)="goReg()">New Account</button>
+    <div>
+      <!--<button type="button" id="showReg" class="new" (click)="goReg()">New Account</button>-->
       <div class="div-message"
            *ngIf="form.invalid; else elseLogin">Input data to required fields to continue sign in</div>
       <ng-template #elseLogin>
-        <button type="submit" id="authoBtn" class="active-btn" (click)="doLogin($event)">Sign In</button>
+        <button type="button" id="authoBtn" class="social-btn" (click)="doLoginWithEmailAndPassword($event)">Sign In with Email</button>
       </ng-template>
     </div>
   </fieldset>

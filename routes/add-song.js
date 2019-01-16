@@ -13,7 +13,7 @@ async function addSong(req, res, next) {
   }
 
   try {
-    let user = await User.findOne({ login: req.session.user });
+    let user = await User.findById(req.session.user);
 
     if (!user) {
       res.status(404).send("Your login is not register in our database.");

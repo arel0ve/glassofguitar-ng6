@@ -8,7 +8,7 @@
   </div>
 
   <div class="user-photo">
-    <img src="../../assets/photos/{{ !user.photo || user.photo === '' ? 'no-photo.png' : user.photo }}"
+    <img [src]="imgSrc"
          alt="Guitarist avatar" class="main-menu-ico" (click)="showAvatar()">
   </div>
 
