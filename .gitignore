@@ -1,0 +1,8 @@
+node_modules
+.idea
+front-ng/node_modules
+front-ng/dist
+front-ng/coverage
+front-ng/GlassOfGuitarApp
+cordova
+bin/serviceAccountKey.json
