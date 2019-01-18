@@ -27,12 +27,71 @@ export class LoginService {
         });
   }
 
-  authGoogle() {
-    this.afAuth.auth.signInWithRedirect(new firebaseAuth.GoogleAuthProvider());
+  authWithRedirectGoogle() {
+    return this.authWithRedirect(new firebaseAuth.GoogleAuthProvider());
   }
 
-  authFacebook() {
-    this.afAuth.auth.signInWithRedirect(new firebaseAuth.FacebookAuthProvider());
+  authWithRedirectFacebook() {
+    return this.authWithRedirect(new firebaseAuth.FacebookAuthProvider());
+  }
+
+  authWithPopupGoogle() {
+    return this.authWithPopup(new firebaseAuth.GoogleAuthProvider());
+  }
+
+  authWithPopupFacebook() {
+    return this.authWithPopup(new firebaseAuth.FacebookAuthProvider());
+  }
+
+  private authWithRedirect(provider) {
+    let name = '';
+    let email = '';
+    let photoUrl = '';
+    let phone = '';
+    return fromPromise(this.afAuth.auth.signInWithRedirect(provider))
+        .pipe(
+            switchMap(() => fromPromise(this.afAuth.auth.getRedirectResult())),
+            map(res => {
+              name = res.user.providerData[0]['displayName'];
+              email = res.user.providerData[0]['email'];
+              photoUrl = res.user.providerData[0]['photoURL'];
+              phone = res.user.providerData[0]['phone'];
+              return res.user;
+            }),
+            switchMap(user => fromPromise(user.getIdToken())),
+            switchMap(token => this.doLoginWithToken({
+              token, email, name, phone, photoUrl
+            })),
+            catchError(err => {
+              console.log('signInWithRedirect', err);
+              return _throw(err);
+            })
+        );
+  }
+
+  private authWithPopup(provider) {
+    let name = '';
+    let email = '';
+    let photoUrl = '';
+    let phone = '';
+    return fromPromise(this.afAuth.auth.signInWithPopup(provider))
+        .pipe(
+            map(res => {
+              name = res.user.providerData[0]['displayName'];
+              email = res.user.providerData[0]['email'];
+              photoUrl = res.user.providerData[0]['photoURL'];
+              phone = res.user.providerData[0]['phone'];
+              return res.user;
+            }),
+            switchMap(user => fromPromise(user.getIdToken())),
+            switchMap(token => this.doLoginWithToken({
+              token, email, name, phone, photoUrl
+            })),
+            catchError(err => {
+              console.log('signInWithPopup', err);
+              return _throw(err);
+            })
+        );
   }
 
   authEmailAndPassword({ email, password }) {

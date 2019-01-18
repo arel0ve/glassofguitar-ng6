@@ -1,10 +1,9 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormGroup, FormControl} from '@angular/forms';
-import {AngularFireAuth} from '@angular/fire/auth';
 import {LoginService} from '../../api/todo/login/login.service';
-import {from as fromPromise, throwError as _throw} from 'rxjs';
-import {catchError, map, switchMap} from 'rxjs/operators';
+import {from as fromPromise} from 'rxjs';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -24,42 +23,11 @@ export class LoginComponent implements OnInit {
   constructor(
       private exitRouter: Router,
       private loginService: LoginService,
-      private afAuth: AngularFireAuth
+      private _ngZone: NgZone
   ) { }
 
   ngOnInit() {
     this.message = '';
-    let name = '';
-    let email = '';
-    let photoUrl = '';
-    fromPromise(this.afAuth.auth.getRedirectResult())
-        .subscribe(result => {
-          if (result.user) {
-            this.loading = true;
-            name = result.user.providerData[0]['displayName'];
-            email = result.user.providerData[0]['email'];
-            photoUrl = result.user.providerData[0]['photoURL'];
-            fromPromise(result.user.getIdToken())
-                .pipe(
-                    switchMap((token: string) => {
-                      this.message = 'Authenticated with firebase successful';
-                      return this.loginService.doLoginWithToken({ token, name, email, photoUrl });
-                    }),
-                    catchError(error => {
-                      console.error('signInWithRedirect', error);
-                      return _throw(error);
-                    })
-                ).subscribe(
-                    url => {
-                      this.loading = false;
-                      this.exitRouter.navigate([`/user/${url}/0`]);
-                    },
-                    err => {
-                      this.loading = false;
-                      this.message = err.error;
-                    });
-          }
-        });
   }
 
   goReg() {
@@ -80,12 +48,48 @@ export class LoginComponent implements OnInit {
 
   doLoginWithGoogle() {
     this.loading = true;
-    this.loginService.authGoogle();
+    if (window['cordova']) {
+      this._ngZone.runOutsideAngular(() => {
+        this.loginService.authWithRedirectGoogle().subscribe(
+            url => this.finishLogin(url),
+            err => this.errorLogin(err));
+      });
+    } else {
+      this._ngZone.runOutsideAngular(() => {
+        this.loginService.authWithPopupGoogle().subscribe(
+            url => this.finishLogin(url),
+            err => this.errorLogin(err));
+      });
+    }
   }
 
   doLoginWithFacebook() {
     this.loading = true;
-    this.loginService.authFacebook();
+    if (window['cordova']) {
+      this._ngZone.runOutsideAngular(() => {
+        this.loginService.authWithRedirectFacebook().subscribe(
+            url => this.finishLogin(url),
+            err => this.errorLogin(err));
+      });
+    } else {
+      this._ngZone.runOutsideAngular(() => {
+        this.loginService.authWithPopupFacebook().subscribe(
+            url => this.finishLogin(url),
+            err => this.errorLogin(err));
+      });
+    }
+  }
+
+  finishLogin(url) {
+    this.loading = false;
+    this._ngZone.run(() => {
+      this.exitRouter.navigate([`/user/${url}/0`]);
+    });
+  }
+
+  errorLogin(err) {
+    this.loading = false;
+    this.message = err.error;
   }
 
   doLoginWithEmailAndPassword(e) {
@@ -98,11 +102,18 @@ export class LoginComponent implements OnInit {
             res => this.authWithLoginAndPassword(res),
             err => {
               if (err.code === 'auth/user-not-found') {
+                this.message = 'Your email still not yet registered in database. Registering...';
                 this.loginService.regEmailAndPassword({
                   email: this.form.value.email,
                   password: this.form.value.password
                 })
                     .subscribe(res => this.authWithLoginAndPassword(res));
+              } else if (err.code === 'auth/wrong-password') {
+                this.loading = false;
+                this.message = 'Wrong password';
+              } else {
+                this.loading = false;
+                this.message = 'Something wrong. Please try again later';
               }
             });
 
@@ -118,14 +129,8 @@ export class LoginComponent implements OnInit {
               return this.loginService.doLoginWithToken({ token, email });
             })
         ).subscribe(
-        url => {
-          this.loading = false;
-          this.exitRouter.navigate([`/user/${url}/0`]);
-        },
-        err => {
-          this.loading = false;
-          this.message = err.error;
-        });
+        url => this.finishLogin(url),
+        err => this.errorLogin(err));
   }
 
 }
