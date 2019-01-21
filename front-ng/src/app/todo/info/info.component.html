@@ -1,20 +1,9 @@
 <div class="increased-text">
-  <p>
-    {{ 'info_guitar_must_be_in_focus' | translate }} <kbd>Tab</kbd>.
-  </p>
+  <p [innerHTML]=" 'info_guitar_must_be_in_focus' | translate "></p>
   <dl>
     <p>
-      <dt>Fingerboard</dt>
-    <dd>To draw chords on fingerboard you can use your keyboard next way:
-      <ul>
-        <li>Major simple chords - X: press and stay down <kbd>A</kbd>, <kbd>B</kbd>, <kbd>C</kbd>,
-          <kbd>D</kbd>, <kbd>E</kbd>, <kbd>F</kbd>, <kbd>G</kbd></li>
-        <li>Upper chords - X#: press and stay down <kbd>Shift</kbd>+... keys of simple chords.</li>
-        <li>Minor chords - Xm: press and stay down <kbd>Ctrl</kbd>+... keys of simple chords.</li>
-        <li>Dominant 7 chords - X7: press and stay down <kbd>Alt</kbd>+... keys of simple chords.</li>
-      </ul>
-      To create complex chord you can use all modified keys, such as you have to key down
-      <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>A</kbd> for creating A#m7 chord.
+      <dt>{{ 'fingerboard' | translate }}</dt>
+    <dd [innerHTML]=" 'info_draw_chord' | translate ">
     </dd>
     <dd>To make capo on fingerboard you have to press and release keys from <kbd>~</kbd> for capo 0 and
       <kbd>1</kbd>, <kbd>2</kbd> ... <kbd>+</kbd> for capo 1, 2 ... 12.
