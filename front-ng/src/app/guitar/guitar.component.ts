@@ -24,12 +24,16 @@ export class GuitarComponent implements OnInit {
     this.fullscreen = this.fullscreenService.guitar$.value;
     this.guitar = new Guitar(this.guitarCanvRef.nativeElement, this.stringsCanvRef.nativeElement, this.infoCanvRef.nativeElement);
 
-    this.guitar.drawGuitar();
-    this.guitarRef.nativeElement.focus();
-
     window.guitar = this.guitar;
 
     window.addEventListener('resize', () => this.guitar.drawGuitar());
+
+    window.addEventListener('load', () => {
+      this.guitar.loadSounds().then(() => {
+        this.guitar.drawGuitar();
+        this.guitarRef.nativeElement.focus();
+      });
+    });
 
     this.fullscreenService.guitar$.subscribe(isFullscreen => {
       this.fullscreen = isFullscreen;

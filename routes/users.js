@@ -12,8 +12,12 @@ async function getUserByLogin(req, res, next) {
         .populate('songs', 'artist title author size speed notes _id');
 
     if (!user) {
-      user = await User.findById(req.params.login)
-          .populate('songs', 'artist title author size speed notes _id');
+      try {
+        user = await User.findById(req.params.login)
+            .populate('songs', 'artist title author size speed notes _id');
+      } catch (e) {
+        user = null;
+      }
     }
 
     if (!user) {

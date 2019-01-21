@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {WorkspaceComponent} from './workspace/workspace.component';
-import {TodoComponent} from './todo/todo.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: WorkspaceComponent
+    loadChildren: './workspace/workspace.module#WorkspaceModule'
   },
   {
     path: 'user/:user',
@@ -15,11 +14,11 @@ const routes: Routes = [
   },
   {
     path: 'user/:user/:song',
-    component: WorkspaceComponent
+    loadChildren: './workspace/workspace.module#WorkspaceModule'
   },
   {
     path: 'todo/:mode',
-    component: TodoComponent,
+    loadChildren: './todo/todo.module#TodoModule',
     runGuardsAndResolvers: 'always'
   },
 ];

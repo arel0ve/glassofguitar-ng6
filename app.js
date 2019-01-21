@@ -82,7 +82,7 @@ app.use('/api/postavatar', postAvatarRouter);
 app.use('/api/query', queryRouter);
 
 app.use(function (req, res, next) {
-  res.set('Cache-Control', 'public, max-age=31557600');
+  // res.set('Cache-Control', 'public, max-age=31557600');
   next();
 });
 

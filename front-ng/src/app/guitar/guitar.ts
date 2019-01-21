@@ -174,12 +174,6 @@ export class Guitar {
         });
     }
 
-    if (this.__sounds.length < 7) {
-      for (let i = 0; i < 45; i++) {
-        this.__sounds[i] = new Sound(`../assets/sounds/${i}.mp3`);
-      }
-    }
-
     this.clearGuitar()
       .then(() => {
         return this.drawSoundBoard();
@@ -204,15 +198,6 @@ export class Guitar {
       })
       .then(() => {
         return this.drawInfoCanv();
-      })
-      .then(() => {
-        if (!this.__speedPlayAll) {
-          this.volume = 90;
-          this.speed = 90;
-        } else {
-          this.volume = this.volume;
-          this.speed = this.speed;
-        }
       });
   }
 
@@ -374,6 +359,24 @@ export class Guitar {
     this.__user = newUser;
   }
 
+
+  loadSounds() {
+    return new Promise(resolve => {
+      if (this.__sounds.length < 7) {
+        for (let i = 0; i < 45; i++) {
+          this.__sounds[i] = new Sound(`../assets/sounds/${i}.mp3`);
+        }
+      }
+      if (!this.__speedPlayAll) {
+        this.volume = 90;
+        this.speed = 90;
+      } else {
+        this.volume = this.volume;
+        this.speed = this.speed;
+      }
+      resolve();
+    });
+  }
 
   clearGuitar(height = this.__guitarCanv.height, width = this.__guitarCanv.width) {
     return new Promise((resolve) => {
