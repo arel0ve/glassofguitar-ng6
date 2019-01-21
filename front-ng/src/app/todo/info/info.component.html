@@ -1,28 +1,20 @@
 <div class="increased-text">
   <p [innerHTML]=" 'info_guitar_must_be_in_focus' | translate "></p>
   <dl>
-    <p>
-      <dt>{{ 'fingerboard' | translate }}</dt>
-    <dd [innerHTML]=" 'info_draw_chord' | translate ">
-    </dd>
-    <dd>To make capo on fingerboard you have to press and release keys from <kbd>~</kbd> for capo 0 and
-      <kbd>1</kbd>, <kbd>2</kbd> ... <kbd>+</kbd> for capo 1, 2 ... 12.
-      Second press on one key take off capo from fingerboard.</dd>
-    <dd>Also you can press any string with <kbd>Left&nbsp;🖰&nbsp;click</kbd>.
-      Second click on one place on fingerboard release string that has pressed early.</dd>
-    <dd><kbd>Right&nbsp;🖰&nbsp;click</kbd> press chord on string and play it.</dd>
-    <dd><kbd>Middle&nbsp;🖰&nbsp;click</kbd> just play open string.</dd>
-    <dd>Press <kbd>Delete</kbd> or <kbd>Backspace</kbd> to clear fingerboard and release all strings.</dd>
-    </p>
-    <p>
-      <dt>Soundboard</dt>
+    <dt>{{ 'fingerboard' | translate }}</dt>
+    <dd [innerHTML]=" 'info_draw_chord' | translate "></dd>
+    <dd [innerHTML]=" 'info_draw_capo' | translate "></dd>
+    <dd [innerHTML]=" 'info_left_click_string_fingerboard' | translate "></dd>
+    <dd [innerHTML]=" 'info_right_click_string_fingerboard' | translate "></dd>
+    <dd [innerHTML]=" 'info_middle_click_string_fingerboard' | translate "></dd>
+    <dd [innerHTML]=" 'info_press_delete_fingerboard' | translate "></dd>
+    <dt>Soundboard</dt>
     <dd>You can play strings on soundboard with keyboard's and mouse's key like on fingerboard.</dd>
     <dd><kbd>Any&nbsp;🖰&nbsp;click</kbd> on soundboard play selected string with pressed chord.</dd>
     <dd>For playing all strings to down with selected speed you have to press <kbd>↓</kbd>.</dd>
     <dd>For playing all strings to up with selected speed you have to press <kbd>↑</kbd>.</dd>
     <dd>For playing just one string with keyboard you have to press one of next keys:
       <kbd>p</kbd>, <kbd>o</kbd>, <kbd>i</kbd>, <kbd>l</kbd>, <kbd>k</kbd>, <kbd>m</kbd>.</dd>
-    </p>
     <p>
       <dt>Areas with volume and speed</dt>
     <dd>For change volume you have to turn up or down <kbd>🖰&nbsp;wheel</kbd> on free area above fingerboard.
