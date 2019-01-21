@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   goReg() {
-    this.exitRouter.navigateByUrl('/todo/reg');
+    this.exitRouter.navigate(['/todo/reg']);
   }
 
   doLogin(e) {
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       email: this.form.value.email,
       password: this.form.value.password
     }).subscribe(
-        url => this.exitRouter.navigateByUrl(`/user/${url}/0`),
+        url => this.exitRouter.navigate([`/user/${url}/0`]),
         err => this.message = err.error
     );
 

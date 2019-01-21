@@ -26,14 +26,9 @@ async function getUserByLogin(req, res, next) {
             title: 'GLASSOF-GUITAR: Play guitar online and write tabs free.',
             hatColor: '#51907F',
             isLogin: !!req.session.user ? "true" : "false",
-            currentLogin: req.session.user,
             login: "/",
-            tag: "Developer",
             name: "Valerii Psol",
             birthday: new Date(1994, 7, 18),
-            place: "Andriivka, Berdiansk region",
-            country: "Ukraine",
-            biography: "",
             songs: [{
               artist: 'Ludwig van Beethoven',
               title: 'Für Elise',
@@ -72,15 +67,6 @@ async function getUserByLogin(req, res, next) {
       return;
     }
 
-    let bio = user.biography;
-
-    if (!bio) bio = "";
-
-    if (bio.length > 240) {
-      bio = bio.slice(0, 237);
-      bio += "...";
-    }
-
     let photo = (!user.photo || user.photo === "") ? "" : `../photos/users/${user.photo}`;
     photo = !photo ? user.photoUrl : photo;
 
@@ -88,15 +74,9 @@ async function getUserByLogin(req, res, next) {
       title: `${user.fullName}: Glassof-Guitar`,
       hatColor: user.hatColor,
       isLogin: !!req.session.user ? "true" : "false",
-      currentLogin: req.session.user,
       login: `/${user.login}`,
-      tag: user.tag,
       name: user.name,
       photo: photo,
-      birthday: user.birthday,
-      place: user.place,
-      country: user.country,
-      biography: bio,
       songs: [],
       songArtist: '',
       songTitle: '',

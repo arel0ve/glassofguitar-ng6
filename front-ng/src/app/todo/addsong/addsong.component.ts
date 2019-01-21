@@ -37,7 +37,7 @@ export class AddsongComponent implements OnInit {
       artist: this.form.value.artist,
       song: this.form.value.song
     }).subscribe(
-        url => this.exitRouter.navigateByUrl(`/user/${url}`),
+        url => this.exitRouter.navigate([`/user/${url}`]),
         err => this.message = err.error
     );
   }

@@ -20,10 +20,6 @@ export class UserComponent implements OnInit, OnChanges {
   ngOnInit() { }
 
   ngOnChanges() {
-    if (this.user.birthday) {
-      const bd = new Date(this.user.birthday);
-      this.user.birthday = bd.toDateString();
-    }
     if (!this.user.photo) {
       this.imgSrc = '../../assets/photos/no-photo.png';
     } else if (!this.user.photo.includes('https:')) {
@@ -33,17 +29,9 @@ export class UserComponent implements OnInit, OnChanges {
     }
   }
 
-  enterInfo() {
-    this.songsRef.nativeElement.classList.add('user-track-list-down');
-  }
-
-  leaveInfo() {
-    this.songsRef.nativeElement.classList.remove('user-track-list-down');
-  }
-
   showAvatar() {
     if (this.user['currentLogin']) {
-      this.exitRouter.navigateByUrl('/todo/avatar');
+      this.exitRouter.navigate(['/todo/avatar']);
     }
   }
 }

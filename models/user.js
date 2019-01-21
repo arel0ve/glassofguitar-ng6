@@ -22,10 +22,6 @@ let schema = new Schema({
     lowercase: true
   },
 
-  tag: {
-    type: String
-  },
-
   name: {
     type: String,
   },
@@ -40,22 +36,6 @@ let schema = new Schema({
 
   numberPhoto: {
     type: Number
-  },
-
-  birthday: {
-    type: Date
-  },
-
-  place: {
-    type: String
-  },
-
-  country: {
-    type: String
-  },
-
-  biography: {
-    type: String
   },
 
   hatColor: {

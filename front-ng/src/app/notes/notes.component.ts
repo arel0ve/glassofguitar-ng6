@@ -86,7 +86,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   addSong() {
-    this.exitRouter.navigateByUrl(`/todo/addsong`);
+    this.exitRouter.navigate([`/todo/addsong`]);
   }
 
   play() {

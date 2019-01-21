@@ -3,6 +3,7 @@ import {fromEvent} from 'rxjs';
 import {SearchQueryService} from '../api/search-query/search-query.service';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {ShowModeService} from '../services/show-mode/show-mode.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-menu',
@@ -31,7 +32,6 @@ import {ShowModeService} from '../services/show-mode/show-mode.service';
 })
 export class MenuComponent implements OnInit, OnChanges {
 
-  @Input() login;
   @Input() isLogin;
   @Input() menuColor;
 
@@ -42,8 +42,11 @@ export class MenuComponent implements OnInit, OnChanges {
   loginLink: string;
   foundSongs: any[];
 
-  constructor(private searchQueryService: SearchQueryService,
-              private showModeService: ShowModeService) { }
+  constructor(
+      private searchQueryService: SearchQueryService,
+      private showModeService: ShowModeService,
+      private exitRouter: Router
+  ) { }
 
   ngOnInit() {
     this.showSearch = false;
@@ -87,5 +90,9 @@ export class MenuComponent implements OnInit, OnChanges {
     } else {
       this.showModeService.mode$.next('workspace');
     }
+  }
+
+  goToHome() {
+    this.exitRouter.navigate(['/']);
   }
 }

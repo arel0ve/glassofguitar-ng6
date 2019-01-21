@@ -75,7 +75,6 @@ app.use('/api/logout', logoutRouter);
 app.use('/api/addsong', addSongRouter);
 app.use('/api/savesong', saveSongRouter);
 
-// app.use('/b', biographyRouter);
 app.use('/api/getavatar', getAvatarRouter);
 app.use('/api/postavatar', postAvatarRouter);
 

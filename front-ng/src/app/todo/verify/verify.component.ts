@@ -31,7 +31,7 @@ export class VerifyComponent implements OnInit {
       password: this.form.value.password,
       verifyCode: this.form.value.verifyCode
     }).subscribe(
-        url => this.exitRouter.navigateByUrl(`/user/${url}/0`),
+        url => this.exitRouter.navigate([`/user/${url}/0`]),
         err => this.message = err.error
     );
 

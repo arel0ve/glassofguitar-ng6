@@ -47,7 +47,7 @@ export class RegistrationComponent implements OnInit {
       country: this.form.value.country,
       hatColor: this.form.value.hatColor
     }).subscribe(
-        url => this.exitRouter.navigateByUrl(`/user/${url}/0`),
+        url => this.exitRouter.navigate([`/user/${url}/0`]),
         err => this.message = err.error
     );
 
