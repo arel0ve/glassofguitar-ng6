@@ -82,7 +82,8 @@ export class LoginComponent implements OnInit {
 
   finishLogin(rez) {
     this.loading = false;
-    this.loginService.authInApp(rez.token);
+    rez = JSON.parse(rez);
+    this.loginService.authInApp(rez.uToken);
     this._ngZone.run(() => {
       this.exitRouter.navigate([`/user/${rez.login}/0`]);
     });

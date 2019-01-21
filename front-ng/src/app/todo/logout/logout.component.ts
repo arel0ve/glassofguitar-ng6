@@ -17,7 +17,7 @@ export class LogoutComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.message = 'Are you sure want to quit from your account?';
+    this.message = 'confirm_logout';
   }
 
   close() {
@@ -27,7 +27,7 @@ export class LogoutComponent implements OnInit {
   logout() {
     this.logoutService.doLogout().subscribe(res => {
       if (res !== 'Ok!') {
-        this.message = 'Something wrong! Please press \'Log Out\' again...';
+        this.message = 'error_in_logout';
       } else {
         this.logoutService.authLogoutApp();
         this.location.back();

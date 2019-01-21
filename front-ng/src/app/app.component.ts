@@ -16,14 +16,13 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-   Window.prototype.guitar = null;
-   this.isLogin = false;
+    Window.prototype.guitar = null;
+    this.isLogin = false;
 
     this.translate.addLangs(['en', 'ru']);
     this.translate.setDefaultLang('en');
     this.translate.use('en');
     this.browserLang = this.translate.getBrowserLang();
-    console.log(this.browserLang);
     this.translate.use(this.browserLang.match(/en|ru/) ? this.browserLang : 'en');
   }
 }
