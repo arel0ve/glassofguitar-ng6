@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { TodoRoutingModule } from './todo-routing.module';
 import { TodoComponent } from './todo.component';
@@ -18,6 +19,7 @@ import {
 @NgModule({
   imports: [
     CommonModule,
+    TranslateModule.forChild(),
     ReactiveFormsModule,
     TodoRoutingModule
   ],
@@ -31,15 +33,6 @@ import {
     AvatarComponent,
     TodoComponent,
     TodoDirective,
-  ],
-  exports: [
-    AddsongComponent,
-    LoginComponent,
-    LogoutComponent,
-    RegistrationComponent,
-    VerifyComponent,
-    InfoComponent,
-    AvatarComponent
   ],
   entryComponents: [
     AddsongComponent,

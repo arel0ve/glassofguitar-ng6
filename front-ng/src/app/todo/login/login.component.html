@@ -1,42 +1,42 @@
 <form [formGroup]="form">
   <fieldset id="autho-field">
-    <legend>SIGN IN</legend>
+    <legend>{{ 'sign_in' | translate | uppercase }}</legend>
     <div>
       <button type="button" class="social-btn" (click)="doLoginWithGoogle()" [disabled]="loading">
-        Sign In with Google
+        {{ 'sign_in_with' | translate: {social: 'Google'} }}
       </button>
     </div>
     <div>
       <button type="button" class="social-btn" (click)="doLoginWithFacebook()" [disabled]="loading">
-        Sign In with Facebook
+        {{ 'sign_in_with' | translate: {social: 'Facebook'} }}
       </button>
     </div>
     <div>
-      - OR -
+      - {{ 'or' | translate | uppercase }} -
     </div>
     <div>
       <label for="email">
-        <span>Email:</span>
+        <span>{{ 'email' | translate }}:</span>
         <input type="email" id="email" formControlName="email" #email required>
       </label>
     </div>
     <div>
       <label for="password">
-        <span>Password:</span>
+        <span>{{ 'password' | translate }}:</span>
         <input type="password" id="password" formControlName="password" #password required autocomplete="current-password"
-               pattern="[0-9a-z]{6,}|[0-9A-Z]{6,}|[0-9a-zA-Z]{6,}" placeholder="min 6 chars, letters and numbers">
+               pattern="[0-9a-z]{6,}|[0-9A-Z]{6,}|[0-9a-zA-Z]{6,}" [placeholder]="'password_placeholder' | translate">
       </label>
     </div>
     <div class="div-message">{{ message }}</div>
     <div>
       <!--<button type="button" id="showReg" class="new" (click)="goReg()">New Account</button>-->
       <div class="div-message"
-           *ngIf="form.invalid; else elseLogin">Input data to required fields to continue sign in</div>
+           *ngIf="form.invalid; else elseLogin">{{ 'input_data_to_continue_sign_in' | translate }}</div>
       <ng-template #elseLogin>
         <button type="button" id="authoBtn" class="social-btn"
                 [disabled]="loading"
                 (click)="doLoginWithEmailAndPassword($event)">
-          Sign In with Email
+          {{ 'sign_in_with' | translate: {social: 'E-mail'} }}
         </button>
       </ng-template>
     </div>

@@ -1,26 +1,30 @@
 <form [formGroup]="form">
   <fieldset id="add-song-field">
-    <legend>ADD SONG</legend>
+    <legend>{{ 'add_song' | translate | uppercase }}</legend>
     <div>
       <label for="artist">
-        <span>Artist:</span>
+        <span>{{ 'artist' | translate }}:</span>
         <input type="text" id="artist" formControlName="artist" #artist required>
       </label>
     </div>
     <div>
       <label for="song">
-        <span>Song title:</span>
+        <span>{{ 'title' | translate }}:</span>
         <input type="text" id="song" formControlName="song" #song required>
       </label>
     </div>
     <div class="div-message">{{ message }}</div>
     <div class="btn-div">
       <div class="div-message"
-           *ngIf="form.invalid; else elseLogin">Input data to required fields to continue creating</div>
+           *ngIf="form.invalid; else elseLogin">{{ 'input_data_to_continue_creating_song' | translate }}</div>
       <ng-template #elseLogin>
-        <button type="submit" id="createBtn" class="active-btn" (click)="doCreate($event)">Create</button>
+        <button type="submit" id="createBtn" class="active-btn" (click)="doCreate($event)">
+          {{ 'create' | translate}}
+        </button>
       </ng-template>
-      <button type="submit" id="cancel" class="active-btn" (click)="close()">Cancel</button>
+      <button type="submit" id="cancel" class="active-btn" (click)="close()">
+        {{ 'cancel' | translate }}
+      </button>
     </div>
   </fieldset>
 </form>

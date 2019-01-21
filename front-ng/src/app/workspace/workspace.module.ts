@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { MenuComponent } from '../menu/menu.component';
 import { UserComponent } from '../user/user.component';
@@ -15,8 +16,7 @@ import { NotesComponent } from '../notes/notes.component';
 import { ChangedNotesDirective } from '../notes/changed.notes.directive';
 import { HoversvgDirective } from '../notes/hoversvg.directive';
 import { WorkspaceComponent } from './workspace.component';
-import {WorkspaceRoutingModule} from './workspace-routing.module';
-import {CommonModule} from '@angular/common';
+import { WorkspaceRoutingModule } from './workspace-routing.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,8 @@ import {CommonModule} from '@angular/common';
   ],
   imports: [
     CommonModule,
-    WorkspaceRoutingModule
+    WorkspaceRoutingModule,
+    TranslateModule.forChild()
   ]
 })
 export class WorkspaceModule { }

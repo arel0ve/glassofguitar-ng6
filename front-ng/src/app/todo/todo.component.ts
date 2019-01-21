@@ -44,31 +44,31 @@ export class TodoComponent implements OnInit, OnDestroy {
       this.mode = value.mode;
       switch (this.mode) {
         case 'login':
-          this.todoTitle = 'Authorization';
+          this.todoTitle = 'authorization';
           this.currentComponent = LoginComponent;
           break;
         case 'logout':
-          this.todoTitle = 'Quit';
+          this.todoTitle = 'quit';
           this.currentComponent = LogoutComponent;
           break;
         case 'reg':
-          this.todoTitle = 'Registration';
+          this.todoTitle = 'registration';
           this.currentComponent = RegistrationComponent;
           break;
         case 'verify':
-          this.todoTitle = 'Verification';
+          this.todoTitle = 'verification';
           this.currentComponent = VerifyComponent;
           break;
         case 'addsong':
-          this.todoTitle = 'New Song';
+          this.todoTitle = 'create';
           this.currentComponent = AddsongComponent;
           break;
         case 'info':
-          this.todoTitle = 'How to play';
+          this.todoTitle = 'how_to_play';
           this.currentComponent = InfoComponent;
           break;
         case 'avatar':
-          this.todoTitle = 'Avatar';
+          this.todoTitle = 'avatar';
           this.currentComponent = AvatarComponent;
           break;
         default:

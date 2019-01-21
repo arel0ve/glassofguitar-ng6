@@ -1,9 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-
-import { User } from './user';
-import { Song } from './song';
-
-import { USERS } from './users-list';
+import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -12,15 +8,22 @@ import { USERS } from './users-list';
 })
 export class AppComponent implements OnInit {
   isLogin: boolean;
-  user: User;
-  song: Song;
 
-  constructor() { }
+  public browserLang: string;
+
+  constructor(
+      public translate: TranslateService
+  ) { }
 
   ngOnInit() {
    Window.prototype.guitar = null;
-   this.user = USERS[0];
-   this.song = USERS[0].songs[0];
    this.isLogin = false;
+
+    this.translate.addLangs(['en', 'ru']);
+    this.translate.setDefaultLang('en');
+    this.translate.use('en');
+    this.browserLang = this.translate.getBrowserLang();
+    console.log(this.browserLang);
+    this.translate.use(this.browserLang.match(/en|ru/) ? this.browserLang : 'en');
   }
 }
