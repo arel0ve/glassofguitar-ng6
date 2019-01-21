@@ -29,6 +29,7 @@ export class LogoutComponent implements OnInit {
       if (res !== 'Ok!') {
         this.message = 'Something wrong! Please press \'Log Out\' again...';
       } else {
+        this.logoutService.authLogoutApp();
         this.location.back();
       }
     });

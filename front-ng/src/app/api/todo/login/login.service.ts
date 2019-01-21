@@ -116,4 +116,8 @@ export class LoginService {
           responseType: 'text'
         });
   }
+
+  authInApp(token) {
+    localStorage.setItem('uToken', token);
+  }
 }

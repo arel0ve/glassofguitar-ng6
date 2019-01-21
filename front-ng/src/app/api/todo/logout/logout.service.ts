@@ -34,4 +34,8 @@ export class LogoutService {
         }
     );
   }
+
+  authLogoutApp() {
+    localStorage.removeItem('uToken');
+  }
 }

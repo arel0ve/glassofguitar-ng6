@@ -80,10 +80,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  finishLogin(url) {
+  finishLogin(rez) {
     this.loading = false;
+    this.loginService.authInApp(rez.token);
     this._ngZone.run(() => {
-      this.exitRouter.navigate([`/user/${url}/0`]);
+      this.exitRouter.navigate([`/user/${rez.login}/0`]);
     });
   }
 
@@ -129,7 +130,7 @@ export class LoginComponent implements OnInit {
               return this.loginService.doLoginWithToken({ token, email });
             })
         ).subscribe(
-        url => this.finishLogin(url),
+        rez => this.finishLogin(rez),
         err => this.errorLogin(err));
   }
 

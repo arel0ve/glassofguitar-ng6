@@ -17,13 +17,19 @@ router.post('/', login);
 async function login(req, res, next) {
 
   if (!req.body.token) {
-    res.status(400).send('You have not token');
+    res.status(400).json({
+      status: 'err',
+      reason: 'You have not token'
+    });
     return;
   }
 
   const decodedToken = await admin.auth().verifyIdToken(req.body.token);
   if (!decodedToken || !decodedToken.uid) {
-    res.status(400).send('Wrong token');
+    res.status(400).json({
+      status: 'err',
+      reason: 'Wrong token'
+    });
     return;
   }
   const uid = decodedToken.uid;
@@ -42,13 +48,21 @@ async function login(req, res, next) {
     await newUser.save();
     const login = newUser.login ? newUser.login : newUser._id.toString();
     req.session.user = newUser._id;
-    res.status(200).send(login);
+    res.status(200).json({
+      status: 'ok',
+      login,
+      uToken: req.body.token
+    });
     return;
   }
 
   const login = user.login ? user.login : user._id.toString();
   req.session.user = user._id;
-  res.status(200).send(login);
+  res.status(200).json({
+    status: 'ok',
+    login,
+    uToken: req.body.token
+  });
 }
 
 module.exports = router;
