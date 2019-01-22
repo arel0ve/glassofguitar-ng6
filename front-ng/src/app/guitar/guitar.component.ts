@@ -37,6 +37,15 @@ export class GuitarComponent implements OnInit {
 
     this.fullscreenService.guitar$.subscribe(isFullscreen => {
       this.fullscreen = isFullscreen;
+      if (this.fullscreen) {
+        if (window['cordova'].platformId === 'android' && window['StatusBar']) {
+          window['StatusBar'].hide();
+        }
+      } else {
+        if (window['cordova'].platformId === 'android' && window['StatusBar']) {
+          window['StatusBar'].show();
+        }
+      }
       setTimeout(() => {
         this.guitar.drawGuitar();
       }, 15);

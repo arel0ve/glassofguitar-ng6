@@ -60,6 +60,15 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
     this.fullscreen = this.fullscreenService.guitar$.value;
     this.fullscreenService.notes$.subscribe(isFullscreen => {
       this.fullscreen = isFullscreen;
+      if (this.fullscreen) {
+        if (window['cordova'].platformId === 'android' && window['StatusBar']) {
+          window['StatusBar'].hide();
+        }
+      } else {
+        if (window['cordova'].platformId === 'android' && window['StatusBar']) {
+          window['StatusBar'].show();
+        }
+      }
       setTimeout(() => {
         this.guitar.drawGuitar();
       }, 15);
