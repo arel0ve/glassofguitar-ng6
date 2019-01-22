@@ -1,5 +1,6 @@
 import { Sound } from '../sound';
 import { Animation } from '../animation';
+import * as chords from '../../assets/service/chords.json';
 
 export class Guitar {
   private __guitarCanv: HTMLCanvasElement;
@@ -138,6 +139,8 @@ export class Guitar {
     this.__user = null;
 
     this.class = Guitar;
+
+    this.__chordsList = chords;
   }
 
   drawGuitar(strings = [0, 1, 2, 3, 4, 5]) {
@@ -150,28 +153,6 @@ export class Guitar {
     if (!this.__guitarCanv.getContext) {
       this.__guitarCanv.innerHTML = 'Canvas is not founded!';
       return;
-    }
-
-    if (Object.keys(this.__chordsList).length < 50) {
-      fetch('assets/service/chords.json')
-        .then(response => {
-          return response.json();
-        })
-        .then(chords => {
-          this.__chordsList = chords;
-        })
-        .catch(e => {
-          this.__chordsList = {
-            A: '02220~',
-            B: '24442~',
-            C: '01023~',
-            D: '2320~~',
-            E: '001220',
-            F: '112331',
-            G: '300023'
-          };
-          console.log(e);
-        });
     }
 
     this.clearGuitar()
