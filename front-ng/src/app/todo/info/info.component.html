@@ -8,22 +8,19 @@
     <dd [innerHTML]=" 'info_right_click_string_fingerboard' | translate "></dd>
     <dd [innerHTML]=" 'info_middle_click_string_fingerboard' | translate "></dd>
     <dd [innerHTML]=" 'info_press_delete_fingerboard' | translate "></dd>
-    <dt>Soundboard</dt>
-    <dd>You can play strings on soundboard with keyboard's and mouse's key like on fingerboard.</dd>
-    <dd><kbd>Any&nbsp;🖰&nbsp;click</kbd> on soundboard play selected string with pressed chord.</dd>
-    <dd>For playing all strings to down with selected speed you have to press <kbd>↓</kbd>.</dd>
-    <dd>For playing all strings to up with selected speed you have to press <kbd>↑</kbd>.</dd>
-    <dd>For playing just one string with keyboard you have to press one of next keys:
-      <kbd>p</kbd>, <kbd>o</kbd>, <kbd>i</kbd>, <kbd>l</kbd>, <kbd>k</kbd>, <kbd>m</kbd>.</dd>
-    <p>
-      <dt>Areas with volume and speed</dt>
+    <dt>{{ 'soundboard' | translate }}</dt>
+    <dd [innerHTML]=" 'info_soundboard_play_strings' | translate "></dd>
+    <dd [innerHTML]=" 'info_soundboard_mouse_click' | translate "></dd>
+    <dd [innerHTML]=" 'info_soundboard_all_strings_down' | translate "></dd>
+    <dd [innerHTML]=" 'info_soundboard_all_strings_up' | translate "></dd>
+    <dd [innerHTML]=" 'info_soundboard_one_string' | translate "></dd>
+    <dt>Areas with volume and speed</dt>
     <dd>For change volume you have to turn up or down <kbd>🖰&nbsp;wheel</kbd> on free area above fingerboard.
       Min volume = 0%, max volume = 100%.</dd>
     <dd>For change speed of playing all strings you have to turn up or down
       <kbd>🖰&nbsp;wheel</kbd> on free area below fingerboard. Min speed means that it's delay 210 ms before
       playing next string, when playing all of it (when you press <kbd>↑</kbd> or <kbd>↓</kbd>).
       Max speed means that this delay is 10 ms. And 1% of speed changing is 2 ms delay.</dd>
-    </p>
   </dl>
   <hr>
 
