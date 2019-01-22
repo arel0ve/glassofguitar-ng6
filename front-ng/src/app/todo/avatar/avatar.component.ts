@@ -15,11 +15,11 @@ export class AvatarComponent implements OnInit {
   constructor(private avatarService: AvatarService, private location: Location) { }
 
   ngOnInit() {
-    this.photoUrl = 'url(../../../assets/photos/no-photo.png)';
+    this.photoUrl = 'url(assets/photos/no-photo.png)';
     this.avatarService.getAvatar()
         .subscribe(
             value => this.photoUrl = `url(${value['photo']})`,
-            () => this.photoUrl = 'url(../../../assets/photos/no-photo.png)');
+            () => this.photoUrl = 'url(assets/photos/no-photo.png)');
   }
 
   loadAvatar(event: Event) {
