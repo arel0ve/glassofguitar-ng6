@@ -38,10 +38,12 @@ export class TodoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (window['cordova'].platformId === 'android' && window['StatusBar']) {
+    if (window['cordova'] && window['cordova'].platformId === 'android' && window['StatusBar']) {
       window['StatusBar'].backgroundColorByHexString('#362A31');
     }
-    screen.orientation.lock('portrait-primary');
+    if (window['cordova']) {
+      screen.orientation.lock('portrait-primary');
+    }
   }
 
   initialiseInvites() {
@@ -94,7 +96,9 @@ export class TodoComponent implements OnInit, OnDestroy {
     if (this.navigationSubscription) {
       this.navigationSubscription.unsubscribe();
     }
-    screen.orientation.unlock();
+    if (window['cordova']) {
+      screen.orientation.unlock();
+    }
   }
 
   close() {

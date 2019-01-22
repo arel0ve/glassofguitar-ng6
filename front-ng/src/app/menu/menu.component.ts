@@ -3,7 +3,7 @@ import {fromEvent} from 'rxjs';
 import {SearchQueryService} from '../api/search-query/search-query.service';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {ShowModeService} from '../services/show-mode/show-mode.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -56,7 +56,7 @@ export class MenuComponent implements OnInit, OnChanges {
   ngOnChanges() {
     this.logClass = this.isLogin === 'true' ? 'log-out' : 'log-in';
     this.loginLink = this.isLogin === 'true' ? '/todo/logout' : '/todo/login';
-    if (window['cordova'].platformId === 'android' && window['StatusBar']) {
+    if (window['cordova'] && window['cordova'].platformId === 'android' && window['StatusBar']) {
       window['StatusBar'].backgroundColorByHexString(this.menuColor);
     }
   }

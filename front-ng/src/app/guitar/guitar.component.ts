@@ -37,13 +37,23 @@ export class GuitarComponent implements OnInit, OnDestroy {
     this.fullscreenService.guitar$.subscribe(isFullscreen => {
       this.fullscreen = isFullscreen;
       if (this.fullscreen) {
-        if (window['cordova'].platformId === 'android' && window['StatusBar']) {
-          window['StatusBar'].hide();
+        if (window['cordova'] && window['cordova'].platformId === 'android' && window['AndroidFullScreen']) {
+          // window['StatusBar'].hide();
+          window['AndroidFullScreen'].isImmersiveModeSupported(
+              () => {
+                window['AndroidFullScreen'].immersiveMode();
+                },
+              () => {
+                window['AndroidFullScreen'].leanMode();
+              }
+              );
           screen.orientation.lock('landscape');
         }
       } else {
-        if (window['cordova'].platformId === 'android' && window['StatusBar']) {
-          window['StatusBar'].show();
+        if (window['cordova'] && window['cordova'].platformId === 'android' && window['AndroidFullScreen']) {
+          // window['StatusBar'].show();
+          window['AndroidFullScreen'].showSystemUI();
+          screen.orientation.lock('portrait-primary');
           screen.orientation.unlock();
         }
       }
@@ -54,7 +64,9 @@ export class GuitarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    screen.orientation.unlock();
+    if (window['cordova'] && window['cordova'].platformId === 'android') {
+      screen.orientation.unlock();
+    }
   }
 
   exitFullscreenGuitar() {
