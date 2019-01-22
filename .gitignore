@@ -4,5 +4,7 @@ front-ng/node_modules
 front-ng/dist
 front-ng/coverage
 front-ng/GlassOfGuitarApp
-cordova
+cordova/node_modules
+cordova/platforms
+cordova/www
 bin/serviceAccountKey.json

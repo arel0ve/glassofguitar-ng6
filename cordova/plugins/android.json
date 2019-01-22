@@ -1,0 +1,50 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-browsertab": {
+      "PACKAGE_NAME": "com.glassof.guitar"
+    },
+    "cordova-plugin-buildinfo": {
+      "PACKAGE_NAME": "com.glassof.guitar"
+    },
+    "cordova-plugin-customurlscheme": {
+      "URL_SCHEME": "com.firebase.cordova",
+      "ANDROID_SCHEME": " ",
+      "ANDROID_HOST": " ",
+      "ANDROID_PATHPREFIX": "/",
+      "PACKAGE_NAME": "com.glassof.guitar"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.glassof.guitar"
+    },
+    "cordova-universal-links-plugin": {
+      "PACKAGE_NAME": "com.glassof.guitar"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.glassof.guitar"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.glassof.guitar"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.glassof.guitar"
+    },
+    "cordova-plugin-screen-orientation": {
+      "PACKAGE_NAME": "com.glassof.guitar"
+    },
+    "cordova-plugin-fullscreen": {
+      "PACKAGE_NAME": "com.glassof.guitar"
+    }
+  },
+  "dependent_plugins": {
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.glassof.guitar"
+    }
+  }
+}
