@@ -153,7 +153,7 @@ export class Guitar {
     }
 
     if (Object.keys(this.__chordsList).length < 50) {
-      fetch('../assets/service/chords.json')
+      fetch('assets/service/chords.json')
         .then(response => {
           return response.json();
         })
@@ -364,7 +364,7 @@ export class Guitar {
     return new Promise(resolve => {
       if (this.__sounds.length < 7) {
         for (let i = 0; i < 45; i++) {
-          this.__sounds[i] = new Sound(`../assets/sounds/${i}.mp3`);
+          this.__sounds[i] = new Sound(`assets/sounds/${i}.mp3`);
         }
       }
       if (!this.__speedPlayAll) {
@@ -406,7 +406,7 @@ export class Guitar {
 
       if (this.__soundBoardTexture === null) {
         this.__soundBoardTexture = document.createElement('img');
-        this.__soundBoardTexture.src = '../assets/textures/red-oak.jpg';
+        this.__soundBoardTexture.src = 'assets/textures/red-oak.jpg';
 
         this.__soundBoardTexture.addEventListener('load', () => {
           ctx.fillStyle = ctx.createPattern(this.__soundBoardTexture, 'repeat');
@@ -498,7 +498,7 @@ export class Guitar {
 
       if (this.__fingerBoardTexture === null) {
         this.__fingerBoardTexture = document.createElement('img');
-        this.__fingerBoardTexture.src = '../assets/textures/black-wood.jpg';
+        this.__fingerBoardTexture.src = 'assets/textures/black-wood.jpg';
 
         this.__fingerBoardTexture.addEventListener('load', () => {
           ctx.fillStyle = ctx.createPattern(this.__fingerBoardTexture, 'repeat');

@@ -21,9 +21,9 @@ export class UserComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     if (!this.user.photo) {
-      this.imgSrc = '../../assets/photos/no-photo.png';
+      this.imgSrc = 'assets/photos/no-photo.png';
     } else if (!this.user.photo.includes('https:')) {
-      this.imgSrc = `../../assets/photos/${this.user.photo}`;
+      this.imgSrc = `assets/photos/${this.user.photo}`;
     } else {
       this.imgSrc = this.user.photo;
     }

@@ -24,5 +24,9 @@ export class AppComponent implements OnInit {
     this.translate.use('en');
     this.browserLang = this.translate.getBrowserLang();
     this.translate.use(this.browserLang.match(/en|ru/) ? this.browserLang : 'en');
+
+    window.addEventListener('deviceorientation', e => {
+      console.log(e);
+    }, true);
   }
 }
