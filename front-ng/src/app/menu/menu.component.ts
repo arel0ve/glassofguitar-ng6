@@ -56,6 +56,9 @@ export class MenuComponent implements OnInit, OnChanges {
   ngOnChanges() {
     this.logClass = this.isLogin === 'true' ? 'log-out' : 'log-in';
     this.loginLink = this.isLogin === 'true' ? '/todo/logout' : '/todo/login';
+    if (window['cordova'].platformId === 'android' && window['StatusBar']) {
+      window['StatusBar'].backgroundColorByHexString(this.menuColor);
+    }
   }
 
   onShowSearch() {

@@ -37,7 +37,11 @@ export class TodoComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {  }
+  ngOnInit() {
+    if (window['cordova'].platformId === 'android' && window['StatusBar']) {
+      window['StatusBar'].backgroundColorByHexString('#362A31');
+    }
+  }
 
   initialiseInvites() {
     this.route.params.subscribe(value => {
