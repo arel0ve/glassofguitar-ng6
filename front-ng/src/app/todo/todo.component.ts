@@ -41,6 +41,7 @@ export class TodoComponent implements OnInit, OnDestroy {
     if (window['cordova'].platformId === 'android' && window['StatusBar']) {
       window['StatusBar'].backgroundColorByHexString('#362A31');
     }
+    screen.orientation.lock('portrait-primary');
   }
 
   initialiseInvites() {
@@ -93,6 +94,7 @@ export class TodoComponent implements OnInit, OnDestroy {
     if (this.navigationSubscription) {
       this.navigationSubscription.unsubscribe();
     }
+    screen.orientation.unlock();
   }
 
   close() {

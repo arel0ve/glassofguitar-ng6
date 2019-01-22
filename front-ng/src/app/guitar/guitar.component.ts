@@ -1,14 +1,13 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { Guitar } from './guitar';
-import {FullscreenService} from "../services/fullscreen/fullscreen.service";
-import {nextTick} from "q";
+import {FullscreenService} from '../services/fullscreen/fullscreen.service';
 
 @Component({
   selector: 'app-guitar',
   templateUrl: './guitar.component.html',
   styleUrls: ['./guitar.component.scss']
 })
-export class GuitarComponent implements OnInit {
+export class GuitarComponent implements OnInit, OnDestroy {
 
   @ViewChild('guitar') guitarRef: ElementRef;
   @ViewChild('guitarCanv') guitarCanvRef: ElementRef;
@@ -40,16 +39,22 @@ export class GuitarComponent implements OnInit {
       if (this.fullscreen) {
         if (window['cordova'].platformId === 'android' && window['StatusBar']) {
           window['StatusBar'].hide();
+          screen.orientation.lock('landscape');
         }
       } else {
         if (window['cordova'].platformId === 'android' && window['StatusBar']) {
           window['StatusBar'].show();
+          screen.orientation.unlock();
         }
       }
       setTimeout(() => {
         this.guitar.drawGuitar();
       }, 15);
     });
+  }
+
+  ngOnDestroy() {
+    screen.orientation.unlock();
   }
 
   exitFullscreenGuitar() {
