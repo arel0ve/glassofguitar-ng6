@@ -8,10 +8,9 @@ export class SaveSongService {
 
   constructor(private http: HttpService) { }
 
-  saveSong({user, songId, speed, size, notes}) {
+  saveSong({songId, speed, size, notes}) {
     return this.http.post('savesong',
         {
-          user,
           songId,
           speed,
           size,

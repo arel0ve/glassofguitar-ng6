@@ -11,8 +11,6 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const loginRouter = require('./routes/login');
-const regRouter = require('./routes/registr');
-const verRouter = require('./routes/verify');
 const logoutRouter = require('./routes/logout');
 
 const songRouter = require('./routes/song');
@@ -48,18 +46,6 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 app.set('trust proxy', 1);
-app.use(session({
-  secret: "balerion-2nd_dc",
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    httpOnly: false,
-    secure: false
-  },
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection
-  })
-}));
 
 app.use(busboy());
 
@@ -67,8 +53,6 @@ app.use('/', indexRouter);
 app.use('/api/song/', songRouter);
 app.use('/api/user/', usersRouter);
 
-app.use('/api/registration', regRouter);
-app.use('/api/verify', verRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/logout', logoutRouter);
 

@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const admin = require('firebase-admin');
+
 const User = require('../models/user').User;
 const Song = require('../models/song').Song;
 
@@ -64,39 +66,37 @@ async function getSong(req, res, next) {
 }
 
 async function addSong(req, res, next) {
-  if (!req.session.user) {
-    res.status(403).send("You have to register and verify to create new song.");
+  if (!req.body.token) {
+    res.status(403).send("You do not have a token.");
+    return;
+  }
+
+  const decodedToken = await admin.auth().verifyIdToken(req.body.token);
+  if (!decodedToken || !decodedToken.uid) {
+    res.status(403).json({
+      status: 'err',
+      reason: 'Wrong token'
+    });
     return;
   }
 
   try {
-    let user = await User.findById(req.session.user);
+    const uid = decodedToken.uid;
 
-    if (!user) {
-      res.status(404).send("Your login is not register in our database.");
-      return;
-    }
+    let user = await User.findOne({ uid }).populate('_id');
 
-    for (let song of user.songs) {
-      if (song.artist === req.body.artist && song.title === req.body.title) {
-        res.status(402).send(`Song "${req.body.artist} - ${req.body.title}" has already been created.`);
-        return;
-      }
-    }
+    let sameSongs = await Song.find({ artist: req.body.artist, title: req.body.song }).populate('_id');
 
-    let song = new Melody({
+    let song = new Song({
       artist: req.body.artist,
-      title: req.body.title,
-      author: user.login
+      title: req.body.song,
+      version: sameSongs.length,
+      author: user._id
     });
 
     song = await song.save();
 
-    user.songs.push(song._id);
-
-    await user.save();
-
-    res.status(200).send(`${user.login}/${song._id}`);
+    res.status(200).send(`${song.artist}/${song.title}/${song.version}`);
   } catch(e) {
     console.log(e);
     res.status(500).send(`Error in updating data! Please try press 'Create Song' again later.`)
@@ -104,32 +104,32 @@ async function addSong(req, res, next) {
 }
 
 async function saveSong(req, res, next) {
-  if (!req.session.user) {
-    res.status(403).send("You have to register and verify to saving song's notes.");
+  if (!req.body.token) {
+    res.status(403).send("You do not have a token.");
     return;
   }
-  if (req.session.user !== req.body.user) {
-    res.status(403).send("You can not save songs of another users.");
+
+  const decodedToken = await admin.auth().verifyIdToken(req.body.token);
+  if (!decodedToken || !decodedToken.uid) {
+    res.status(403).json({
+      status: 'err',
+      reason: 'Wrong token'
+    });
     return;
   }
 
   try {
-    let user = await User.findOne({ login: req.session.user })
-        .populate('songs', 'artist title author size speed notes _id');
+    const uid = decodedToken.uid;
+    let user = await Song.findById(req.body.songId)
+        .populate('author', 'uid');
 
     if (!user) {
-      res.status(404).send("It's mistake! Your login is not register in our database.");
+      res.status(404).send("This song has not already created.");
       return;
     }
 
-    let song = null;
-    for (let userSong of user.songs) {
-      if (userSong._id.toString() === req.body.songId) {
-        song = userSong;
-      }
-    }
-    if (!song) {
-      res.status(403).send('This song has not already created.');
+    if (!user.author.uid !== uid) {
+      res.status(404).send("You can not edit songs which have created by another user.");
       return;
     }
 

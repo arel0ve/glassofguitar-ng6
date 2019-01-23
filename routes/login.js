@@ -26,7 +26,7 @@ async function login(req, res, next) {
 
   const decodedToken = await admin.auth().verifyIdToken(req.body.token);
   if (!decodedToken || !decodedToken.uid) {
-    res.status(400).json({
+    res.status(403).json({
       status: 'err',
       reason: 'Wrong token'
     });
@@ -47,7 +47,6 @@ async function login(req, res, next) {
 
     await newUser.save();
     const login = newUser.login ? newUser.login : newUser._id.toString();
-    req.session.user = newUser._id;
     res.status(200).json({
       status: 'ok',
       login,
@@ -57,7 +56,6 @@ async function login(req, res, next) {
   }
 
   const login = user.login ? user.login : user._id.toString();
-  req.session.user = user._id;
   res.status(200).json({
     status: 'ok',
     login,

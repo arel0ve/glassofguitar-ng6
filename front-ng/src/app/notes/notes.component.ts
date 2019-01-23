@@ -85,6 +85,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
 
   ngOnChanges() {
     if (this.song && this.song.notes) {
+      this.songId = this.song._id;
       this.notes = this.song.notes;
       this.speed = this.song.speed;
       this.numerator = +this.song.size.slice(0, this.song.size.indexOf('/'));
@@ -248,27 +249,25 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   giveParams() {
     this.router.params.pipe(takeUntil(this.unsubscribe)).subscribe(value => {
       this.user = value.user || '0';
-      this.songId = value.song || '0';
       window.guitar.user = this.user;
     });
   }
 
   saveAllNotes() {
-    this.unsubscribe.next();
-    this.giveParams();
-    this.saveSongService.saveSong({
-      user: this.user,
-      songId: this.songId,
-      speed: this.speed,
-      size: `${this.numerator}/${this.denominator}`,
-      notes: this.notes
-    }).subscribe(
-        () => this.successfulSaving = true,
-        err => {
-          this.successfulSaving = false;
-          console.log(err.error);
-        }
-    );
+    if (this.songId) {
+      this.saveSongService.saveSong({
+        songId: this.songId,
+        speed: this.speed,
+        size: `${this.numerator}/${this.denominator}`,
+        notes: this.notes
+      }).subscribe(
+          () => this.successfulSaving = true,
+          err => {
+            this.successfulSaving = false;
+            console.log(err.error);
+          }
+      );
+    }
   }
 
   streamStart() {
