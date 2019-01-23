@@ -33,7 +33,7 @@ async function postAvatar(req, res, next) {
 
     filename = user.login + numberPhoto + ".png";
 
-    let filePath = path.join(__dirname, "../front-ng/dist/angular-prj/assets/photos/users/");
+    let filePath = path.join(__dirname, "../front-ng/dist/assets/photos/users/");
     let fstream = fs.createWriteStream(filePath + filename);
     file.pipe(fstream);
 
@@ -45,7 +45,7 @@ async function postAvatar(req, res, next) {
 
       if (numberPhoto !== 0) {
         let oldFilename = user.login + (numberPhoto - 1) + ".png";
-        let filePath = path.join(__dirname, "../front-ng/dist/angular-prj/assets/photos/users/");
+        let filePath = path.join(__dirname, "../front-ng/dist/assets/photos/users/");
         fs.remove(filePath + oldFilename, err => {
           if (err) return next(err);
 

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-prj": {
+    "glassof-guitar": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-prj",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -60,18 +60,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-prj:build"
+            "browserTarget": "glassof-guitar:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-prj:build:production"
+              "browserTarget": "glassof-guitar:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-prj:build"
+            "browserTarget": "glassof-guitar:build"
           }
         },
         "test": {
@@ -117,7 +117,7 @@
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular-prj:serve:production"
+              "devServerTarget": "glassof-guitar:serve:production"
             }
           }
         },
@@ -133,5 +133,5 @@
       }
     }
   },
-  "defaultProject": "angular-prj"
+  "defaultProject": "glassof-guitar"
 }
