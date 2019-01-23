@@ -179,7 +179,21 @@ export class Guitar {
       })
       .then(() => {
         return this.drawInfoCanv();
-      });
+      })
+      .then(() => {
+        if (this.volume) {
+          this.volume = this.volume;
+        } else {
+          this.volume = 90;
+        }
+        if (!window['cordova']) {
+          if (this.speed) {
+            this.speed = this.speed;
+          } else {
+            this.speed = 90;
+          }
+        }
+      })
   }
 
   set guitarHeight(height) {

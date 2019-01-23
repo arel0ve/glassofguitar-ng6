@@ -61,6 +61,22 @@ export class GuitarComponent implements OnInit, OnDestroy {
         this.guitar.drawGuitar();
       }, 15);
     });
+
+    document.addEventListener('volumeupbutton', () => {
+      if (!this.guitar.volume) {
+        this.guitar.volume = 100;
+      } else {
+        this.guitar.volume += 10;
+      }
+    });
+
+    document.addEventListener('volumedownbutton', () => {
+      if (!this.guitar.volume) {
+        this.guitar.volume = 80;
+      } else {
+        this.guitar.volume -= 10;
+      }
+    });
   }
 
   ngOnDestroy() {
