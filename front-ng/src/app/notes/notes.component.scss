@@ -213,6 +213,31 @@ i {
   transition: border-bottom .6s, padding-bottom .6s;
 }
 
+.user-photo {
+  margin-top: 5px;
+  display: inline-block;
+  padding-bottom: 24px;
+  overflow: hidden;
+}
+
+.user-photo > img {
+  position: absolute;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  opacity: .85;
+  border-radius: 50% 50%;
+  transform: scale(1);
+  transition: border-radius .6s, transform .6s .4s, opacity .5s .1s;
+}
+
+.user-photo > img:hover {
+  opacity: 1;
+  border-radius: 25% 25%;
+  transform: scale(1.15);
+  transition: border-radius 1.2s, transform 1.2s .8s, opacity 1s .2s;
+}
+
 .song-title b {
   color: rgb(177, 207, 227);
   font-weight: 200;

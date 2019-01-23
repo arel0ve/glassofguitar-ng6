@@ -8,6 +8,13 @@
       <i class="large material-icons" (click)="stop()">replay</i>
     </div>
 
+    <div class="action-menu">
+      <div class="user-photo">
+        <img [src]="imgSrc"
+             alt="Guitarist avatar" class="main-menu-ico" (click)="showAvatar()">
+      </div>
+    </div>
+
     <!--<div class="action-menu">-->
       <!--<i class="large material-icons start" (click)="streamStart()" *ngIf="login === user && !ws">voice_chat</i>-->
       <!--<i class="large material-icons start" (click)="streamPlay()" *ngIf="login !== user && !ws">tv</i>-->

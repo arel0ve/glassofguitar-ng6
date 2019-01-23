@@ -22,9 +22,9 @@ async function getSong(req, res, next) {
             artist: 'Ludwig van Beethoven',
             title: 'Für Elise',
             version: 0,
-            views: -1,
-            plays: -1,
-            likes: -1,
+            views: null,
+            plays: null,
+            likes: null,
             size: '3/8',
             speed: '63',
             notes: [
@@ -49,7 +49,8 @@ async function getSong(req, res, next) {
             author: {
               hatColor: '#51907F',
               name: "Valerii Psol",
-              date: Date.now()
+              date: Date.now(),
+              photoUrl: null
             }
           }
       );

@@ -22,6 +22,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   guitar: Guitar;
   user: string;
   songId: string;
+  imgSrc: string;
 
   notes: string[];
   speed: number;
@@ -55,6 +56,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
     this.denominator = 2;
     this.barLength = 16 / this.denominator * this.numerator;
     this.successfulSaving = null;
+    this.imgSrc = 'assets/icons/main-logo.png';
 
     this.fullscreen = this.fullscreenService.guitar$.value;
     this.fullscreenService.notes$.subscribe(isFullscreen => {
@@ -94,6 +96,10 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
       this.barLength = 16 / this.denominator * this.numerator;
       this.selectedColumn = 0;
       this.__delayBeforeNextNote = Math.round(60000 / (this.speed * 4));
+
+      if (this.song.author.photoUrl !== null) {
+        this.imgSrc = this.song.author.photoUrl ? this.song.author.photoUrl : 'assets/photos/no-photo.png';
+      }
 
       this.giveParams();
     }
