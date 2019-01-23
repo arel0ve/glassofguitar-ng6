@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from './services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,19 +10,20 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  isLogin: boolean;
 
   public browserLang: string;
 
   constructor(
       public translate: TranslateService,
       private location: Location,
-      private router: Router
+      private router: Router,
+      private authService: AuthService
   ) { }
 
   ngOnInit() {
     Window.prototype.guitar = null;
-    this.isLogin = false;
+
+    this.authService.checkAuth();
 
     this.translate.addLangs(['en', 'ru']);
     this.translate.setDefaultLang('en');

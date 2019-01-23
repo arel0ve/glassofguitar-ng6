@@ -7,8 +7,6 @@ import {LoginService} from './todo/login/login.service';
 import {LogoutService} from './todo/logout/logout.service';
 import {GetUserService} from './get-user/get-user.service';
 import {SearchQueryService} from './search-query/search-query.service';
-import {RegistrationService} from './todo/registration/registration.service';
-import {VerifyService} from './todo/verify/verify.service';
 import {AvatarService} from './todo/avatar/avatar.service';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../../environments/environment';
@@ -26,8 +24,6 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
     SaveSongService,
     LoginService,
     LogoutService,
-    RegistrationService,
-    VerifyService,
     GetUserService,
     SearchQueryService,
     AvatarService,

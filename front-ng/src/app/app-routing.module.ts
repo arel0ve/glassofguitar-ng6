@@ -12,7 +12,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'user/:user/:song',
+    path: 'song/:artist/:song',
     loadChildren: './workspace/workspace.module#WorkspaceModule'
   },
   {

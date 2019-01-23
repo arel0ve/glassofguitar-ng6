@@ -12,6 +12,12 @@ let schema = new Schema({
     required: true
   },
 
+  version: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
@@ -64,4 +70,4 @@ let schema = new Schema({
   }]
 });
 
-exports.Melody = mongoose.model('Melody', schema);
+exports.Song = mongoose.model('Song', schema);

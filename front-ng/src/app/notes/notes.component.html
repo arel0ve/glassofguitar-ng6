@@ -24,8 +24,7 @@
   </div>
 
   <div class="song-title">
-    <b>{{ song.artist }}</b>&nbsp;-&nbsp;<b>{{ song.title }}</b>&nbsp;by&nbsp;<strong>{{ song.name }}</strong>
-    {{ song.tag !== '' ? '(' + song.tag + ')': '' }}
+    <b>{{ song.artist }}</b>&nbsp;-&nbsp;<b>{{ song.title }}</b>&nbsp;by&nbsp;<strong>{{ song.author?.name }}</strong>
   </div>
 
   <div class="bar">
@@ -39,9 +38,9 @@
   </div>
   <div *ngFor="let column of notes; index as i" class="column" [class.last-column]="i % barLength === barLength - 1">
     <i class="large material-icons" [class.selected]="selectedColumn === i" (click)="selectionClick(i)">place</i>
-    <input type="text" *ngFor="let note of column.split(''); index as j" class="note" appChangedNotes="note"
-           [value]="note !== '-' ? guitar.class.getNumByLetter(note) : '-'" placeholder="-"
-           (blur)="changeNote($event, i, j)">
+    <div type="text" *ngFor="let note of column.split(''); index as j" class="note" appChangedNotes="note"
+           (blur)="changeNote($event, i, j)">{{ note !== '-' ? guitar.class.getNumByLetter(note) : '-' }}
+    </div>
   </div>
   <div class="info-notes">
     <div class="plus-btn" (click)="plusColumns()"></div>

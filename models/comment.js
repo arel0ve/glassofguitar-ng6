@@ -25,4 +25,4 @@ let schema = new Schema({
   },
 });
 
-exports.Melody = mongoose.model('Comment', schema);
+exports.Comment = mongoose.model('Comment', schema);

@@ -2,8 +2,8 @@ import {Component, ElementRef, Input, OnChanges, OnInit, ViewChild} from '@angul
 import {fromEvent} from 'rxjs';
 import {SearchQueryService} from '../api/search-query/search-query.service';
 import {animate, style, transition, trigger} from '@angular/animations';
-import {ShowModeService} from '../services/show-mode/show-mode.service';
 import {Router} from '@angular/router';
+import {AuthService} from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -32,10 +32,11 @@ import {Router} from '@angular/router';
 })
 export class MenuComponent implements OnInit, OnChanges {
 
-  @Input() isLogin;
   @Input() menuColor;
 
   @ViewChild('searchField') searchElem: ElementRef;
+
+  isLogin: boolean;
 
   logClass: string;
   showSearch: boolean;
@@ -44,18 +45,21 @@ export class MenuComponent implements OnInit, OnChanges {
 
   constructor(
       private searchQueryService: SearchQueryService,
-      private showModeService: ShowModeService,
-      private exitRouter: Router
+      private exitRouter: Router,
+      private authService: AuthService
   ) { }
 
   ngOnInit() {
     this.showSearch = false;
     this.foundSongs = [];
+    this.authService.isAuth.subscribe((value) => {
+      this.isLogin = value;
+    });
   }
 
   ngOnChanges() {
-    this.logClass = this.isLogin === 'true' ? 'log-out' : 'log-in';
-    this.loginLink = this.isLogin === 'true' ? '/todo/logout' : '/todo/login';
+    this.logClass = this.isLogin ? 'log-out' : 'log-in';
+    this.loginLink = this.isLogin ? '/todo/logout' : '/todo/login';
     if (window['cordova'] && window['cordova'].platformId === 'android' && window['StatusBar']) {
       window['StatusBar'].backgroundColorByHexString(this.menuColor);
     }
@@ -85,14 +89,6 @@ export class MenuComponent implements OnInit, OnChanges {
               });
     });
 
-  }
-
-  showUser() {
-    if (this.showModeService.mode$.value === 'workspace') {
-      this.showModeService.mode$.next('user');
-    } else {
-      this.showModeService.mode$.next('workspace');
-    }
   }
 
   goToHome() {

@@ -1,4 +1,3 @@
-<app-menu [isLogin]="user.isLogin" [menuColor]="user.hatColor"></app-menu>
-<app-user [user]="user" *ngIf="mode === 'both' || mode === 'user'"></app-user>
-<app-guitar *ngIf="mode === 'both' || mode === 'workspace'"></app-guitar>
-<app-notes [song]="song" [login]="user.currentLogin" *ngIf="mode === 'both' || mode === 'workspace'"></app-notes>
+<app-menu [menuColor]="author.hatColor"></app-menu>
+<app-guitar></app-guitar>
+<app-notes [song]="song"></app-notes>

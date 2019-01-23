@@ -11,9 +11,7 @@ import {
   AvatarComponent,
   LoginComponent,
   LogoutComponent,
-  InfoComponent,
-  RegistrationComponent,
-  VerifyComponent
+  InfoComponent
 } from './';
 
 @NgModule({
@@ -27,8 +25,6 @@ import {
     AddsongComponent,
     LoginComponent,
     LogoutComponent,
-    RegistrationComponent,
-    VerifyComponent,
     InfoComponent,
     AvatarComponent,
     TodoComponent,
@@ -38,8 +34,6 @@ import {
     AddsongComponent,
     LoginComponent,
     LogoutComponent,
-    RegistrationComponent,
-    VerifyComponent,
     InfoComponent,
     AvatarComponent,
   ],

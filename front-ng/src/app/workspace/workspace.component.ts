@@ -1,8 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {GetUserService} from '../api/get-user/get-user.service';
-import {ShowModeService} from '../services/show-mode/show-mode.service';
+import {GetSongService} from '../api/get-song/get-song.service';
 
 @Component({
   selector: 'app-workspace',
@@ -11,19 +10,16 @@ import {ShowModeService} from '../services/show-mode/show-mode.service';
 })
 export class WorkspaceComponent implements OnInit, OnDestroy {
 
-  login: Observable<string>;
-  songId: Observable<string>;
+  artistName: Observable<string>;
+  songName: Observable<string>;
   navigationSubscription;
-  user: any;
+  author: any;
   song: any;
 
-  mode = 'both';
-
   constructor(
-      private getUser: GetUserService,
+      private getSongService: GetSongService,
       private route: ActivatedRoute,
-      private exitRouter: Router,
-      private showModeService: ShowModeService
+      private exitRouter: Router
   ) {
     this.navigationSubscription = this.exitRouter.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
@@ -31,30 +27,25 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
         this.initialiseInvites();
       }
     });
-
-    this.showModeService.mode$.subscribe(mode => {
-      this.mode = mode;
-    });
   }
 
   initialiseInvites() {
     this.route.params.subscribe(value => {
-      this.login = value.user || '0';
-      this.songId = value.song || '0';
+      this.artistName = value.user || '0';
+      this.songName = value.song || '0';
 
-      this.getUser.getUser({
-        login: this.login,
-        songId: this.songId
-      }).subscribe(user => {
-        this.user = user;
-        this.song = Object.assign({name: this.user.name, tag: this.user.tag}, user['currentSong']);
+      this.getSongService.getSong({
+        artistName: this.artistName,
+        songName: this.songName
+      }).subscribe(song => {
+        this.song = song;
+        this.author = song['author'];
       });
     });
   }
 
   ngOnInit() {
-    this.user = {
-      isLogin: 'false',
+    this.author = {
       hatColor: '#273554',
     };
     this.song = {};

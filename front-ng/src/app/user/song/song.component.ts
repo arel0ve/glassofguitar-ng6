@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ShowModeService} from '../../services/show-mode/show-mode.service';
 
 @Component({
   selector: 'app-song',
@@ -18,21 +17,15 @@ export class SongComponent implements OnInit {
   isProgress: boolean;
   isSelected: boolean;
 
-  constructor(private router: Router, private showModeService: ShowModeService) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.isProgress = false;
     this.isSelected = false;
 
-    if (this.showModeService.mode$.value === 'both') {
-      this.isEnter = false;
-      this.angle = Math.floor(Math.random() * 30) + (Math.random() > 0.5 ? 30 : -60);
-      this.brightness = Math.abs(Math.cos(this.angle / (180 / Math.PI))) + .1;
-    } else {
-      this.isEnter = true;
-      this.angle = 0;
-      this.brightness = 1;
-    }
+    this.isEnter = false;
+    this.angle = Math.floor(Math.random() * 30) + (Math.random() > 0.5 ? 30 : -60);
+    this.brightness = Math.abs(Math.cos(this.angle / (180 / Math.PI))) + .1;
   }
 
   enterSong() {
@@ -69,10 +62,6 @@ export class SongComponent implements OnInit {
 
   navigateToSong() {
     const author = this.song.author ? this.song.author + '/' : '';
-    this.router.navigate([`/user/${author}${this.song.id}`]).then(() => {
-      if (this.showModeService.mode$.value === 'user') {
-        this.showModeService.mode$.next('workspace');
-      }
-    });
+    this.router.navigate([`/user/${author}${this.song.id}`]);
   }
 }

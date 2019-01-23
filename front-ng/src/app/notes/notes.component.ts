@@ -15,7 +15,6 @@ import {FullscreenService} from '../services/fullscreen/fullscreen.service';
 export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
 
   @Input() song;
-  @Input() login;
 
   @ViewChild('notesBlock') notesRef: ElementRef;
   @ViewChild('playBtn') playRef: ElementRef;
@@ -86,10 +85,10 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
 
   ngOnChanges() {
     if (this.song && this.song.notes) {
-      this.notes = this.song.notes.notes;
-      this.speed = this.song.notes.speed;
-      this.numerator = +this.song.notes.size.slice(0, this.song.notes.size.indexOf('/'));
-      this.denominator = +this.song.notes.size.slice(this.song.notes.size.indexOf('/') + 1);
+      this.notes = this.song.notes;
+      this.speed = this.song.speed;
+      this.numerator = +this.song.size.slice(0, this.song.size.indexOf('/'));
+      this.denominator = +this.song.size.slice(this.song.size.indexOf('/') + 1);
 
       this.barLength = 16 / this.denominator * this.numerator;
       this.selectedColumn = 0;

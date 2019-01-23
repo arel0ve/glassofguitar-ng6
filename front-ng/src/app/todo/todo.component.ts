@@ -2,8 +2,6 @@ import {Component, OnDestroy, OnInit, ViewChild, ComponentFactoryResolver} from 
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {LogoutComponent} from './logout/logout.component';
-import {RegistrationComponent} from './registration/registration.component';
-import {VerifyComponent} from './verify/verify.component';
 import {AddsongComponent} from './addsong/addsong.component';
 import {InfoComponent} from './info/info.component';
 import {TodoDirective} from './todo.directive';
@@ -57,14 +55,6 @@ export class TodoComponent implements OnInit, OnDestroy {
         case 'logout':
           this.todoTitle = 'quit';
           this.currentComponent = LogoutComponent;
-          break;
-        case 'reg':
-          this.todoTitle = 'registration';
-          this.currentComponent = RegistrationComponent;
-          break;
-        case 'verify':
-          this.todoTitle = 'verification';
-          this.currentComponent = VerifyComponent;
           break;
         case 'addsong':
           this.todoTitle = 'create';

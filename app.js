@@ -15,8 +15,7 @@ const regRouter = require('./routes/registr');
 const verRouter = require('./routes/verify');
 const logoutRouter = require('./routes/logout');
 
-const addSongRouter = require('./routes/add-song');
-const saveSongRouter = require('./routes/save-song');
+const songRouter = require('./routes/song');
 
 const biographyRouter = require('./routes/biography');
 const getAvatarRouter = require('./routes/get-avatar');
@@ -65,15 +64,13 @@ app.use(session({
 app.use(busboy());
 
 app.use('/', indexRouter);
+app.use('/api/song/', songRouter);
 app.use('/api/user/', usersRouter);
 
 app.use('/api/registration', regRouter);
 app.use('/api/verify', verRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/logout', logoutRouter);
-
-app.use('/api/addsong', addSongRouter);
-app.use('/api/savesong', saveSongRouter);
 
 app.use('/api/getavatar', getAvatarRouter);
 app.use('/api/postavatar', postAvatarRouter);
