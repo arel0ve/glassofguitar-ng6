@@ -1,6 +1,7 @@
 {
   "add_song": "add song",
   "artist": "Artist",
+  "attention": "Attention!",
   "authorization": "Authorization",
   "avatar": "User Photo",
   "cancel": "Cancel",
@@ -10,6 +11,10 @@
   "error_in_logout": "Something wrong! Please press 'Log Out' again...",
   "fingerboard": "Fingerboard",
   "how_to_play": "How To Play",
+  "info_areas_with_volume_and_speed": "Areas with volume and speed",
+  "info_attention_text": "When guitar in focus all browser's keyboard's events (hotkeys) are disabled and you can't use it. For example, if you press <kbd>Ctrl</kbd>+<kbd>A</kbd> all text will not be selected, or if you press <kbd>Ctrl</kbd>+<kbd>S</kbd> web page will not be saved. But all keyboard's events (hotkeys) of your operation system stay enabled anyway, such as <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Esc</kbd> open Task Manager or <kbd>Ctrl</kbd>+<kbd>F4</kbd> close the active window in Windows operation system. That's why please use complex chords careful or disabled some hotkeys in your operation system.",
+  "info_change_speed": "For change speed of playing all strings you have to turn up or down <kbd>Mouse wheel</kbd> on free area below fingerboard. Min speed means that it's delay 210 ms before playing next string, when playing all of it (when you press <kbd>↑</kbd> or <kbd>↓</kbd>). Max speed means that this delay is 10 ms. And 1% of speed changing is 2 ms delay.",
+  "info_change_volume": "For change volume you have to turn up or down <kbd>Mouse wheel</kbd> on free area above fingerboard. Min volume = 0%, max volume = 100%.",
   "info_draw_capo": "To make capo on fingerboard you have to press and release keys from <kbd>~</kbd> for capo 0 and <kbd>1</kbd>, <kbd>2</kbd> ... <kbd>+</kbd> for capo 1, 2 ... 12. Second press on one key take off capo from fingerboard.",
   "info_draw_chord": "To draw chords on fingerboard you can use your keyboard next way:<ul><li>Major simple chords - X: press and stay down <kbd>A</kbd>, <kbd>B</kbd>, <kbd>C</kbd>, <kbd>D</kbd>, <kbd>E</kbd>, <kbd>F</kbd>, <kbd>G</kbd></li> <li>Upper chords - X#: press and stay down <kbd>Shift</kbd>+... keys of simple chords.</li> <li>Minor chords - Xm: press and stay down <kbd>Ctrl</kbd>+... keys of simple chords.</li> <li>Dominant 7 chords - X7: press and stay down <kbd>Alt</kbd>+... keys of simple chords.</li></ul> To create complex chord you can use all modified keys, such as you have to key down <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>A</kbd> for creating A#m7 chord.",
   "info_guitar_must_be_in_focus": "You can play the guitar with your mouse and keyboard. Guitar panel must be in focus (blue border around it) for using keyboard. If you click on any object except guitar, you lose focus and can't use keyboard anymore. For return to guitar panel you have to click on it or press <kbd>Tab</kbd>.",

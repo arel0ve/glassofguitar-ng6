@@ -14,22 +14,13 @@
     <dd [innerHTML]=" 'info_soundboard_all_strings_down' | translate "></dd>
     <dd [innerHTML]=" 'info_soundboard_all_strings_up' | translate "></dd>
     <dd [innerHTML]=" 'info_soundboard_one_string' | translate "></dd>
-    <dt>Areas with volume and speed</dt>
-    <dd>For change volume you have to turn up or down <kbd>🖰&nbsp;wheel</kbd> on free area above fingerboard.
-      Min volume = 0%, max volume = 100%.</dd>
-    <dd>For change speed of playing all strings you have to turn up or down
-      <kbd>🖰&nbsp;wheel</kbd> on free area below fingerboard. Min speed means that it's delay 210 ms before
-      playing next string, when playing all of it (when you press <kbd>↑</kbd> or <kbd>↓</kbd>).
-      Max speed means that this delay is 10 ms. And 1% of speed changing is 2 ms delay.</dd>
+    <dt>{{ 'info_areas_with_volume_and_speed' | translate }}</dt>
+    <dd [innerHTML]=" 'info_change_volume' | translate "></dd>
+    <dd [innerHTML]=" 'info_change_speed' | translate "></dd>
   </dl>
   <hr>
 
-  <p><strong>Attention!</strong> When guitar in focus all browser's keyboard's events (hotkeys) are disabled
-    and you can't use it. For example, if you press <kbd>Ctrl</kbd>+<kbd>A</kbd> all text will not be selected,
-    or if you press <kbd>Ctrl</kbd>+<kbd>S</kbd> web page will not be saved.
-    But all keyboard's events (hotkeys) of your operation system stay enabled anyway,
-    such as <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Esc</kbd> open Task Manager or
-    <kbd>Ctrl</kbd>+<kbd>F4</kbd> close the active window in Windows operation system.
-    That's why please use complex chords careful or disabled some hotkeys in your operation system.</p>
+  <strong>{{ 'attention' | translate }}</strong>
+  <p [innerHTML]=" 'info_attention_text' | translate "></p>
 
 </div>
