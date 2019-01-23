@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -12,7 +14,9 @@ export class AppComponent implements OnInit {
   public browserLang: string;
 
   constructor(
-      public translate: TranslateService
+      public translate: TranslateService,
+      private location: Location,
+      private router: Router
   ) { }
 
   ngOnInit() {
@@ -24,5 +28,19 @@ export class AppComponent implements OnInit {
     this.translate.use('en');
     this.browserLang = this.translate.getBrowserLang();
     this.translate.use(this.browserLang.match(/en|ru/) ? this.browserLang : 'en');
+
+    document.addEventListener('backbutton', (e) => {
+      try {
+        if (window.history.length > 1) {
+          this.location.back();
+        } else {
+          this.router.initialNavigation();
+        }
+      } catch (err) {
+        console.log('backButton', err);
+        this.router.initialNavigation();
+      }
+      e.preventDefault();
+    });
   }
 }
