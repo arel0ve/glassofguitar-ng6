@@ -216,15 +216,15 @@ i {
 .user-photo {
   margin-top: 5px;
   display: inline-block;
-  padding-bottom: 24px;
+  padding-bottom: 32px;
   overflow: hidden;
 }
 
 .user-photo > img {
   position: absolute;
   cursor: pointer;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   opacity: .85;
   border-radius: 50% 50%;
   transform: scale(1);
@@ -367,4 +367,8 @@ input[type='text'] {
   opacity: .3;
   animation: 1.8s 1 hide-opacity;
   -webkit-animation: 1.8s 1 hide-opacity;
+}
+
+.material-icons {
+  font-size: 32px;
 }
