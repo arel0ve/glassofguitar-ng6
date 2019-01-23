@@ -120,15 +120,15 @@ async function saveSong(req, res, next) {
 
   try {
     const uid = decodedToken.uid;
-    let user = await Song.findById(req.body.songId)
+    let song = await Song.findById(req.body.songId)
         .populate('author', 'uid');
 
-    if (!user) {
+    if (!song) {
       res.status(404).send("This song has not already created.");
       return;
     }
 
-    if (!user.author.uid !== uid) {
+    if (!song.author.uid !== uid) {
       res.status(404).send("You can not edit songs which have created by another user.");
       return;
     }
@@ -136,6 +136,8 @@ async function saveSong(req, res, next) {
     song.size = req.body.size ? req.body.size : song.size;
     song.speed = req.body.speed ? req.body.speed : song.speed;
     song.notes = req.body.notes ? req.body.notes : song.notes;
+
+    song.author = song.author._id;
 
     await song.save();
 
