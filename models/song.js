@@ -13,8 +13,8 @@ let schema = new Schema({
   },
 
   author: {
-    type: String,
-    required: true
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   },
 
   size: {
@@ -33,23 +33,35 @@ let schema = new Schema({
     type: [String],
     required: true,
     default: ["------"]
-  }
-});
+  },
 
-schema.virtual('fullTitle')
-    .set(function(fullTitle) {
-      if (~fullTitle.indexOf(' - ')) {
-        this.artist = fullTitle.slice(0, fullTitle.indexOf(' - '));
-        this.title = fullTitle.slice(fullTitle.indexOf(' - ') + 3);
-      } else {
-        this.title = fullTitle;
-      }
-    })
-    .get(function() {
-      if (this.artist && this.artist.length > 0) {
-        return `${this.artist} - ${this.title}`;
-      }
-      return this.title;
-    });
+  created: {
+    type: Date,
+    default: Date.now
+  },
+
+  views: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+
+  plays: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+
+  likes: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment'
+  }]
+});
 
 exports.Melody = mongoose.model('Melody', schema);

@@ -12,7 +12,7 @@ export const environment = {
     storageBucket: 'glass-of-guitar.appspot.com',
     messagingSenderId: '48139893536'
   },
-  baseApiURL: 'http://www.glassofguitar.com/api/'
+  baseApiURL: 'localhost:9000/api/'
 };
 
 /*
