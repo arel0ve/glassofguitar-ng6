@@ -40,7 +40,7 @@ export class MenuComponent implements OnInit, OnChanges {
   logClass: string;
   showSearch: boolean;
   loginLink: string;
-  foundSongs: any[];
+  foundSongs: any;
 
   constructor(
       private searchQueryService: SearchQueryService,
@@ -74,7 +74,7 @@ export class MenuComponent implements OnInit, OnChanges {
     }
     const type = e.shiftKey ? 'author' : 'song';
     this.searchQueryService.findQuery({type, query: e.target.value})
-        .subscribe((searchResult: Array<string>) => {
+        .subscribe((searchResult) => {
           this.foundSongs = searchResult || [];
           fromEvent(document, 'click')
               .subscribe((event) => {

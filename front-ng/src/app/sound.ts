@@ -10,6 +10,7 @@ export class Sound {
     this.sound.setAttribute('controls', 'none');
     this.sound.style.display = 'none';
     this.sound.preload = 'auto';
+    this.sound.volume = .9;
 
     document.body.appendChild(this.sound);
   }

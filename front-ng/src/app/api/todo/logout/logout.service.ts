@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {from as fromPromise, throwError as _throw} from 'rxjs';
 import {catchError, map, switchMap} from 'rxjs/operators';
+import {HttpService} from '../../http/http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import {catchError, map, switchMap} from 'rxjs/operators';
 export class LogoutService {
 
   constructor(
-      private http: HttpClient,
+      private http: HttpService,
       private afAuth: AngularFireAuth
   ) { }
 
@@ -26,7 +26,7 @@ export class LogoutService {
   }
 
   apiLogout() {
-    return this.http.post('api/logout',
+    return this.http.post('logout',
         null,
         {
           responseType: 'text',

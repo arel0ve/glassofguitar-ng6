@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpService} from '../../http/http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AvatarService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpService) { }
 
   getAvatar() {
     return this.http.get(
-        'api/getavatar',
+        'getavatar',
         {
           withCredentials: true
         });
@@ -18,7 +18,7 @@ export class AvatarService {
 
   postAvatar(formData) {
     return this.http.post(
-        'api/postavatar',
+        'postavatar',
         formData,
         {
           withCredentials: true,

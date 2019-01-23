@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpService } from '../http/http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SaveSongService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpService) { }
 
   saveSong({user, songId, speed, size, notes}) {
-    return this.http.post('api/savesong',
+    return this.http.post('savesong',
         {
           user,
           songId,

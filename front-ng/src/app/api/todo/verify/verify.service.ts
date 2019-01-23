@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpService} from '../../http/http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VerifyService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpService) { }
 
   doVerify({login, password, verifyCode}) {
-    return this.http.post('api/verify',
+    return this.http.post('verify',
         {
           login,
           password,

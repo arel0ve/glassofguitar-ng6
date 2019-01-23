@@ -1,9 +1,9 @@
 import {Injectable, NgZone} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {AngularFireAuth} from '@angular/fire/auth';
 import { auth as firebaseAuth } from 'firebase/app';
 import {from as fromPromise, throwError as _throw} from 'rxjs';
 import {catchError, map, switchMap} from 'rxjs/operators';
+import {HttpService} from '../../http/http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +11,12 @@ import {catchError, map, switchMap} from 'rxjs/operators';
 export class LoginService {
 
   constructor(
-      private http: HttpClient,
+      private http: HttpService,
       private afAuth: AngularFireAuth
   ) { }
 
   doLogin({ email, password }) {
-    return this.http.post('api/login',
+    return this.http.post('login',
         {
           email,
           password
@@ -103,7 +103,7 @@ export class LoginService {
   }
 
   doLoginWithToken({ token, email = '', phone = '', name = '', photoUrl = '' }) {
-    return this.http.post('api/login',
+    return this.http.post('login',
         {
           token,
           name,

@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpService} from '../../http/http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistrationService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpService) { }
 
   doReg({login, password, email, tag, name, birthday, place, country, hatColor}) {
-    return this.http.post('api/registration',
+    return this.http.post('registration',
         {
           login,
           password,

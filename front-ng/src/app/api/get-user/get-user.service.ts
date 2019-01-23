@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {retry} from 'rxjs/operators';
+import {HttpService} from '../http/http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetUserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpService) { }
 
   getUser({login, songId}) {
     return this.http.get(
-        `api/user/${login}/${songId}`,
+        `user/${login}/${songId}`,
         {withCredentials: true}
         )
         .pipe(

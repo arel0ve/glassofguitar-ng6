@@ -26,7 +26,7 @@ export class LogoutComponent implements OnInit {
 
   logout() {
     this.logoutService.doLogout().subscribe(res => {
-      if (res !== 'Ok!') {
+      if (res.toString() !== 'Ok!') {
         this.message = 'error_in_logout';
       } else {
         this.logoutService.authLogoutApp();

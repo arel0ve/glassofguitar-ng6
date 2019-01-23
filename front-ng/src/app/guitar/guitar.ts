@@ -287,8 +287,10 @@ export class Guitar {
       v < 0 ? 0 : v
       : 100;
     this.__volume = v / 100;
-    for (let i = 0; i < 45; i++) {
-      this.__sounds[i].volume = this.__volume;
+    if (this.__sounds.length > 0) {
+      for (let i = 0; i < 45; i++) {
+        this.__sounds[i].volume = this.__volume;
+      }
     }
 
     const ctx = this.__infoCanv.getContext('2d');

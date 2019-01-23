@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpService } from '../http/http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchQueryService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpService) { }
 
   findQuery({type, query}) {
-    return this.http.post('api/query',
+    return this.http.post('query',
         {
           type,
           query

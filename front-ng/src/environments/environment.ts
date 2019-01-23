@@ -11,7 +11,8 @@ export const environment = {
     projectId: 'glass-of-guitar',
     storageBucket: 'glass-of-guitar.appspot.com',
     messagingSenderId: '48139893536'
-  }
+  },
+  baseApiURL: 'http://www.glassofguitar.com/api/'
 };
 
 /*
