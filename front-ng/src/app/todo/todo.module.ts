@@ -10,6 +10,7 @@ import {
   AddsongComponent,
   AvatarComponent,
   LoginComponent,
+  UsernameComponent,
   LogoutComponent,
   InfoComponent
 } from './';
@@ -24,6 +25,7 @@ import {
   declarations: [
     AddsongComponent,
     LoginComponent,
+    UsernameComponent,
     LogoutComponent,
     InfoComponent,
     AvatarComponent,
@@ -33,6 +35,7 @@ import {
   entryComponents: [
     AddsongComponent,
     LoginComponent,
+    UsernameComponent,
     LogoutComponent,
     InfoComponent,
     AvatarComponent,

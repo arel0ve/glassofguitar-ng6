@@ -7,6 +7,7 @@ import {InfoComponent} from './info/info.component';
 import {TodoDirective} from './todo.directive';
 import {AvatarComponent} from './avatar/avatar.component';
 import {Location} from '@angular/common';
+import {UsernameComponent} from './username/username.component';
 
 @Component({
   selector: 'app-todo',
@@ -51,6 +52,10 @@ export class TodoComponent implements OnInit, OnDestroy {
         case 'login':
           this.todoTitle = 'authorization';
           this.currentComponent = LoginComponent;
+          break;
+        case 'username':
+          this.todoTitle = 'username';
+          this.currentComponent = UsernameComponent;
           break;
         case 'logout':
           this.todoTitle = 'quit';

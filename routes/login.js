@@ -46,19 +46,19 @@ async function login(req, res, next) {
     });
 
     await newUser.save();
-    const login = newUser.login ? newUser.login : newUser._id.toString();
     res.status(200).json({
       status: 'ok',
-      login,
+      login: '',
+      name: '',
       uToken: req.body.token
     });
     return;
   }
 
-  const login = user.login ? user.login : user._id.toString();
   res.status(200).json({
     status: 'ok',
-    login,
+    login: user.login,
+    name: user.name ? user.name : user.login,
     uToken: req.body.token
   });
 }

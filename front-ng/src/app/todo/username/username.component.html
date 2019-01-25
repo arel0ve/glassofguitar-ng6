@@ -1,0 +1,42 @@
+<form [formGroup]="form">
+  <fieldset id="autho-field">
+    <legend>{{ 'choose_username' | translate | uppercase }}</legend>
+    <div>
+      <label for="login">
+        <span>{{ 'login' | translate }}:</span>
+        <input type="text" id="login" formControlName="login" #login required>
+      </label>
+    </div>
+    <div>
+      <label for="name">
+        <span>{{ 'name' | translate }}:</span>
+        <input type="text" id="name" formControlName="name" #name>
+      </label>
+    </div>
+    <div class="div-message">{{ message }}</div>
+    <div>
+      <div class="div-message"
+           *ngIf="form.invalid; else elseLogin">{{ 'input_data_to_continue_setup_username' | translate }}</div>
+      <ng-template #elseLogin>
+        <button type="button" id="authoBtn" class="social-btn"
+                [disabled]="loading"
+                (click)="setupUsername($event)">
+          {{ 'setup_username' | translate: {social: 'E-mail'} }}
+        </button>
+      </ng-template>
+    </div>
+  </fieldset>
+</form>
+<div class="lds-css ng-scope loading-spinner" *ngIf="loading">
+  <div class="lds-gear" style="width: 100%; height: 100%">
+    <div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</div>
+

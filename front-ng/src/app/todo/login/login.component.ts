@@ -30,10 +30,6 @@ export class LoginComponent implements OnInit {
     this.message = '';
   }
 
-  goReg() {
-    this.exitRouter.navigate(['/todo/reg']);
-  }
-
   doLogin(e) {
     this.loginService.doLogin({
       email: this.form.value.email,
@@ -85,7 +81,11 @@ export class LoginComponent implements OnInit {
     rez = JSON.parse(rez);
     this.loginService.authInApp(rez.uToken);
     this._ngZone.run(() => {
-      this.exitRouter.navigate([`/user/${rez.login}/0`]);
+      if (rez.login) {
+        this.exitRouter.navigate([`/user/${rez.login}/0`]);
+      } else {
+        this.exitRouter.navigate([`/todo/username`]);
+      }
     });
   }
 
