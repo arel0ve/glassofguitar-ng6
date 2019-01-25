@@ -3,131 +3,65 @@ const router = express.Router();
 
 const User = require('../models/user').User;
 
-/* GET users listing. */
-router.get(['/:login', '/:login/:song'], getUserByLogin);
+// router.get('/:login', getUserByLogin);
+router.post('/', postUserLogin);
 
-async function getUserByLogin(req, res, next) {
-  try {
-    let user = await User.findOne({ login: req.params.login })
-        .populate('songs', 'artist title author size speed notes _id');
-
-    if (!user) {
-      try {
-        user = await User.findById(req.params.login)
-            .populate('songs', 'artist title author size speed notes _id');
-      } catch (e) {
-        user = null;
-      }
-    }
-
-    if (!user) {
-      res.status(203).json(
-          {
-            title: 'GLASSOF-GUITAR: Play guitar online and write tabs free.',
-            hatColor: '#51907F',
-            isLogin: !!req.session.user ? "true" : "false",
-            login: "/",
-            name: "Valerii Psol",
-            birthday: new Date(1994, 7, 18),
-            songs: [{
-              artist: 'Ludwig van Beethoven',
-              title: 'Für Elise',
-              author: '0',
-              id: '0'
-            }],
-            currentSong: {
-              artist: 'Ludwig van Beethoven',
-              title: 'Für Elise',
-              notes: {
-                size: '3/8',
-                speed: '63',
-                notes: [
-                  '------','------','------','------','-----0','----4-',
-                  '-----0','----4-','-----0','----0-','----3-','----1-',
-                  '---2--','------','------','-3----','--2---','---2--',
-                  '----0-','------','------','--2---','---1--','----0-',
-                  '----1-','------','------','--2---','-----0','----4-',
-                  '-----0','----4-','-----0','----0-','----3-','----1-',
-                  '---2--','------','------','-3----','--2---','---2--',
-                  '----0-','------','------','--2---','----1-','----0-',
-                  '---2--','------','------','----0-','----1-','----3-',
-                  '-----0','------','------','---0--','-----1','-----0',
-                  '----3-','------','------','--3---','-----0','----3-',
-                  '----1-','------','------','--2---','----3-','----1-',
-                  '---0--','------','------','--2---','-----0','----4-',
-                  '-----0','----4-','-----0','----0-','----3-','----1-',
-                  '---2--','------','------','-3----','--2---','---2--',
-                  '----0-','------','------','--2---','----1-','----0-',
-                  '---2--','------','------','------','------','------'
-                ]
-              }
-            }
-          }
-      );
-      return;
-    }
-
-    let photo = (!user.photo || user.photo === "") ? "" : `../photos/users/${user.photo}`;
-    photo = !photo ? user.photoUrl : photo;
-
-    let sendObj = {
-      title: `${user.fullName}: Glassof-Guitar`,
-      hatColor: user.hatColor,
-      isLogin: !!req.session.user ? "true" : "false",
-      login: `/${user.login}`,
-      name: user.name,
-      photo: photo,
-      songs: [],
-      songArtist: '',
-      songTitle: '',
-      currentSong: {
-        artist: '',
-        title: '',
-        notes: {
-          size: '2/2',
-          speed: '60',
-          notes: []
-        }
-      }
-    };
-
-    for (let userSong of user.songs) {
-      sendObj.songs.push({
-        artist: userSong.artist,
-        title: userSong.title,
-        author: user.login,
-        id: userSong._id
-      });
-    }
-
-    let song = null;
-
-    if (!!req.params.song)  {
-      for (let userSong of user.songs) {
-        if (userSong._id.toString() === req.params.song) {
-          song = userSong;
-        }
-      }
-    }
-
-    if (song !== null) {
-      sendObj.title = `${user.fullName} - "${song.artist} - ${song.title}": Glassof-Guitar`;
-      sendObj.currentSong.artist = song.artist;
-      sendObj.currentSong.title = song.title;
-      sendObj.currentSong.notes = {
-        size: song.size,
-        speed: song.speed,
-        notes: song.notes
-      };
-    }
-
-    res.status(200).json(sendObj);
-  } catch(e) {
-    console.log(e);
-    res.status(500).send({
-      message: "Server error"
-    })
+async function postUserLogin(req, res, next) {
+  if (!req.body.token) {
+    res.status(400).json({
+      status: 'err',
+      reason: 'You have not token'
+    });
+    return;
   }
+
+  if (!req.body.login) {
+    res.status(402).json({
+      status: 'err',
+      reason: 'You have not login'
+    });
+    return;
+  }
+
+  const decodedToken = await admin.auth().verifyIdToken(req.body.token);
+  if (!decodedToken || !decodedToken.uid) {
+    res.status(403).json({
+      status: 'err',
+      reason: 'Wrong token'
+    });
+    return;
+  }
+  const uid = decodedToken.uid;
+
+  let user = await User.findOne({ uid });
+
+  if (!user) {
+    res.status(403).json({
+      status: 'Your uid is not registered',
+    });
+    return;
+  }
+
+  let userWithChooseLogin = await User.findOne({ login: req.body.login });
+
+  if (userWithChooseLogin) {
+    res.status(402).json({
+      status: 'This username has already exists',
+    });
+    return;
+  }
+
+  user.login = req.body.login;
+  user.name = req.body.name ? req.body.name : req.body.login;
+
+  user = await user.save();
+
+  res.status(200).json({
+    status: 'ok',
+    login: user.login,
+    name: user.name,
+    uToken: req.body.token
+  });
 }
 
 module.exports = router;
