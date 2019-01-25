@@ -15,7 +15,6 @@ const logoutRouter = require('./routes/logout');
 
 const songRouter = require('./routes/song');
 
-const biographyRouter = require('./routes/biography');
 const getAvatarRouter = require('./routes/get-avatar');
 const postAvatarRouter = require('./routes/post-avatar');
 
