@@ -35,8 +35,8 @@ export class WorkspacePageComponent implements OnInit, OnDestroy {
       this.songName = value.song || '0';
 
       this.getSongService.getSong({
-        artistName: this.artistName,
-        songName: this.songName
+        artist: this.artistName,
+        song: this.songName
       }).subscribe(song => {
         this.song = song;
         this.author = song['author'];

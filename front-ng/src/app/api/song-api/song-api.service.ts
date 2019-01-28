@@ -11,9 +11,9 @@ export class SongApiService {
       private http: HttpService
   ) { }
 
-  getSong({artistName, songName}) {
+  getSong({artist, song}) {
     return this.http.get(
-        `song/${artistName}/${songName}`,
+        `song/${artist}/${song}`,
         {withCredentials: true}
     )
         .pipe(

@@ -8,6 +8,7 @@ import { LoginService } from './login/login.service';
 import { LogoutService } from './logout/logout.service';
 import { UserApiService } from './user-api/user-api.service';
 import { SongApiService } from './song-api/song-api.service';
+import { SongListApiService } from './song-list-api/song-list-api.service';
 import { SearchQueryService } from './search-query/search-query.service';
 import { AvatarService } from './avatar/avatar.service';
 import { environment } from '../../environments/environment';
@@ -24,6 +25,7 @@ import { environment } from '../../environments/environment';
     LogoutService,
     UserApiService,
     SongApiService,
+    SongListApiService,
     SearchQueryService,
     AvatarService,
   ],
