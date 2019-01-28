@@ -7,12 +7,12 @@ const routes: Routes = [
     loadChildren: './workspace/workspace.module#WorkspaceModule'
   },
   {
-    path: 'user/:user',
+    path: 'user/:login',
     redirectTo: 'user/:user/0',
     pathMatch: 'full'
   },
   {
-    path: 'song/:artist/:song',
+    path: 'song/:artist/:song/:version',
     loadChildren: './workspace/workspace.module#WorkspaceModule'
   },
   {

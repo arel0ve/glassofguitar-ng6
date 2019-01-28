@@ -8,12 +8,13 @@ const logger = require('morgan');
 const busboy = require('connect-busboy');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const userRouter = require('./routes/user');
 
 const loginRouter = require('./routes/login');
 const logoutRouter = require('./routes/logout');
 
 const songRouter = require('./routes/song');
+const songsRouter = require('./routes/songs');
 
 const getAvatarRouter = require('./routes/get-avatar');
 const postAvatarRouter = require('./routes/post-avatar');
@@ -50,7 +51,8 @@ app.use(busboy());
 
 app.use('/', indexRouter);
 app.use('/api/song/', songRouter);
-app.use('/api/user/', usersRouter);
+app.use('/api/songs/', songsRouter);
+app.use('/api/user/', userRouter);
 
 app.use('/api/login', loginRouter);
 app.use('/api/logout', logoutRouter);

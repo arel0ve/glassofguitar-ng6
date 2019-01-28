@@ -18,8 +18,8 @@ async function login(req, res, next) {
 
   if (!req.body.token) {
     res.status(400).json({
-      status: 'err',
-      reason: 'You have not token'
+      status: 'error',
+      message: 'You have not token'
     });
     return;
   }
@@ -27,8 +27,8 @@ async function login(req, res, next) {
   const decodedToken = await admin.auth().verifyIdToken(req.body.token);
   if (!decodedToken || !decodedToken.uid) {
     res.status(403).json({
-      status: 'err',
-      reason: 'Wrong token'
+      status: 'error',
+      message: 'Wrong token'
     });
     return;
   }

@@ -5,8 +5,10 @@ router.post('/', logout);
 
 function logout(req, res, next) {
 
-  res.statusCode = 200;
-  res.send("Ok!");
+  res.status(200).json({
+    status: 'ok',
+    message: 'Logout successful'
+  })
 }
 
 module.exports = router;

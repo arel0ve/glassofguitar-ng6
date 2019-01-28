@@ -57,10 +57,17 @@ async function getSong(req, res, next) {
       return;
     }
 
-    res.status(200).json(song);
+    song.views += 1;
+    await song.save();
+
+    res.status(200).json({
+      status: "ok",
+      song
+    });
   } catch (e) {
     console.log(e);
-    res.status(500).send({
+    res.status(500).json({
+      status: "error",
       message: "Server error"
     });
   }
@@ -68,15 +75,18 @@ async function getSong(req, res, next) {
 
 async function addSong(req, res, next) {
   if (!req.body.token) {
-    res.status(403).send("You do not have a token.");
+    res.status(403).json({
+      status: 'error',
+      message: 'Missing token'
+    });
     return;
   }
 
   const decodedToken = await admin.auth().verifyIdToken(req.body.token);
   if (!decodedToken || !decodedToken.uid) {
     res.status(403).json({
-      status: 'err',
-      reason: 'Wrong token'
+      status: 'error',
+      message: 'Wrong token'
     });
     return;
   }
@@ -97,24 +107,33 @@ async function addSong(req, res, next) {
 
     song = await song.save();
 
-    res.status(200).send(`${song.artist}/${song.title}/${song.version}`);
+    res.status(200).json({
+      status: 'ok',
+      url: `${song.artist}/${song.title}/${song.version}`
+    })
   } catch(e) {
     console.log(e);
-    res.status(500).send(`Error in updating data! Please try press 'Create Song' again later.`)
+    res.status(500).json({
+      status: "error",
+      message: "Server error"
+    });
   }
 }
 
 async function saveSong(req, res, next) {
   if (!req.body.token) {
-    res.status(403).send("You do not have a token.");
+    res.status(403).json({
+      status: 'error',
+      message: 'Missing token'
+    });
     return;
   }
 
   const decodedToken = await admin.auth().verifyIdToken(req.body.token);
   if (!decodedToken || !decodedToken.uid) {
     res.status(403).json({
-      status: 'err',
-      reason: 'Wrong token'
+      status: 'error',
+      message: 'Wrong token'
     });
     return;
   }
@@ -125,12 +144,18 @@ async function saveSong(req, res, next) {
         .populate('author', 'uid');
 
     if (!song) {
-      res.status(404).send("This song has not already created.");
+      res.status(404).json({
+        status: 'error',
+        message: 'Song has not already created'
+      });
       return;
     }
 
     if (!song.author.uid !== uid) {
-      res.status(404).send("You can not edit songs which have created by another user.");
+      res.status(403).json({
+        status: 'error',
+        message: 'Wrong rights'
+      });
       return;
     }
 
@@ -142,10 +167,16 @@ async function saveSong(req, res, next) {
 
     await song.save();
 
-    res.status(200).send(`Ok!`);
+    res.status(200).json({
+      status: "ok",
+      message: "Saving successful"
+    });
   } catch (e) {
     console.log(e);
-    res.status(500).send("Server error");
+    res.status(500).json({
+      status: "error",
+      message: "Server error"
+    });
   }
 }
 
