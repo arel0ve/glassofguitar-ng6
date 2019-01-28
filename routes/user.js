@@ -133,9 +133,11 @@ async function getUserData(req, res, next) {
 
   res.status(200).json({
     status: 'ok',
-    login: user.login,
-    name: user.name,
-    created: user.created,
+    user: {
+      login: user.login,
+      name: user.name,
+      created: user.created,
+    },
     songs
   });
 }

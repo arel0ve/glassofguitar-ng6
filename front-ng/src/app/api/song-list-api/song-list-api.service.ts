@@ -11,7 +11,7 @@ export class SongListApiService {
       private http: HttpService
   ) { }
 
-  getSongsListByArtist({ artist }) {
+  getSongsByArtist({ artist }) {
     return this.http.get(
         `songs/artist/${artist}`,
         {withCredentials: true}
@@ -38,6 +38,16 @@ export class SongListApiService {
     )
         .pipe(
             retry(1)
+        );
+  }
+
+  getMostPopularitySongs() {
+    return this.http.get(
+        `songs/most-popularity`,
+        {withCredentials: true}
+    )
+        .pipe(
+          retry(1)
         );
   }
 }
