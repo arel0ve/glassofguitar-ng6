@@ -32,8 +32,6 @@ import {AuthService} from '../services/auth/auth.service';
 })
 export class MenuComponent implements OnInit, OnChanges {
 
-  @Input() menuColor;
-
   @ViewChild('searchField') searchElem: ElementRef;
 
   isLogin: boolean;
@@ -61,7 +59,7 @@ export class MenuComponent implements OnInit, OnChanges {
     this.logClass = this.isLogin ? 'log-out' : 'log-in';
     this.loginLink = this.isLogin ? '/todo/logout' : '/todo/login';
     if (window['cordova'] && window['cordova'].platformId === 'android' && window['StatusBar']) {
-      window['StatusBar'].backgroundColorByHexString(this.menuColor);
+      window['StatusBar'].backgroundColorByHexString('#4d0e1b');
     }
   }
 

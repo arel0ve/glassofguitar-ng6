@@ -1,14 +1,13 @@
 .wrapper {
   position: fixed;
+  background: linear-gradient(rgba(77, 14, 27, 1), rgba(77, 14, 27, 0));
   box-shadow: 0 1px 2px black;
-  opacity: .75;
   height: 1.1em;
   width: 100%;
   font-size: 1.5em;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  transition: opacity .3s;
   font-family: "Guild Regular", sans-serif;
   @media (min-width: 576px) {
     font-size: 2em;
@@ -19,8 +18,7 @@
 }
 
 .wrapper:hover {
-  opacity: 1;
-  transition: opacity .6s;
+  background: linear-gradient(rgba(77, 14, 27, 1), rgba(77, 14, 27, .5));
 }
 
 .main-menu-ico {

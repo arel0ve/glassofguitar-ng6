@@ -11,9 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { SonglistComponent } from './songlist/songlist.component';
-import { UserinfoComponent } from './userinfo/userinfo.component';
-import { ChooseSongPageComponent } from './choose-song-page/choose-song-page.component';
+import { MenuComponent } from './menu/menu.component';
 
 export function createTranslateLoader(http: HttpClient, location: Location) {
   // Make sure translation location complies with APP_BASE_HREF
@@ -23,9 +21,7 @@ export function createTranslateLoader(http: HttpClient, location: Location) {
 @NgModule({
   declarations: [
     AppComponent,
-    SonglistComponent,
-    UserinfoComponent,
-    ChooseSongPageComponent,
+    MenuComponent,
   ],
   imports: [
     CommonModule,

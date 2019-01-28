@@ -30,11 +30,6 @@ let schema = new Schema({
     type: String
   },
 
-  hatColor: {
-    type: String,
-    default: '#51907f'
-  },
-
   created: {
     type: Date,
     default: Date.now

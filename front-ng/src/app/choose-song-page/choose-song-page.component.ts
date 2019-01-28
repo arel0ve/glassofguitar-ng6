@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-choose-song-page',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChooseSongPageComponent implements OnInit {
 
-  constructor() { }
+  public showUserInfo = false;
+
+  constructor(
+      private router: Router
+  ) { }
 
   ngOnInit() {
+    if (this.router.url.slice(0, 5).includes('user')) {
+
+      this.showUserInfo = true;
+    }
   }
 
 }

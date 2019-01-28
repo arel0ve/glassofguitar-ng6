@@ -85,7 +85,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.sendFile(path.join(__dirname, 'front-ng/dist/angular-prj/index.html'));
+  res.sendFile(path.join(__dirname, 'front-ng/dist/index.html'));
   // res.render('error');
 });
 

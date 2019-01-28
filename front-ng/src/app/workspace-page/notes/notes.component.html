@@ -1,0 +1,59 @@
+<div #notesBlock class="wrapper" [class.regular-wrapper]="!fullscreen" [class.full-wrapper]="fullscreen">
+
+  <div class="hat">
+
+    <div class="play-menu">
+      <i class="large material-icons" (click)="addSong()">add_circle</i>
+      <i #playBtn class="large material-icons" (click)="play()">play_circle_filled</i>
+      <i class="large material-icons" (click)="stop()">replay</i>
+    </div>
+
+    <div class="action-menu">
+      <div class="user-photo" (click)="showAuthor()">
+        <img [src]="imgSrc"
+             alt="Guitarist avatar" class="main-menu-ico">
+      </div>
+    </div>
+
+    <!--<div class="action-menu">-->
+      <!--<i class="large material-icons start" (click)="streamStart()" *ngIf="login === user && !ws">voice_chat</i>-->
+      <!--<i class="large material-icons start" (click)="streamPlay()" *ngIf="login !== user && !ws">tv</i>-->
+      <!--<i class="large material-icons stop" (click)="streamStop()" *ngIf="ws">videocam_off</i>-->
+    <!--</div>-->
+
+    <div class="action-menu">
+      <i class="large material-icons action" (click)="goFullscreenGuitar()">fullscreen</i>
+      <i class="large material-icons action" *ngIf="!fullscreen" (click)="goFullscreenNotes()">library_music</i>
+      <i class="large material-icons action" *ngIf="fullscreen" (click)="exitFullscreenNotes()">fullscreen_exit</i>
+      <i class="large material-icons action" (click)="showHelp()">help_outline</i>
+    </div>
+
+  </div>
+
+  <div class="song-title">
+    <b (click)="showArtistSongs()">{{ song.artist }}</b>
+    &nbsp;-&nbsp;
+    <b (click)="showSongVersions()">{{ song.title }}</b>
+  </div>
+
+  <div class="bar">
+    <div class="speed" contenteditable="true" appChangedNotes="speed" (blur)="changeSpeed($event)">{{ speed }}</div>
+    <div class="numerator" contenteditable="true" appChangedNotes="numerator" (blur)="changeSize($event, true)">
+      {{ numerator }}
+    </div>
+    <div class="denominator" contenteditable="true" appChangedNotes="denominator" (blur)="changeSize($event, false)">
+      {{ denominator }}
+    </div>
+  </div>
+  <div *ngFor="let column of notes; index as i" class="column" [class.last-column]="i % barLength === barLength - 1">
+    <i class="large material-icons" [class.selected]="selectedColumn === i" (click)="selectionClick(i)">place</i>
+    <div type="text" *ngFor="let note of column.split(''); index as j" class="note" appChangedNotes="note"
+           (blur)="changeNote($event, i, j)">{{ note !== '-' ? guitar.class.getNumByLetter(note) : '-' }}
+    </div>
+  </div>
+  <div class="info-notes">
+    <div class="plus-btn" (click)="plusColumns()"></div>
+    <div [ngClass]="{'successful-saving': successfulSaving,
+      'unsuccessful-saving': !successfulSaving && successfulSaving !== null}"></div>
+  </div>
+</div>

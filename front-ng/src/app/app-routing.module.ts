@@ -4,16 +4,23 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: './workspace/workspace.module#WorkspaceModule'
-  },
-  {
-    path: 'user/:login',
-    redirectTo: 'user/:user/0',
-    pathMatch: 'full'
+    loadChildren: './workspace-page/workspace-page.module#WorkspacePageModule'
   },
   {
     path: 'song/:artist/:song/:version',
-    loadChildren: './workspace/workspace.module#WorkspaceModule'
+    loadChildren: './workspace-page/workspace-page.module#WorkspacePageModule'
+  },
+  {
+    path: 'user/:login',
+    loadChildren: './choose-song-page/choose-song-page.module#ChooseSongPageModule'
+  },
+  {
+    path: 'songs/:artist',
+    loadChildren: './choose-song-page/choose-song-page.module#ChooseSongPageModule',
+  },
+  {
+    path: 'songs/:artist/:title',
+    loadChildren: './choose-song-page/choose-song-page.module#ChooseSongPageModule'
   },
   {
     path: 'todo/:mode',

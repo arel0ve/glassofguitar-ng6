@@ -1,0 +1,28 @@
+<div class="wrapper">
+
+  <div class="user-name">
+    <div>
+      <b>{{ user.tag }}</b>
+    </div>
+    <div>{{ user.name }}</div>
+  </div>
+
+  <div class="user-photo">
+    <img [src]="imgSrc"
+         alt="Guitarist avatar" class="main-menu-ico" (click)="showAvatar()">
+  </div>
+
+  <!--<div class="wrapper-3d">-->
+    <!--<div #userInfo class="userinfo" (mouseenter)="enterInfo()" (mouseleave)="leaveInfo()">-->
+      <!--<p><b>Birthday</b>: {{ user.birthday }}</p>-->
+      <!--<p><b>Place of birth</b>: {{ user.place }}</p>-->
+      <!--<p><b>Country living</b>: {{ user.country }}</p>-->
+      <!--&lt;!&ndash;<p><b>Biography</b>:<br>{{ user.biography }}</p>&ndash;&gt;-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <div #songs class="user-track-list">
+    <app-song *ngFor="let song of user.songs" [song]="song"></app-song>
+  </div>
+
+</div>

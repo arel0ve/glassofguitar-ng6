@@ -1,4 +1,4 @@
-import { Guitar } from './guitar/guitar';
+import { Guitar } from './workspace-page/guitar/guitar';
 
 declare global {
   interface Window {
