@@ -2,7 +2,7 @@ import {AfterViewChecked, Component, ElementRef, Input, OnChanges, OnInit, ViewC
 import { Guitar } from '../guitar/guitar';
 import { Animation } from '../../animation';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SaveSongService} from '../../api/save-song/save-song.service';
+import {SongApiService} from '../../api/song-api/song-api.service';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {FullscreenService} from '../../services/fullscreen/fullscreen.service';
@@ -44,7 +44,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   constructor(
       private exitRouter: Router,
       private router: ActivatedRoute,
-      private saveSongService: SaveSongService,
+      private songApiService: SongApiService,
       private fullscreenService: FullscreenService
   ) { }
 
@@ -261,7 +261,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
 
   saveAllNotes() {
     if (this.songId) {
-      this.saveSongService.saveSong({
+      this.songApiService.saveSong({
         songId: this.songId,
         speed: this.speed,
         size: `${this.numerator}/${this.denominator}`,

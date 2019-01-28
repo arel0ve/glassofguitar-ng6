@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {GetSongService} from '../api/get-song/get-song.service';
+import {SongApiService} from '../api/song-api/song-api.service';
 
 @Component({
   selector: 'app-workspace',
@@ -17,7 +17,7 @@ export class WorkspacePageComponent implements OnInit, OnDestroy {
   song: any;
 
   constructor(
-      private getSongService: GetSongService,
+      private getSongService: SongApiService,
       private route: ActivatedRoute,
       private exitRouter: Router
   ) {

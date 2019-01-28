@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AvatarService} from '../../api/todo/avatar/avatar.service';
+import {AvatarService} from '../../api/avatar/avatar.service';
 import {Location} from '@angular/common';
 
 @Component({

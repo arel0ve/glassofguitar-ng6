@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class ChooseSongPageComponent implements OnInit {
 
-  public showUserInfo = false;
+  public mode = 'song';
 
   constructor(
       private router: Router
@@ -16,9 +16,10 @@ export class ChooseSongPageComponent implements OnInit {
 
   ngOnInit() {
     if (this.router.url.slice(0, 5).includes('user')) {
-
-      this.showUserInfo = true;
+      this.mode = 'user';
     }
   }
+
+
 
 }

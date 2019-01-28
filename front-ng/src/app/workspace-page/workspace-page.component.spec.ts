@@ -3,7 +3,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { WorkspacePageComponent } from './workspace-page.component';
-import { GetUserService } from '../api/get-user/get-user.service';
+import { UserApiService } from '../api/user-api/user-api.service';
 
 describe('WorkspacePageComponent', () => {
   let component: WorkspacePageComponent;
@@ -11,13 +11,13 @@ describe('WorkspacePageComponent', () => {
   let apiGetUser;
 
   beforeEach(async(() => {
-    apiGetUser = jasmine.createSpyObj('GetUserService', ['getUser']);
+    apiGetUser = jasmine.createSpyObj('UserApiService', ['getUser']);
     TestBed.configureTestingModule({
       declarations: [ WorkspacePageComponent ],
       imports: [ RouterTestingModule ],
       providers: [
         {
-          provide: GetUserService, useValue: apiGetUser
+          provide: UserApiService, useValue: apiGetUser
         }
       ],
       schemas: [ NO_ERRORS_SCHEMA ]

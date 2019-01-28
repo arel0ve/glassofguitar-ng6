@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {FormGroup, FormControl} from '@angular/forms';
 import {Location} from '@angular/common';
-import {AddSongService} from '../../api/todo/add-song/add-song.service';
+import {SongApiService} from '../../api/song-api/song-api.service';
 
 @Component({
   selector: 'app-addsong',
@@ -21,7 +21,7 @@ export class AddsongComponent implements OnInit {
   constructor(
       private exitRouter: Router,
       private location: Location,
-      private addSongService: AddSongService,
+      private songApiService: SongApiService,
   ) { }
 
   ngOnInit() {
@@ -33,11 +33,11 @@ export class AddsongComponent implements OnInit {
   }
 
   doCreate() {
-    this.addSongService.addSong({
+    this.songApiService.addSong({
       artist: this.form.value.artist,
       song: this.form.value.song
     }).subscribe(
-        url => this.exitRouter.navigate([`/user/${url}`]),
+        res => this.exitRouter.navigate([`/user/${res['url']}`]),
         err => this.message = err.error
     );
   }

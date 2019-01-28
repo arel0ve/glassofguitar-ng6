@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { LoginComponent } from './login.component';
-import { LoginService } from '../../api/todo/login/login.service';
+import { LoginService } from '../../api/login/login.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

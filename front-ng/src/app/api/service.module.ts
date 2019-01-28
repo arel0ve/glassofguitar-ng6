@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {AddSongService} from './todo/add-song/add-song.service';
-import {HttpClientModule} from '@angular/common/http';
-import {SaveSongService} from './save-song/save-song.service';
-import {LoginService} from './todo/login/login.service';
-import {LogoutService} from './todo/logout/logout.service';
-import {GetUserService} from './get-user/get-user.service';
-import {SearchQueryService} from './search-query/search-query.service';
-import {AvatarService} from './todo/avatar/avatar.service';
-import {AngularFireModule} from '@angular/fire';
-import {environment} from '../../environments/environment';
-import {AngularFireAuthModule} from '@angular/fire/auth';
+import { HttpClientModule } from '@angular/common/http';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+import { LoginService } from './login/login.service';
+import { LogoutService } from './logout/logout.service';
+import { UserApiService } from './user-api/user-api.service';
+import { SongApiService } from './song-api/song-api.service';
+import { SearchQueryService } from './search-query/search-query.service';
+import { AvatarService } from './avatar/avatar.service';
+import { environment } from '../../environments/environment';
 
 @NgModule({
   imports: [
@@ -20,11 +20,10 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
     HttpClientModule,
   ],
   providers: [
-    AddSongService,
-    SaveSongService,
     LoginService,
     LogoutService,
-    GetUserService,
+    UserApiService,
+    SongApiService,
     SearchQueryService,
     AvatarService,
   ],

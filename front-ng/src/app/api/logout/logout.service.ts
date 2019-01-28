@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {from as fromPromise, throwError as _throw} from 'rxjs';
 import {catchError, map, switchMap} from 'rxjs/operators';
-import {HttpService} from '../../http/http.service';
+import {HttpService} from '../http/http.service';
 
 @Injectable({
   providedIn: 'root'

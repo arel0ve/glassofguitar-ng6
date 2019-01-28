@@ -1,7 +1,7 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormGroup, FormControl} from '@angular/forms';
-import {LoginService} from '../../api/todo/login/login.service';
+import {LoginService} from '../../api/login/login.service';
 import {from as fromPromise} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 
