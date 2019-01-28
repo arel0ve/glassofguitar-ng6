@@ -4,6 +4,8 @@ const router = express.Router();
 const User = require('../models/user').User;
 const Song = require('../models/song').Song;
 
+const admin = require('firebase-admin');
+
 router.post('/', postUserLogin);
 router.put('/:login', putUserName);
 router.get('/:login', getUserData);
