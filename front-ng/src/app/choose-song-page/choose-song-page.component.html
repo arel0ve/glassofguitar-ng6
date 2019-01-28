@@ -1,2 +1,2 @@
-<app-userinfo *ngIf="mode === 'user'"></app-userinfo>
-<app-songlist></app-songlist>
+<app-userinfo *ngIf="mode === 'user'" [user]="user"></app-userinfo>
+<app-songlist [songs]="songs"></app-songlist>
