@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AvatarService} from '../../api/avatar/avatar.service';
 import {Location} from '@angular/common';
+import {ActivatedRoute} from '@angular/router';
+import {AvatarService} from '../../api/avatar/avatar.service';
 
 @Component({
   selector: 'app-avatar',
@@ -11,15 +12,33 @@ export class AvatarComponent implements OnInit {
 
   photoUrl: string;
   file: File;
+  isCurrentUser: boolean;
 
-  constructor(private avatarService: AvatarService, private location: Location) { }
+  constructor(
+      private route: ActivatedRoute,
+      private avatarService: AvatarService,
+      private location: Location
+  ) { }
 
   ngOnInit() {
     this.photoUrl = 'url(assets/photos/no-photo.png)';
-    this.avatarService.getAvatar()
-        .subscribe(
-            value => this.photoUrl = `url(${value['photo']})`,
-            () => this.photoUrl = 'url(assets/photos/no-photo.png)');
+    this.isCurrentUser = false;
+    this.route.queryParams.subscribe(value => {
+      if (value && value.length > 0) {
+        this.avatarService.getAvatar(value['login'])
+            .subscribe(
+                res => {
+                  if (res['photoUrl']) {
+                    this.photoUrl = `url(${res['photoUrl']})`;
+                  }
+                  if (res['status'] === 'ok') {
+                    this.isCurrentUser = true;
+                  }
+                  }
+            );
+      }
+    });
+
   }
 
   loadAvatar(event: Event) {

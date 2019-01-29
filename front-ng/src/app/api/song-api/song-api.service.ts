@@ -29,7 +29,7 @@ export class SongApiService {
         },
         {
           withCredentials: true,
-          responseType: 'text'
+          responseType: 'json'
         });
   }
 
@@ -43,7 +43,7 @@ export class SongApiService {
         },
         {
           withCredentials: true,
-          responseType: 'text'
+          responseType: 'json'
         });
   }
 

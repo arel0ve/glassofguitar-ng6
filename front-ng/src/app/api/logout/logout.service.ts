@@ -29,7 +29,7 @@ export class LogoutService {
     return this.http.post('logout',
         null,
         {
-          responseType: 'text',
+          responseType: 'json',
           withCredentials: true
         }
     );

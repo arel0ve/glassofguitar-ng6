@@ -8,21 +8,22 @@ export class AvatarService {
 
   constructor(private http: HttpService) { }
 
-  getAvatar() {
+  getAvatar(login) {
     return this.http.get(
-        'getavatar',
+        `avatar/${login}`,
         {
-          withCredentials: true
+          withCredentials: true,
+          responseType: 'json'
         });
   }
 
   postAvatar(formData) {
     return this.http.post(
-        'postavatar',
+        'avatar',
         formData,
         {
           withCredentials: true,
-          responseType: 'text'
+          responseType: 'json'
         });
   }
 }
