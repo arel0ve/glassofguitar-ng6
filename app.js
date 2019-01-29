@@ -16,8 +16,7 @@ const logoutRouter = require('./routes/logout');
 const songRouter = require('./routes/song');
 const songsRouter = require('./routes/songs');
 
-const getAvatarRouter = require('./routes/get-avatar');
-const postAvatarRouter = require('./routes/post-avatar');
+const avatarRouter = require('./routes/avatar');
 
 const queryRouter = require('./routes/search-query');
 
@@ -57,8 +56,7 @@ app.use('/api/user/', userRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/logout', logoutRouter);
 
-app.use('/api/getavatar', getAvatarRouter);
-app.use('/api/postavatar', postAvatarRouter);
+app.use('/api/avatar', avatarRouter);
 
 app.use('/api/query', queryRouter);
 

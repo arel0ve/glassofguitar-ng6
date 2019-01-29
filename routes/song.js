@@ -74,7 +74,7 @@ async function getSong(req, res, next) {
 }
 
 async function addSong(req, res, next) {
-  if (!req.body.token) {
+  if (!req.headers.token) {
     res.status(403).json({
       status: 'error',
       message: 'Missing token'
@@ -82,7 +82,7 @@ async function addSong(req, res, next) {
     return;
   }
 
-  const decodedToken = await admin.auth().verifyIdToken(req.body.token);
+  const decodedToken = await admin.auth().verifyIdToken(req.headers.token);
   if (!decodedToken || !decodedToken.uid) {
     res.status(403).json({
       status: 'error',
@@ -121,7 +121,7 @@ async function addSong(req, res, next) {
 }
 
 async function saveSong(req, res, next) {
-  if (!req.body.token) {
+  if (!req.headers.token) {
     res.status(403).json({
       status: 'error',
       message: 'Missing token'
@@ -129,7 +129,7 @@ async function saveSong(req, res, next) {
     return;
   }
 
-  const decodedToken = await admin.auth().verifyIdToken(req.body.token);
+  const decodedToken = await admin.auth().verifyIdToken(req.headers.token);
   if (!decodedToken || !decodedToken.uid) {
     res.status(403).json({
       status: 'error',

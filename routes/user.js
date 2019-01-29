@@ -11,7 +11,7 @@ router.put('/:login', putUserName);
 router.get('/:login', getUserData);
 
 async function postUserLogin(req, res, next) {
-  if (!req.body.token) {
+  if (!req.headers.token) {
     res.status(403).json({
       status: 'error',
       message: 'Missing token'
@@ -27,7 +27,7 @@ async function postUserLogin(req, res, next) {
     return;
   }
 
-  const decodedToken = await admin.auth().verifyIdToken(req.body.token);
+  const decodedToken = await admin.auth().verifyIdToken(req.headers.token);
   if (!decodedToken || !decodedToken.uid) {
     res.status(403).json({
       status: 'error',
@@ -66,12 +66,12 @@ async function postUserLogin(req, res, next) {
     status: 'ok',
     login: user.login,
     name: user.name,
-    uToken: req.body.token
+    uToken: req.headers.token
   });
 }
 
 async function putUserName(req, res, next) {
-  if (!req.body.token) {
+  if (!req.headers.token) {
     res.status(403).json({
       status: 'error',
       message: 'Missing token'
@@ -87,7 +87,7 @@ async function putUserName(req, res, next) {
     return;
   }
 
-  const decodedToken = await admin.auth().verifyIdToken(req.body.token);
+  const decodedToken = await admin.auth().verifyIdToken(req.headers.token);
   if (!decodedToken || !decodedToken.uid) {
     res.status(403).json({
       status: 'error',
@@ -115,7 +115,7 @@ async function putUserName(req, res, next) {
     status: 'ok',
     login: user.login,
     name: user.name,
-    uToken: req.body.token
+    uToken: req.headers.token
   });
 }
 
