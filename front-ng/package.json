@@ -1,6 +1,7 @@
 {
   "name": "glass-of-guitar",
   "description": "Web application for playing the guitar with your device and sharing your notes",
+  "license": "MIT",
   "version": "1.0.0",
   "homepage": "http://www.glassofguitar.com/",
   "author": {
