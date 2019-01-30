@@ -12,12 +12,13 @@ export class WorkspacePageComponent implements OnInit, OnDestroy {
 
   artistName: Observable<string>;
   songName: Observable<string>;
+  version: number;
   navigationSubscription;
   author: any;
   song: any;
 
   constructor(
-      private getSongService: SongApiService,
+      private songApiService: SongApiService,
       private route: ActivatedRoute,
       private exitRouter: Router
   ) {
@@ -31,15 +32,17 @@ export class WorkspacePageComponent implements OnInit, OnDestroy {
 
   initialiseInvites() {
     this.route.params.subscribe(value => {
-      this.artistName = value.user || '0';
+      this.artistName = value.artist || '0';
       this.songName = value.song || '0';
+      this.version = value.version || 0;
 
-      this.getSongService.getSong({
+      this.songApiService.getSong({
         artist: this.artistName,
-        song: this.songName
-      }).subscribe(song => {
-        this.song = song;
-        this.author = song['author'];
+        song: this.songName,
+        version: this.version
+      }).subscribe(res => {
+        this.song = res['song'];
+        this.author = res['song']['author'];
       });
     });
   }

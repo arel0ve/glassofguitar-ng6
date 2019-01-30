@@ -86,6 +86,7 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   ngOnChanges() {
+    console.log(this.song);
     if (this.song && this.song.notes) {
       this.songId = this.song._id;
       this.notes = this.song.notes;

@@ -6,51 +6,54 @@ const admin = require('firebase-admin');
 const User = require('../models/user').User;
 const Song = require('../models/song').Song;
 
-router.get(['/:artist/:song', '/:artist/:song/:version'] , getSong);
+router.get(['/:artist/:song', '/:artist/:title/:version'] , getSong);
 router.post('/', addSong);
 router.put('/', saveSong);
 
 async function getSong(req, res, next) {
   try{
     let version = !!req.params.version ? req.params.version : 0;
-    let song = await Song.findOne({artist: req.params.artist, song: req.params.song, version})
+    let song = await Song.findOne({artist: req.params.artist, title: req.params.title, version})
         .populate('author', 'login name photoUrl hatColor -_id');
 
     if (!song) {
       res.status(203).json(
           {
-            artist: 'Ludwig van Beethoven',
-            title: 'Für Elise',
-            version: 0,
-            views: null,
-            plays: null,
-            likes: null,
-            size: '3/8',
-            speed: '63',
-            notes: [
-              '------','------','------','------','-----0','----4-',
-              '-----0','----4-','-----0','----0-','----3-','----1-',
-              '---2--','------','------','-3----','--2---','---2--',
-              '----0-','------','------','--2---','---1--','----0-',
-              '----1-','------','------','--2---','-----0','----4-',
-              '-----0','----4-','-----0','----0-','----3-','----1-',
-              '---2--','------','------','-3----','--2---','---2--',
-              '----0-','------','------','--2---','----1-','----0-',
-              '---2--','------','------','----0-','----1-','----3-',
-              '-----0','------','------','---0--','-----1','-----0',
-              '----3-','------','------','--3---','-----0','----3-',
-              '----1-','------','------','--2---','----3-','----1-',
-              '---0--','------','------','--2---','-----0','----4-',
-              '-----0','----4-','-----0','----0-','----3-','----1-',
-              '---2--','------','------','-3----','--2---','---2--',
-              '----0-','------','------','--2---','----1-','----0-',
-              '---2--','------','------','------','------','------'
-            ],
-            author: {
-              hatColor: '#51907F',
-              name: "Valerii Psol",
-              date: Date.now(),
-              photoUrl: null
+            status: 'default',
+            song: {
+              artist: 'Ludwig van Beethoven',
+              title: 'Für Elise',
+              version: 0,
+              views: null,
+              plays: null,
+              likes: null,
+              size: '3/8',
+              speed: '63',
+              notes: [
+                '------','------','------','------','-----0','----4-',
+                '-----0','----4-','-----0','----0-','----3-','----1-',
+                '---2--','------','------','-3----','--2---','---2--',
+                '----0-','------','------','--2---','---1--','----0-',
+                '----1-','------','------','--2---','-----0','----4-',
+                '-----0','----4-','-----0','----0-','----3-','----1-',
+                '---2--','------','------','-3----','--2---','---2--',
+                '----0-','------','------','--2---','----1-','----0-',
+                '---2--','------','------','----0-','----1-','----3-',
+                '-----0','------','------','---0--','-----1','-----0',
+                '----3-','------','------','--3---','-----0','----3-',
+                '----1-','------','------','--2---','----3-','----1-',
+                '---0--','------','------','--2---','-----0','----4-',
+                '-----0','----4-','-----0','----0-','----3-','----1-',
+                '---2--','------','------','-3----','--2---','---2--',
+                '----0-','------','------','--2---','----1-','----0-',
+                '---2--','------','------','------','------','------'
+              ],
+              author: {
+                hatColor: '#51907F',
+                name: "Valerii Psol",
+                date: Date.now(),
+                photoUrl: null
+              }
             }
           }
       );
@@ -96,11 +99,11 @@ async function addSong(req, res, next) {
 
     let user = await User.findOne({ uid }).populate('_id');
 
-    let sameSongs = await Song.find({ artist: req.body.artist, title: req.body.song }).populate('_id');
+    let sameSongs = await Song.find({ artist: req.body.artist, title: req.body.title }).populate('_id');
 
     let song = new Song({
       artist: req.body.artist,
-      title: req.body.song,
+      title: req.body.title,
       version: sameSongs.length,
       author: user._id
     });

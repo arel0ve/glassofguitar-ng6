@@ -1,2 +1,3 @@
 <app-userinfo *ngIf="mode === 'user'" [user]="user"></app-userinfo>
 <app-songlist [songs]="songs"></app-songlist>
+<a routerLink="/todo/addsong">{{ 'create_new_song' | translate }}</a>
