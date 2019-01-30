@@ -52,12 +52,12 @@ export class MenuComponent implements OnInit, OnChanges {
     this.foundSongs = [];
     this.authService.isAuth.subscribe((value) => {
       this.isLogin = value;
+      this.logClass = this.isLogin ? 'log-out' : 'log-in';
+      this.loginLink = this.isLogin ? '/todo/logout' : '/todo/login';
     });
   }
 
   ngOnChanges() {
-    this.logClass = this.isLogin ? 'log-out' : 'log-in';
-    this.loginLink = this.isLogin ? '/todo/logout' : '/todo/login';
     if (window['cordova'] && window['cordova'].platformId === 'android' && window['StatusBar']) {
       window['StatusBar'].backgroundColorByHexString('#4d0e1b');
     }

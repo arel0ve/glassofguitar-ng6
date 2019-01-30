@@ -22,5 +22,11 @@ export class AuthService {
 
   public setToken(token: string): void {
     localStorage.setItem('uToken', token);
+    this.checkAuth();
+  }
+
+  public clearToken(): void {
+    localStorage.removeItem('uToken');
+    this.checkAuth();
   }
 }

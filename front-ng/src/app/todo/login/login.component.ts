@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       email: this.form.value.email,
       password: this.form.value.password
     }).subscribe(
-        url => this.exitRouter.navigate([`/user/${url}/0`]),
+        url => this.exitRouter.navigate([`/user/${url}`]),
         err => this.message = err.error
     );
 
@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit {
     this.auth.setToken(rez.uToken);
     this._ngZone.run(() => {
       if (rez.login) {
-        this.exitRouter.navigate([`/user/${rez.login}/0`]);
+        this.exitRouter.navigate([`/user/${rez.login}`]);
       } else {
         this.exitRouter.navigate([`/todo/username`]);
       }

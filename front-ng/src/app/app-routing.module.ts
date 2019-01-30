@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: './choose-song-page/choose-song-page.module#ChooseSongPageModule'
   },
   {
+    path: 'songs',
+    loadChildren: './choose-song-page/choose-song-page.module#ChooseSongPageModule',
+  },
+  {
     path: 'songs/:artist',
     loadChildren: './choose-song-page/choose-song-page.module#ChooseSongPageModule',
   },

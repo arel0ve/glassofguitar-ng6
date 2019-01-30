@@ -83,6 +83,7 @@ export class LoginService {
               email = res.user.providerData[0]['email'];
               photoUrl = res.user.providerData[0]['photoURL'];
               phone = res.user.providerData[0]['phone'];
+              console.log(res.user);
               return res.user;
             }),
             switchMap(user => fromPromise(user.getIdToken())),

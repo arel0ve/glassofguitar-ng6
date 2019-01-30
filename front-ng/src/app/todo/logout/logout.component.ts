@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Location} from '@angular/common';
+import {Router} from '@angular/router';
 import {LogoutService} from '../../api/logout/logout.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class LogoutComponent implements OnInit {
   message: string;
 
   constructor(
-      private location: Location,
+      private exitRouter: Router,
       private logoutService: LogoutService,
   ) { }
 
@@ -21,16 +21,16 @@ export class LogoutComponent implements OnInit {
   }
 
   close() {
-    this.location.back();
+    this.exitRouter.navigate(['/']);
   }
 
   logout() {
     this.logoutService.doLogout().subscribe(res => {
-      if (res.toString() !== 'Ok!') {
+      if (res['status'] !== 'ok') {
         this.message = 'error_in_logout';
       } else {
         this.logoutService.authLogoutApp();
-        this.location.back();
+        this.exitRouter.navigate(['/songs']);
       }
     });
   }
