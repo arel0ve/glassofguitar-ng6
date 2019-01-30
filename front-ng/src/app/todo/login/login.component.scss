@@ -1,8 +1,7 @@
 fieldset {
-  background: rgba(0, 0, 0, .2);
-  width: 90%;
+  width: 100%;
   position: relative;
-  left: 5%;
+  left: 0;
   margin-top: 5%;
   @media (min-width: 576px) {
     width: 80%;
@@ -14,16 +13,13 @@ fieldset {
   }
 }
 
-legend {
-  background: rgba(0, 0, 0, .8);
-  padding: 3px 6px;
-  border-radius: 5px;
-  text-align: left;
-}
-
 fieldset > div {
   margin: 10px 0;
   text-align: center;
+}
+
+label {
+  display: inline;
 }
 
 label > span {
