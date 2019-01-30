@@ -10,11 +10,11 @@ const multerS3 = require('multer-s3');
 
 const AWS = require('aws-sdk');
 
-let fineName = '';
+let fileName = '';
 
 AWS.config.update({
-  secretAccessKey: 'Mr1JDAx/ql+wObd1ifhqLn89ZtEqenjLJZC8bPxc',
-  accessKeyId: 'AKIAJO2XWUY4J5CVIPPQ',
+  secretAccessKey: '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',
+  accessKeyId: 'AKIAIKA3CACJJNWK3LOA',
   region: 'us-east-1'
 });
 
@@ -27,9 +27,9 @@ const upload = multer({
     acl: 'public-read-write',
     key: async function (req, file, cb) {
 
-      fineName = Date.now().toString();
+      fileName = Date.now().toString();
 
-      cb(null, fineName);
+      cb(null, fileName);
     }
   })
 });
@@ -68,7 +68,7 @@ async function postAvatar(req, res, next) {
       return;
     }
 
-    user.photoUrl = `https://s3.amazonaws.com/glassof-guitar/${fineName}`;
+    user.photoUrl = `https://s3.amazonaws.com/glassof-guitar/${fileName}`;
 
     user = await user.save();
 
