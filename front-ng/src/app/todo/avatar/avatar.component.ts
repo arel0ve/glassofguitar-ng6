@@ -24,7 +24,7 @@ export class AvatarComponent implements OnInit {
     this.photoUrl = 'url(assets/photos/no-photo.png)';
     this.isCurrentUser = false;
     this.route.queryParams.subscribe(value => {
-      if (value && value.length > 0) {
+      if (value && value['login']) {
         this.avatarService.getAvatar(value['login'])
             .subscribe(
                 res => {

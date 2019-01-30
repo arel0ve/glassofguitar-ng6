@@ -139,6 +139,7 @@ async function getUserData(req, res, next) {
     user: {
       login: user.login,
       name: user.name,
+      photoUrl: user.photoUrl,
       created: user.created,
     },
     songs

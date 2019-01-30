@@ -16,7 +16,11 @@ export class AuthService {
     this.isAuth.next(!!window.localStorage.getItem('uToken'));
   }
 
-  public getCurrentToken(): string {
+  public getToken(): string {
     return window.localStorage.getItem('uToken');
+  }
+
+  public setToken(token: string): void {
+    localStorage.setItem('uToken', token);
   }
 }

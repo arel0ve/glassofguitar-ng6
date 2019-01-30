@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-userinfo',
@@ -9,9 +10,13 @@ export class UserinfoComponent implements OnInit {
 
   @Input() user;
 
-  constructor() { }
+  constructor(private exitRouter: Router) { }
 
   ngOnInit() {
+  }
+
+  showFullImage() {
+    this.exitRouter.navigate(['/todo/avatar'], { queryParams: { login: this.user.login } });
   }
 
 }

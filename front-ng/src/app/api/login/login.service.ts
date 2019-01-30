@@ -4,6 +4,7 @@ import { auth as firebaseAuth } from 'firebase/app';
 import {from as fromPromise, throwError as _throw} from 'rxjs';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {HttpService} from '../http/http.service';
+import {AuthService} from "../../services/auth/auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class LoginService {
 
   constructor(
       private http: HttpService,
+      private auth: AuthService,
       private afAuth: AngularFireAuth
   ) { }
 
@@ -115,9 +117,5 @@ export class LoginService {
           withCredentials: true,
           responseType: 'json'
         });
-  }
-
-  authInApp(token) {
-    localStorage.setItem('uToken', token);
   }
 }

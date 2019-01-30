@@ -1,4 +1,4 @@
 <div class="wrapper">
-  <img [src]="user.photoUrl">
-  <span>{{ user.name }}</span>
+  <img [src]="user?.photoUrl" (click)="showFullImage()">
+  <span>{{ user?.name }}</span>
 </div>

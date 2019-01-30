@@ -4,6 +4,7 @@ import {FormGroup, FormControl} from '@angular/forms';
 import {LoginService} from '../../api/login/login.service';
 import {from as fromPromise} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
       private exitRouter: Router,
+      private auth: AuthService,
       private loginService: LoginService,
       private _ngZone: NgZone
   ) { }
@@ -78,7 +80,7 @@ export class LoginComponent implements OnInit {
 
   finishLogin(rez) {
     this.loading = false;
-    this.loginService.authInApp(rez.uToken);
+    this.auth.setToken(rez.uToken);
     this._ngZone.run(() => {
       if (rez.login) {
         this.exitRouter.navigate([`/user/${rez.login}/0`]);
