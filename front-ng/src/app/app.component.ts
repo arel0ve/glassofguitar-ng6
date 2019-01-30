@@ -31,6 +31,16 @@ export class AppComponent implements OnInit {
     this.browserLang = this.translate.getBrowserLang();
     this.translate.use(this.browserLang.match(/en|ru/) ? this.browserLang : 'en');
 
+    if (this.authService.isAuth.value === true) {
+      setTimeout(() => {
+        this.authService.updateToken();
+      }, 1000);
+    }
+
+    setInterval(() => {
+      this.authService.updateToken();
+    }, 1000000);
+
     document.addEventListener('backbutton', (e) => {
       try {
         if (window.history.length > 1) {

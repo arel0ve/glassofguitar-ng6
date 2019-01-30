@@ -42,8 +42,4 @@ export class HttpService {
     }
     return this.http.delete(environment.baseApiURL + url, options);
   }
-
-  public updateToken() {
-    this.afAuth.auth.currentUser.getIdToken().then(token => this.auth.setToken(token));
-  }
 }

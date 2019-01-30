@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class AuthService {
 
   public isAuth: BehaviorSubject<boolean>;
 
-  constructor() {
+  constructor(private afAuth: AngularFireAuth) {
     this.isAuth = new BehaviorSubject(false);
   }
 
@@ -28,5 +29,9 @@ export class AuthService {
   public clearToken(): void {
     localStorage.removeItem('uToken');
     this.checkAuth();
+  }
+
+  public updateToken() {
+    this.afAuth.auth.currentUser.getIdToken().then(token => this.setToken(token));
   }
 }
