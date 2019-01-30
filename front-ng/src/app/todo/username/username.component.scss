@@ -1,8 +1,16 @@
 fieldset {
   background: rgba(0, 0, 0, .2);
-  width: 50%;
+  width: 90%;
   position: relative;
-  left: calc(25% - 12px);
+  left: calc(5% - 18px);
+  @media (min-width: 576px) {
+    width: 80%;
+    left: calc(10% - 18px);
+  }
+  @media (min-width: 992px) {
+    width: 60%;
+    left: calc(20% - 18px);
+  }
 }
 
 legend {
