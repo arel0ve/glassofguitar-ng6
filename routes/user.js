@@ -107,7 +107,8 @@ async function putUserName(req, res, next) {
     return;
   }
 
-  user.name = req.body.name ? req.body.name : req.body.login;
+  user.login = req.params.login;
+  user.name = req.body.name ? req.body.name : req.params.login;
 
   user = await user.save();
 

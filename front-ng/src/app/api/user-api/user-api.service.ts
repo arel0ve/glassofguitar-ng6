@@ -18,4 +18,17 @@ export class UserApiService {
             retry(1)
         );
   }
+
+  setupUsername({ login, name }) {
+    return this.http.put(
+        `user/${login}`,
+        {
+          name
+        },
+        {
+          withCredentials: true,
+          responseType: 'json'
+        }
+    );
+  }
 }

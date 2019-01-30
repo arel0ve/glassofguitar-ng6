@@ -16,7 +16,7 @@ router.post('/', login);
 
 async function login(req, res, next) {
 
-  if (!req.headers.token) {
+  if (!req.body.token) {
     res.status(400).json({
       status: 'error',
       message: 'You have not token'
@@ -24,7 +24,7 @@ async function login(req, res, next) {
     return;
   }
 
-  const decodedToken = await admin.auth().verifyIdToken(req.headers.token);
+  const decodedToken = await admin.auth().verifyIdToken(req.body.token);
   if (!decodedToken || !decodedToken.uid) {
     res.status(403).json({
       status: 'error',
@@ -50,7 +50,7 @@ async function login(req, res, next) {
       status: 'ok',
       login: '',
       name: '',
-      uToken: req.headers.token
+      uToken: req.body.token
     });
     return;
   }
@@ -59,7 +59,7 @@ async function login(req, res, next) {
     status: 'ok',
     login: user.login,
     name: user.name ? user.name : user.login,
-    uToken: req.headers.token
+    uToken: req.body.token
   });
 }
 

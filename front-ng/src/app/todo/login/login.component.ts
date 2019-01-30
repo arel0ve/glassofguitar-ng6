@@ -78,7 +78,6 @@ export class LoginComponent implements OnInit {
 
   finishLogin(rez) {
     this.loading = false;
-    rez = JSON.parse(rez);
     this.loginService.authInApp(rez.uToken);
     this._ngZone.run(() => {
       if (rez.login) {
