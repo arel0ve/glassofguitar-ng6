@@ -31,6 +31,7 @@
               "src/google3e4c4b4a19327ba2.html"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": []

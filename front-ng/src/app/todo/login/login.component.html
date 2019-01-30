@@ -1,6 +1,5 @@
 <form [formGroup]="form">
   <fieldset id="autho-field">
-    <legend>{{ 'sign_in' | translate | uppercase }}</legend>
     <div>
       <button type="button" class="social-btn" (click)="doLoginWithGoogle()" [disabled]="loading">
         {{ 'sign_in_with' | translate: {social: 'Google'} }}

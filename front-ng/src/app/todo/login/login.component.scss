@@ -2,14 +2,15 @@ fieldset {
   background: rgba(0, 0, 0, .2);
   width: 90%;
   position: relative;
-  left: calc(5% - 18px);
+  left: 5%;
+  margin-top: 5%;
   @media (min-width: 576px) {
     width: 80%;
-    left: calc(10% - 18px);
+    left: 10%;
   }
   @media (min-width: 992px) {
     width: 60%;
-    left: calc(20% - 18px);
+    left: 20%;
   }
 }
 

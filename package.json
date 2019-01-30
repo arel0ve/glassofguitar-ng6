@@ -8,6 +8,7 @@
   "dependencies": {
     "@webcomponents/webcomponentsjs": "^2.0.4",
     "aws-sdk": "^2.395.0",
+    "bootstrap": "^4.2.1",
     "connect-busboy": "0.0.2",
     "connect-mongo": "^2.0.1",
     "cookie-parser": "~1.4.3",
