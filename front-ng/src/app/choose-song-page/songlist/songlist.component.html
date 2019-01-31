@@ -1,12 +1,11 @@
 <div class="wrapper">
-  <div *ngIf="!songs?.length">
+  <div *ngIf="!songs?.length" class="song">
     There are no songs
   </div>
-  <div *ngFor="let song of songs">
-    <a [routerLink]="'/'+song.artist+'/'+song.title+'/'+song.version">
-      <span>{{ song.artist }}</span>
-      -
-      <span>{{ song.title }}</span>
-    </a>
-  </div>
+  <a *ngFor="let song of songs" class="song"
+     [routerLink]="'/song/'+song.artist+'/'+song.title+'/'+song.version">
+    <span>{{ song.artist }}</span>
+    -
+    <span>{{ song.title }}</span>
+  </a>
 </div>
