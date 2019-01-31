@@ -16,10 +16,11 @@ async function searchQuery(req, res, next) {
         .limit(10);
 
     if (songs.length === 0) {
-      res.status(203).json([{
+      res.status(203).json({
         status: 'error',
-        message: `Songs with '${req.body.query}' not found`
-      }]);
+        message: `songs_not_found`,
+        query: req.body.query
+      });
       return;
     }
 
@@ -32,7 +33,7 @@ async function searchQuery(req, res, next) {
     console.log(e);
     res.status(500).json({
       status: 'error',
-      message: 'Server error'
+      message: 'server_error'
     });
   }
 };

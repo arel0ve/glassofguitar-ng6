@@ -40,6 +40,8 @@ export class MenuComponent implements OnInit, OnChanges {
   showSearch: boolean;
   loginLink: string;
   foundSongs: any;
+  queryErrorMessage: string;
+  wrongQuery: string;
 
   constructor(
       private searchQueryService: SearchQueryService,
@@ -50,6 +52,8 @@ export class MenuComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.showSearch = false;
     this.foundSongs = [];
+    this.queryErrorMessage = '';
+    this.wrongQuery = '';
     this.authService.isAuth.subscribe((value) => {
       this.isLogin = value;
       this.logClass = this.isLogin ? 'log-out' : 'log-in';
@@ -77,7 +81,12 @@ export class MenuComponent implements OnInit, OnChanges {
     const type = e.shiftKey ? 'author' : 'song';
     this.searchQueryService.findQuery({type, query: e.target.value})
         .subscribe((searchResult) => {
-          this.foundSongs = searchResult || [];
+          this.foundSongs = searchResult['songs'] || [];
+          if (this.foundSongs.length === 0) {
+            this.queryErrorMessage = searchResult['message'];
+            console.log(searchResult);
+            this.wrongQuery = searchResult['query'];
+          }
           fromEvent(document, 'click')
               .subscribe((event) => {
                 if (!event.target['closest'] || event.target['closest']('.search-result')) {

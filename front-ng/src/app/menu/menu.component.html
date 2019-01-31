@@ -15,21 +15,23 @@
     <img src="assets/icons/search.png" alt="s" class="main-menu-ico" (click)="onShowSearch()">
   </div>
 </div>
-<div *ngIf="foundSongs.length" class="search-result">
+<div *ngIf="foundSongs.length; else elseBlock" class="search-result">
   <div *ngFor="let song of foundSongs" @showFound>
-    <div *ngIf="song.type === 'song'">
-      <a [routerLink]="song.href">
+    <div>
+      <a [routerLink]="'/song/'+song.artist+'/'+song.title+'/'+song.version">
         <b>{{ song.artist }}</b> - {{ song.title }}
       </a>
     </div>
-    <div *ngIf="song.type === 'user'">
-      <a [routerLink]="song.href">
-        <b>{{ song.tag }}</b>{{ song.author }}
-      </a>
-    </div>
-    <div *ngIf="song.type === 'error'">
-      {{ song.message }}
-    </div>
   </div>
 </div>
+
+<ng-template #elseBlock>
+  <div class="search-result">
+    <div>
+      <div>
+       {{ queryErrorMessage | translate: {query: wrongQuery} }}
+      </div>
+    </div>
+  </div>
+</ng-template>
 
