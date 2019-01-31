@@ -33,6 +33,7 @@
   "login": "Login (must be unique)",
   "name": "Displayed Name",
   "no": "No",
+  "no_songs": "There are not yet any songs",
   "or": "or",
   "password": "Password",
   "password_placeholder": "min 6 chars, letters and numbers",
