@@ -10,6 +10,7 @@
   "email": "E-mail",
   "error_in_logout": "Something wrong! Please press 'Log Out' again...",
   "fingerboard": "Fingerboard",
+  "have_not_token": "You have not got a token. Please, reload page and try again",
   "how_to_play": "How To Play",
   "info_areas_with_volume_and_speed": "Areas with volume and speed",
   "info_attention_text": "When guitar in focus all browser's keyboard's events (hotkeys) are disabled and you can't use it. For example, if you press <kbd>Ctrl</kbd>+<kbd>A</kbd> all text will not be selected, or if you press <kbd>Ctrl</kbd>+<kbd>S</kbd> web page will not be saved. But all keyboard's events (hotkeys) of your operation system stay enabled anyway, such as <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Esc</kbd> open Task Manager or <kbd>Ctrl</kbd>+<kbd>F4</kbd> close the active window in Windows operation system. That's why please use complex chords careful or disabled some hotkeys in your operation system.",
@@ -41,9 +42,12 @@
   "registration": "Registration",
   "setup_username": "Setup Username",
   "sign_in_with": "Sign In with {{social}}",
+  "something_wrong": "Something wrong. Please try again later",
   "soundboard": "Soundboard",
   "title": "Title",
   "username": "Username",
   "verification": "Verification",
+  "wrong_password": "Wrong password",
+  "wrong_token": "Your token is wrong. Please, reload page and try again",
   "yes": "Yes"
 }

@@ -113,10 +113,10 @@ export class LoginComponent implements OnInit {
                     .subscribe(res => this.authWithLoginAndPassword(res));
               } else if (err.code === 'auth/wrong-password') {
                 this.loading = false;
-                this.message = 'Wrong password';
+                this.message = 'wrong_password';
               } else {
                 this.loading = false;
-                this.message = 'Something wrong. Please try again later';
+                this.message = 'something_wrong';
               }
             });
 

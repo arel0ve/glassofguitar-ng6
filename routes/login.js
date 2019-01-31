@@ -19,7 +19,7 @@ async function login(req, res, next) {
   if (!req.body.token) {
     res.status(400).json({
       status: 'error',
-      message: 'You have not token'
+      message: 'have_not_token'
     });
     return;
   }
@@ -28,7 +28,7 @@ async function login(req, res, next) {
   if (!decodedToken || !decodedToken.uid) {
     res.status(403).json({
       status: 'error',
-      message: 'Wrong token'
+      message: 'wrong_token'
     });
     return;
   }
