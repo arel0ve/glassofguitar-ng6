@@ -71,7 +71,7 @@ async function getSong(req, res, next) {
     console.log(e);
     res.status(500).json({
       status: "error",
-      message: "Server error"
+      message: "server_error"
     });
   }
 }
@@ -80,7 +80,7 @@ async function addSong(req, res, next) {
   if (!req.headers.token) {
     res.status(403).json({
       status: 'error',
-      message: 'Missing token'
+      message: 'have_not_token'
     });
     return;
   }
@@ -89,7 +89,7 @@ async function addSong(req, res, next) {
   if (!decodedToken || !decodedToken.uid) {
     res.status(403).json({
       status: 'error',
-      message: 'Wrong token'
+      message: 'wrong_token'
     });
     return;
   }
@@ -118,7 +118,7 @@ async function addSong(req, res, next) {
     console.log(e);
     res.status(500).json({
       status: "error",
-      message: "Server error"
+      message: "server_error"
     });
   }
 }
@@ -127,7 +127,7 @@ async function saveSong(req, res, next) {
   if (!req.headers.token) {
     res.status(403).json({
       status: 'error',
-      message: 'Missing token'
+      message: 'have_not_token'
     });
     return;
   }
@@ -136,7 +136,7 @@ async function saveSong(req, res, next) {
   if (!decodedToken || !decodedToken.uid) {
     res.status(403).json({
       status: 'error',
-      message: 'Wrong token'
+      message: 'wrong_token'
     });
     return;
   }
@@ -149,7 +149,7 @@ async function saveSong(req, res, next) {
     if (!song) {
       res.status(404).json({
         status: 'error',
-        message: 'Song has not already created'
+        message: 'song_has_not_already_created'
       });
       return;
     }
@@ -157,7 +157,7 @@ async function saveSong(req, res, next) {
     if (!song.author.uid !== uid) {
       res.status(403).json({
         status: 'error',
-        message: 'Wrong rights'
+        message: 'wrong_rights'
       });
       return;
     }
@@ -172,13 +172,13 @@ async function saveSong(req, res, next) {
 
     res.status(200).json({
       status: "ok",
-      message: "Saving successful"
+      message: "saving_successful"
     });
   } catch (e) {
     console.log(e);
     res.status(500).json({
       status: "error",
-      message: "Server error"
+      message: "server_error"
     });
   }
 }

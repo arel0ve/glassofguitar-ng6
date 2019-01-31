@@ -12,7 +12,7 @@
         <input type="text" id="song" formControlName="song" #song required>
       </label>
     </div>
-    <div class="div-message">{{ message }}</div>
+    <div class="div-message">{{ message | translate }}</div>
     <div class="btn-div">
       <div class="div-message"
            *ngIf="form.invalid; else elseLogin">{{ 'input_data_to_continue_creating_song' | translate }}</div>

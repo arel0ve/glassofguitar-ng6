@@ -40,7 +40,7 @@
   "password_placeholder": "минимум 6 символов, буквы и цифры",
   "quit": "Выход",
   "registration": "Регистрация",
-  "server_error": "Server error",
+  "server_error": "Серверная ошибка",
   "setup_username": "Сохранить имя пользователя",
   "sign_in_with": "Войти через {{social}}",
   "something_wrong": "Что-то пошло не так. Попробуйте еще раз позже",
