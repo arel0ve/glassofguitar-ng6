@@ -1,3 +1,7 @@
 <app-userinfo *ngIf="mode === 'user'" [user]="user"></app-userinfo>
 <app-songlist [songs]="songs"></app-songlist>
-<a routerLink="/todo/addsong">{{ 'create_new_song' | translate }}</a>
+<div class="create-wrapper">
+  <a class="create-btn" routerLink="/todo/addsong">
+    <span>{{ 'create_new_song' | translate }}</span>
+  </a>
+</div>

@@ -1,0 +1,30 @@
+.create-wrapper {
+  width: 100%;
+  text-align: center;
+  .create-btn {
+    font-size: 1.4em;
+    border-radius: 6px;
+    position: relative;
+    top: 12px;
+    margin: 0 12px;
+    padding: 12px;
+    background-color: rgba(77, 154, 89, .5);
+    color: rgb(12, 7, 14);
+    text-decoration: none;
+    display: grid;
+    width: calc(100% - 24px);
+    transition: background-color .3s, color .4s .05s;
+    @media (min-width: 576px) {
+      width: calc(75% - 24px);
+    }
+    @media (min-width: 992px) {
+      width: calc(50% - 24px);
+    }
+    &:hover {
+      background-color: rgba(77, 154, 89, .7);
+      color: rgb(254, 214, 227);
+      transition: background-color .6s, color .8s .1s;
+    }
+  }
+}
+
