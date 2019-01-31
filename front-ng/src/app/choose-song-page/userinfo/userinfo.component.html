@@ -1,4 +1,7 @@
 <div class="wrapper">
-  <img [src]="user?.photoUrl" (click)="showFullImage()">
-  <span>{{ user?.name }}</span>
+  <div class="user-photo" (click)="showFullImage()">
+    <img [src]="user?.photoUrl"
+         alt="Guitarist avatar" class="main-menu-ico">
+  </div>
+  <span class="user-name">{{ user?.name }}</span>
 </div>
