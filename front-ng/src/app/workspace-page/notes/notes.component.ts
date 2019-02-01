@@ -176,7 +176,6 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
 
   changeSpeed(e) {
     this.speed = +e.target.innerHTML;
-    this.saveAllNotes();
   }
 
   changeSize(e, isNumerator: boolean) {
@@ -193,7 +192,6 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
 
     setTimeout(() => {
       this.columns = this.notesRef.nativeElement.querySelectorAll('.column');
-      this.saveAllNotes();
     }, 0);
   }
 
@@ -207,7 +205,6 @@ export class NotesComponent implements OnInit, OnChanges, AfterViewChecked {
     e.target.value = '';
     value = value === '' || value === '-' ? '-' : Guitar.getLetterByNum(+value);
     this.notes[i] = this.notes[i].slice(0, j) + value + this.notes[i].slice(j + 1);
-    this.saveAllNotes();
   }
 
   private defaultSelection(num = this.selectedColumn) {

@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
 const logger = require('morgan');
 const busboy = require('connect-busboy');
 
@@ -22,8 +21,6 @@ const queryRouter = require('./routes/search-query');
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/guitar_v2_0_0', {useNewUrlParser: true});
-
-const MongoStore = require('connect-mongo')(session);
 
 const ws = require('./ws/guitar-stream.ws');
 

@@ -22,6 +22,13 @@
     <!--</div>-->
 
     <div class="action-menu">
+      <i class="large material-icons action" (click)="saveAllNotes()"
+         [ngClass]="{
+         'start': successfulSaving,
+         'action': successfulSaving === null,
+         'stop': !successfulSaving && successfulSaving !== null
+         }"
+      >save</i>
       <i class="large material-icons action" (click)="goFullscreenGuitar()">fullscreen</i>
       <i class="large material-icons action" *ngIf="!fullscreen" (click)="goFullscreenNotes()">library_music</i>
       <i class="large material-icons action" *ngIf="fullscreen" (click)="exitFullscreenNotes()">fullscreen_exit</i>
@@ -53,7 +60,6 @@
   </div>
   <div class="info-notes">
     <div class="plus-btn" (click)="plusColumns()"></div>
-    <div [ngClass]="{'successful-saving': successfulSaving,
-      'unsuccessful-saving': !successfulSaving && successfulSaving !== null}"></div>
+    <div></div>
   </div>
 </div>
